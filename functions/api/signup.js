@@ -34,7 +34,7 @@ export async function onRequestPost(context) {
         },
         body: JSON.stringify({
           from: 'Sprout AAC <hello@sproutaac.org>',
-          to: 'hello@sproutaac.org',
+          to: env.NOTIFICATION_EMAIL || 'hello@sproutaac.org',
           subject: `New waitlist signup: ${email}`,
           text: `New Sprout AAC waitlist signup\n\nEmail: ${email}\nTime: ${new Date().toUTCString()}\n\nView all signups in your D1 database (sproutaac-db → WaitlistSignup).`,
         }),
