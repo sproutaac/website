@@ -2,6 +2,8 @@
 
 Marketing and waitlist site for [Sprout AAC](https://sproutaac.org) — a free, offline-first AAC app for children who communicate differently.
 
+![Sprout AAC website](https://sproutaac.org/og-image.png)
+
 ## Stack
 
 - **Hosting:** Cloudflare Pages
@@ -92,6 +94,10 @@ Set via `npx wrangler secret put <NAME>`:
 1. New signup → confirmation email to signee + admin notification to `NOTIFICATION_EMAIL`
 2. Unsubscribe tokens are HMAC-SHA256(email, ADMIN_KEY), URL-safe base64 — no DB storage needed
 3. Broadcast emails are sent to all `unsubscribed = 0` rows, each with a personalised unsubscribe link
+
+## Contributing
+
+See [CONTRIBUTING.md](https://github.com/sproutaac/.github/blob/main/CONTRIBUTING.md). Copy and content improvements are welcome — no Flutter knowledge required.
 
 ## App repo
 
