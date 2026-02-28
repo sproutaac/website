@@ -23,21 +23,23 @@ export async function onRequestPost(context) {
     return Response.json({ error: 'Server error' }, { status: 500 });
   }
 
-  // Notify hello@sproutaac.com via Resend (fire-and-forget)
+  // Notify hello@sproutaac.org via Resend
   if (env.RESEND_API_KEY) {
-    fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${env.RESEND_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: 'Sprout AAC <hello@sproutaac.org>',
-        to: 'hello@sproutaac.org',
-        subject: `New waitlist signup: ${email}`,
-        text: `New Sprout AAC waitlist signup\n\nEmail: ${email}\nTime: ${new Date().toUTCString()}\n\nView all signups in your D1 database (sproutaac-db → WaitlistSignup).`,
-      }),
-    }).catch(err => console.error('Resend error:', err));
+    context.waitUntil(
+      fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${env.RESEND_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          from: 'Sprout AAC <hello@sproutaac.org>',
+          to: 'hello@sproutaac.org',
+          subject: `New waitlist signup: ${email}`,
+          text: `New Sprout AAC waitlist signup\n\nEmail: ${email}\nTime: ${new Date().toUTCString()}\n\nView all signups in your D1 database (sproutaac-db → WaitlistSignup).`,
+        }),
+      }).catch(err => console.error('Resend error:', err))
+    );
   }
 
   return Response.json({ ok: true });
