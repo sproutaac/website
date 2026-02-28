@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy — Sprout AAC</title>
+  <meta name="description" content="Sprout AAC's privacy policy. Plain English. No surprises." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --forest:   #0F5C2E;
+      --green:    #1A8C45;
+      --fresh:    #A8F0C0;
+      --cream:    #FAF7F2;
+      --warm:     #F3EDE3;
+      --charcoal: #1C1C1A;
+      --muted:    #6B6860;
+      --line:     #E2D9CC;
+      --font-serif: 'Lora', Georgia, serif;
+      --font-sans:  'DM Sans', system-ui, sans-serif;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--charcoal);
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    /* ── Nav ─────────────────────────────────────────────────────── */
+    nav {
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+      background: var(--cream);
+    }
+    @media (max-width: 600px) { nav { padding: 18px 24px; } }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--forest);
+    }
+    .nav-logo-text {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .nav-badge {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      color: var(--green);
+    }
+    .nav-back {
+      font-size: 14px;
+      color: var(--muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--forest); }
+
+    /* ── Hero strip ──────────────────────────────────────────────── */
+    .hero-strip {
+      background: var(--forest);
+      padding: 64px 48px 56px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-strip::after {
+      content: '';
+      position: absolute;
+      right: -60px;
+      top: -60px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(168,240,192,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero-strip-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      color: var(--fresh);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .hero-headline {
+      font-family: var(--font-serif);
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      color: white;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .hero-headline em { font-style: italic; color: var(--fresh); }
+    .hero-sub {
+      font-size: 17px;
+      color: rgba(255,255,255,0.65);
+      max-width: 540px;
+    }
+    .hero-date {
+      margin-top: 20px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* ── Commitment cards ────────────────────────────────────────── */
+    .commitments {
+      background: var(--warm);
+      padding: 56px 48px;
+      border-bottom: 1px solid var(--line);
+    }
+    @media (max-width: 600px) { .commitments { padding: 40px 24px; } }
+
+    .commitments-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 680px) {
+      .commitments-inner { grid-template-columns: 1fr; }
+    }
+
+    .commitment-card {
+      background: white;
+      border-radius: 16px;
+      padding: 28px 24px;
+      border: 1.5px solid var(--line);
+    }
+    .commitment-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .commitment-title {
+      font-family: var(--font-serif);
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--charcoal);
+    }
+    .commitment-body {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── Main content ────────────────────────────────────────────── */
+    .content {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 64px 48px 80px;
+    }
+    @media (max-width: 600px) { .content { padding: 48px 24px 64px; } }
+
+    .content h2 {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--charcoal);
+      margin: 48px 0 12px;
+      padding-top: 8px;
+      border-top: 1px solid var(--line);
+    }
+    .content h2:first-child { margin-top: 0; border-top: none; padding-top: 0; }
+
+    .content p {
+      color: var(--muted);
+      margin-bottom: 16px;
+      font-size: 16px;
+    }
+    .content p strong { color: var(--charcoal); font-weight: 600; }
+
+    .content ul {
+      list-style: none;
+      margin: 0 0 20px;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .content ul li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 16px;
+      color: var(--muted);
+    }
+    .content ul li::before {
+      content: '✓';
+      color: var(--green);
+      font-weight: 700;
+      font-size: 14px;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    /* never-do list */
+    .content ul.never li::before {
+      content: '✕';
+      color: #E53935;
+    }
+
+    /* ── Contact block ────────────────────────────────────────────── */
+    .contact-block {
+      background: var(--forest);
+      border-radius: 20px;
+      padding: 36px 32px;
+      margin-top: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .contact-block-text h3 {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 6px;
+    }
+    .contact-block-text p {
+      color: rgba(255,255,255,0.6);
+      font-size: 15px;
+      margin: 0;
+    }
+    .contact-btn {
+      background: var(--fresh);
+      color: var(--forest);
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 15px;
+      white-space: nowrap;
+      transition: opacity 0.2s, transform 0.15s;
+      flex-shrink: 0;
+    }
+    .contact-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    /* ── Footer ──────────────────────────────────────────────────── */
+    footer {
+      background: var(--charcoal);
+      padding: 40px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    @media (max-width: 600px) { footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; } }
+
+    .footer-logo-text {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+    .footer-links a {
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      font-size: 13.5px;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: white; }
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(255,255,255,0.22);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <a href="/" class="nav-logo">
+      <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
+        <ellipse cx="20" cy="18" rx="5" ry="10" fill="#1A8C45" transform="rotate(-25 20 18)"/>
+        <ellipse cx="20" cy="18" rx="5" ry="10" fill="#0F5C2E" transform="rotate(10 20 18)"/>
+        <ellipse cx="20" cy="18" rx="4" ry="9" fill="#3DC46A" transform="rotate(38 20 18)"/>
+        <line x1="20" y1="24" x2="20" y2="32" stroke="#0F5C2E" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <div class="nav-logo-text">Sprout</div>
+        <div class="nav-badge">AAC</div>
+      </div>
+    </a>
+    <a href="/" class="nav-back">
+      ← Back to home
+    </a>
+  </nav>
+
+  <!-- Hero strip -->
+  <div class="hero-strip">
+    <div class="hero-strip-inner">
+      <p class="hero-eyebrow">Privacy Policy</p>
+      <h1 class="hero-headline">
+        Your child's data<br><em>stays on their device.</em>
+      </h1>
+      <p class="hero-sub">
+        We wrote this to be read, not to protect us from lawyers.
+        If something isn't clear, email us and we'll explain it in plain English.
+      </p>
+      <p class="hero-date">Last updated: February 2026</p>
+    </div>
+  </div>
+
+  <!-- Commitment cards -->
+  <div class="commitments">
+    <div class="commitments-inner">
+      <div class="commitment-card">
+        <span class="commitment-icon">📱</span>
+        <div class="commitment-title">Stored on-device</div>
+        <div class="commitment-body">All board data, profiles, and settings live on the device. We can't see them. Nobody can.</div>
+      </div>
+      <div class="commitment-card">
+        <span class="commitment-icon">🚫</span>
+        <div class="commitment-title">No account needed</div>
+        <div class="commitment-body">You don't need to sign up to use Sprout. No account means nothing to collect.</div>
+      </div>
+      <div class="commitment-card">
+        <span class="commitment-icon">🔒</span>
+        <div class="commitment-title">Never sold</div>
+        <div class="commitment-body">We will never sell, share, or monetize any information about you or your child. Full stop.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="content">
+
+    <h2>The app</h2>
+    <p>
+      Sprout stores everything — your child's boards, symbols, profiles, and settings —
+      <strong>locally on your device.</strong> This data never leaves the device unless
+      you explicitly export a board yourself (for example, to share with a therapist).
+    </p>
+    <p>We don't collect:</p>
+    <ul class="never">
+      <li>Any information about your child — name, age, diagnosis, communication patterns</li>
+      <li>Usage analytics tied to your child or their communication</li>
+      <li>Device identifiers, advertising IDs, or anything similar</li>
+      <li>Location data</li>
+    </ul>
+    <p>
+      When you export a board to share with a therapist or another device, that data
+      goes directly from your device to wherever you send it — it doesn't pass through
+      our servers.
+    </p>
+
+    <h2>The waitlist</h2>
+    <p>
+      If you signed up for early access on our website, we collected your email address.
+      Here's exactly what we do with it:
+    </p>
+    <ul>
+      <li>Send you one email when Sprout launches</li>
+      <li>Occasionally share meaningful development updates (never more than once a month)</li>
+      <li>Remove you immediately if you unsubscribe — no questions asked</li>
+    </ul>
+    <p>
+      <strong>We will never sell, rent, or share your email address with anyone.</strong>
+      We use it for one purpose: keeping you informed about Sprout. That's it.
+    </p>
+
+    <h2>The website</h2>
+    <p>
+      Sproutaac.org is hosted on Cloudflare Pages. Cloudflare may collect standard
+      server logs (IP addresses, browser type, pages visited) for security and
+      performance purposes. We don't use Google Analytics, Meta Pixel, or any
+      third-party tracking on this site.
+    </p>
+
+    <h2>Children's privacy</h2>
+    <p>
+      Sprout is designed for use by children under the supervision of parents and
+      caregivers. Because the app requires no account and stores no data on our servers,
+      no personal information about children is ever transmitted to us.
+      We comply fully with COPPA (Children's Online Privacy Protection Act).
+    </p>
+
+    <h2>Open source transparency</h2>
+    <p>
+      Sprout is open source. You don't have to take our word for any of this —
+      <strong>you can read the code</strong> and verify exactly what the app does and
+      doesn't do. Our repository is publicly available on GitHub at
+      <a href="https://github.com/sproutaac" style="color: var(--green);">github.com/sproutaac</a>.
+    </p>
+
+    <h2>Changes to this policy</h2>
+    <p>
+      If we ever change this policy in a meaningful way, we'll notify waitlist subscribers
+      by email and update the date at the top of this page. We won't bury changes in
+      legalese — if something important changes, we'll say so plainly.
+    </p>
+
+    <!-- Contact block -->
+    <div class="contact-block">
+      <div class="contact-block-text">
+        <h3>Have a question?</h3>
+        <p>We're real people and we'll give you a real answer.</p>
+      </div>
+      <a href="mailto:hello@sproutaac.com" class="contact-btn">
+        hello@sproutaac.com
+      </a>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo-text">Sprout AAC</div>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="https://github.com/sproutaac" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:hello@sproutaac.com">Contact</a>
+    </div>
+    <p class="footer-copy">© 2026 Sprout AAC. Free forever.</p>
+  </footer>
+
+</body>
+</html>
