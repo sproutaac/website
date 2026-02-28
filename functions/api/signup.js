@@ -122,10 +122,15 @@ export async function onRequestPost(context) {
   // Store in D1 — INSERT OR IGNORE silently handles duplicates
   let isNew = true;
   try {
-    const result = await env.DB.prepare(
-      `INSERT OR IGNORE INTO "WaitlistSignup" (id, email, createdAt) VALUES (?, ?, ?)`
-    ).bind(crypto.randomUUID(), email, new Date().toISOString()).run();
-    isNew = result.meta?.changes > 0;
+    const existing = await env.DB.prepare(
+      `SELECT id FROM "WaitlistSignup" WHERE email = ?`
+    ).bind(email).first();
+    isNew = !existing;
+    if (isNew) {
+      await env.DB.prepare(
+        `INSERT INTO "WaitlistSignup" (id, email, createdAt) VALUES (?, ?, ?)`
+      ).bind(crypto.randomUUID(), email, new Date().toISOString()).run();
+    }
   } catch (err) {
     console.error('DB error:', err);
     return Response.json({ error: 'Server error' }, { status: 500 });
@@ -136,7 +141,7 @@ export async function onRequestPost(context) {
     const unsubLink = `https://sproutaac.org/api/unsubscribe?email=${encodeURIComponent(email)}&token=${token}`;
     const adminLink = `https://sproutaac.org/admin/signups?key=${env.ADMIN_KEY}`;
 
-    // Send confirmation to signee (only if new signup)
+    // Send confirmation to signee (only on new signup)
     if (isNew) {
       context.waitUntil(
         fetch('https://api.resend.com/emails', {
