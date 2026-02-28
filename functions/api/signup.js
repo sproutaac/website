@@ -141,10 +141,10 @@ export async function onRequestPost(context) {
     const unsubLink = `https://sproutaac.org/api/unsubscribe?email=${encodeURIComponent(email)}&token=${token}`;
     const adminLink = `https://sproutaac.org/admin/signups?key=${env.ADMIN_KEY}`;
 
-    // Send confirmation to signee (only on new signup)
-    if (isNew) {
-      context.waitUntil(
-        fetch('https://api.resend.com/emails', {
+    // Single waitUntil — send both emails sequentially
+    context.waitUntil((async () => {
+      if (isNew) {
+        await fetch('https://api.resend.com/emails', {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${env.RESEND_API_KEY}`,
@@ -157,13 +157,10 @@ export async function onRequestPost(context) {
             html: buildConfirmationEmail(email, unsubLink),
             text: `You're on the Sprout AAC waitlist!\n\nThanks for joining. We'll send you one email when the app is ready to download on iOS and Android.\n\nLearn more: https://sproutaac.org\n\nUnsubscribe: ${unsubLink}`,
           }),
-        }).catch(err => console.error('Resend confirmation error:', err))
-      );
-    }
+        }).catch(err => console.error('Resend confirmation error:', err));
+      }
 
-    // Notify admin
-    context.waitUntil(
-      fetch('https://api.resend.com/emails', {
+      await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${env.RESEND_API_KEY}`,
@@ -176,8 +173,8 @@ export async function onRequestPost(context) {
           html: buildAdminNotificationEmail(email, adminLink),
           text: `New Sprout AAC waitlist signup\n\nEmail: ${email}\nTime: ${new Date().toUTCString()}\n\nView all: ${adminLink}`,
         }),
-      }).catch(err => console.error('Resend admin error:', err))
-    );
+      }).catch(err => console.error('Resend admin error:', err));
+    })());
   }
 
   return Response.json({ ok: true });
