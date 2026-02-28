@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Sprout AAC — Free communication for every child</title>
   <meta name="description" content="Sprout is a free, offline-first AAC app for children who communicate differently. No subscription. No paywall. Forever." />
 
@@ -43,7 +43,9 @@
       --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+      overflow-x: hidden;
+    }
 
     body {
       background: var(--cream);
@@ -52,6 +54,8 @@
       font-size: 17px;
       line-height: 1.65;
       overflow-x: hidden;
+      position: relative;
+      touch-action: pan-y;
     }
 
     /* ── Noise texture overlay ─────────────────────────────────────── */
@@ -93,8 +97,8 @@
 
     .reveal {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+      transform: translateY(16px);
+      transition: opacity 0.95s var(--ease-out), transform 0.95s var(--ease-out);
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
@@ -1222,7 +1226,7 @@
     <div class="footer-links">
       <a href="https://github.com/sproutaac" target="_blank" rel="noopener">GitHub</a>
       <a href="mailto:hello@sproutaac.com">hello@sproutaac.com</a>
-      <a href="#">Privacy</a>
+      <a href="mailto:hello@sproutaac.com?subject=Privacy%20inquiry">Privacy</a>
     </div>
     <p class="footer-copy">© 2026 Sprout AAC. Free forever.</p>
   </footer>
@@ -1239,15 +1243,44 @@
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const delay = entry.target.closest('.features-grid, .audience-grid, .faq-list')
-            ? Array.from(entry.target.parentElement.children).indexOf(entry.target) * 80
+            ? Array.from(entry.target.parentElement.children).indexOf(entry.target) * 110
             : 0;
           setTimeout(() => entry.target.classList.add('visible'), delay);
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.05 });
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ── Smooth scroll ─────────────────────────────────────────────
+    const easeInOutCubic = t => t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
+
+    function smoothScrollTo(target, duration) {
+      duration = duration || 720;
+      const start = window.scrollY;
+      const end = target.getBoundingClientRect().top + window.scrollY;
+      const distance = end - start;
+      let startTime = null;
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        const progress = Math.min((ts - startTime) / duration, 1);
+        window.scrollTo(0, start + distance * easeInOutCubic(progress));
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        const id = link.getAttribute('href').slice(1);
+        if (!id) { e.preventDefault(); return; }
+        const target = document.getElementById(id);
+        if (!target) { e.preventDefault(); return; }
+        e.preventDefault();
+        smoothScrollTo(target);
+      });
+    });
 
     // ── Phone demo interaction ────────────────────────────────────
     let outputWords = [];
