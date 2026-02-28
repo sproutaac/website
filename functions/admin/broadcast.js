@@ -127,7 +127,7 @@ export async function onRequestGet(context) {
   <main>
     <p class="eyebrow">Admin</p>
     <h1>Send Broadcast</h1>
-    <p class="subtitle">Sending to <strong>${total} subscriber${total === 1 ? '' : 's'}</strong> from <strong>no-reply@sproutaac.org</strong></p>
+    <p class="subtitle">Sending to <strong>${total} subscriber${total === 1 ? '' : 's'}</strong> from <strong>hello@sproutaac.org</strong></p>
 
     <form id="broadcast-form">
       <div class="card">
@@ -307,7 +307,7 @@ export async function onRequestPost(context) {
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: 'Sprout AAC <no-reply@sproutaac.org>', to: env.NOTIFICATION_EMAIL, subject: `[TEST] ${subject}`, html, text }),
+      body: JSON.stringify({ from: 'Sprout AAC <hello@sproutaac.org>', to: env.NOTIFICATION_EMAIL, subject: `[TEST] ${subject}`, html, text }),
     });
     if (!res.ok) {
       const err = await res.json();
@@ -322,7 +322,7 @@ export async function onRequestPost(context) {
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: 'Sprout AAC <no-reply@sproutaac.org>', to: row.email, subject, html, text }),
+      body: JSON.stringify({ from: 'Sprout AAC <hello@sproutaac.org>', to: row.email, subject, html, text }),
     });
     if (res.ok) sent++;
   }
