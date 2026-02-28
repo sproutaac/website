@@ -1,3 +1,13 @@
+async function makeUnsubToken(email, secret) {
+  const key = await crypto.subtle.importKey(
+    'raw', new TextEncoder().encode(secret),
+    { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']
+  );
+  const sig = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(email.toLowerCase()));
+  return btoa(String.fromCharCode(...new Uint8Array(sig)))
+    .replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+}
+
 const STYLE = `
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -81,8 +91,7 @@ function buildEmailHtml({ subject, previewText, heading, body, ctaLabel, ctaUrl 
           <p style="margin:0;font-size:12px;color:#b0aa9f;text-align:center;line-height:1.7;font-family:'DM Sans',Helvetica,Arial,sans-serif">
             You're receiving this because you joined the Sprout AAC waitlist at
             <a href="https://sproutaac.org" style="color:#1A8C45;text-decoration:none">sproutaac.org</a>.<br>
-            To unsubscribe, reply with "unsubscribe" or email
-            <a href="mailto:hello@sproutaac.org" style="color:#1A8C45;text-decoration:none">hello@sproutaac.org</a>.
+            <a href="{{UNSUB_LINK}}" style="color:#1A8C45;text-decoration:none">Unsubscribe</a> · <a href="mailto:hello@sproutaac.org" style="color:#1A8C45;text-decoration:none">hello@sproutaac.org</a>
           </p>
         </td></tr>
 
@@ -98,13 +107,7 @@ export async function onRequestGet(context) {
   const key = new URL(request.url).searchParams.get('key');
   if (!key || key !== env.ADMIN_KEY) return new Response('Unauthorized', { status: 401 });
 
-  const { results } = await env.DB.prepare(
-    `SELECT COUNT(*) as count FROM "WaitlistSignup"`
-  ).first();
-  const count = results?.count ?? (await env.DB.prepare(`SELECT COUNT(*) as count FROM "WaitlistSignup"`).first()).count;
-
-  const { meta } = await env.DB.prepare(`SELECT COUNT(*) as count FROM "WaitlistSignup"`).run();
-  const total = (await env.DB.prepare(`SELECT COUNT(*) as count FROM "WaitlistSignup"`).first()).count;
+  const total = (await env.DB.prepare(`SELECT COUNT(*) as count FROM "WaitlistSignup" WHERE unsubscribed = 0`).first()).count;
 
   const html = `<!DOCTYPE html>
 <html lang="en">
@@ -304,13 +307,18 @@ export async function onRequestPost(context) {
   }
 
   const html = buildEmailHtml({ subject, previewText, heading, body, ctaLabel, ctaUrl });
-  const text = `${heading}\n\n${body}${ctaLabel && ctaUrl ? `\n\n${ctaLabel}: ${ctaUrl}` : ''}\n\n---\nYou received this because you signed up at sproutaac.org. To unsubscribe, reply to this email.`;
+  const text = `${heading}\n\n${body}${ctaLabel && ctaUrl ? `\n\n${ctaLabel}: ${ctaUrl}` : ''}\n\n---\nYou received this because you signed up at sproutaac.org.\nUnsubscribe: {{UNSUB_LINK}}`;
 
   if (test) {
+    const testEmail = env.NOTIFICATION_EMAIL;
+    const token = await makeUnsubToken(testEmail, env.ADMIN_KEY || '');
+    const unsubLink = `https://sproutaac.org/api/unsubscribe?email=${encodeURIComponent(testEmail)}&token=${token}`;
+    const testHtml = html.replace('{{UNSUB_LINK}}', unsubLink);
+    const testText = text.replace('{{UNSUB_LINK}}', unsubLink);
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: 'Sprout AAC <hello@sproutaac.org>', to: env.NOTIFICATION_EMAIL, subject: `[TEST] ${subject}`, html, text }),
+      body: JSON.stringify({ from: 'Sprout AAC <hello@sproutaac.org>', to: testEmail, subject: `[TEST] ${subject}`, html: testHtml, text: testText }),
     });
     if (!res.ok) {
       const err = await res.json();
@@ -319,13 +327,19 @@ export async function onRequestPost(context) {
     return Response.json({ ok: true });
   }
 
-  const { results } = await env.DB.prepare(`SELECT email FROM "WaitlistSignup"`).all();
+  const { results } = await env.DB.prepare(
+    `SELECT email FROM "WaitlistSignup" WHERE unsubscribed = 0`
+  ).all();
   let sent = 0;
   for (const row of results) {
+    const token = await makeUnsubToken(row.email, env.ADMIN_KEY || '');
+    const unsubLink = `https://sproutaac.org/api/unsubscribe?email=${encodeURIComponent(row.email)}&token=${token}`;
+    const personalizedHtml = html.replace('{{UNSUB_LINK}}', unsubLink);
+    const personalizedText = text.replace('{{UNSUB_LINK}}', unsubLink);
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: 'Sprout AAC <hello@sproutaac.org>', to: row.email, subject, html, text }),
+      body: JSON.stringify({ from: 'Sprout AAC <hello@sproutaac.org>', to: row.email, subject, html: personalizedHtml, text: personalizedText }),
     });
     if (res.ok) sent++;
   }

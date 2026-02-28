@@ -1,0 +1,1 @@
+ALTER TABLE "WaitlistSignup" ADD COLUMN "unsubscribed" INTEGER NOT NULL DEFAULT 0;
