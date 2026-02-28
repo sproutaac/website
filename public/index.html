@@ -918,6 +918,12 @@
       font-weight: 500;
     }
     .success-msg.show { display: flex; }
+    /* On cream background the light mint is unreadable — use dark green instead */
+    #hero-success {
+      color: var(--forest);
+      background: rgba(168, 240, 192, 0.25);
+      border-color: var(--green);
+    }
 
     /* ── SCROLL LINE decoration ────────────────────────────────────── */
     .scroll-line {
