@@ -7,13 +7,16 @@ export async function onRequestGet(context) {
   }
 
   const { results } = await env.DB.prepare(
-    `SELECT email, createdAt FROM "WaitlistSignup" ORDER BY createdAt DESC`
+    `SELECT email, createdAt, betaTester, unsubscribed FROM "WaitlistSignup" ORDER BY createdAt DESC`
   ).all();
 
+  const active = results.filter(r => !r.unsubscribed).length;
+  const beta = results.filter(r => r.betaTester && !r.unsubscribed).length;
+
   const rows = results.map((r, i) => `
-    <tr>
+    <tr${r.unsubscribed ? ' style="opacity:0.4"' : ''}>
       <td class="num">${i + 1}</td>
-      <td class="email">${r.email}</td>
+      <td class="email">${r.email}${r.betaTester ? ' <span class="beta-badge">beta</span>' : ''}${r.unsubscribed ? ' <span class="unsub-badge">unsubscribed</span>' : ''}</td>
       <td class="date">${new Date(r.createdAt).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}</td>
     </tr>`).join('');
 
@@ -92,6 +95,12 @@ export async function onRequestGet(context) {
     td.email { font-weight: 500; color: var(--forest); }
     td.date { color: #999; font-size: 13px; }
     .empty { text-align: center; padding: 60px 20px; color: #bbb; font-style: italic; font-size: 15px; }
+    .beta-badge { display: inline-block; background: #EEF2FF; color: #4338CA; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; border-radius: 4px; padding: 2px 6px; margin-left: 6px; vertical-align: middle; }
+    .unsub-badge { display: inline-block; background: #FEF2F2; color: #B91C1C; font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; border-radius: 4px; padding: 2px 6px; margin-left: 6px; vertical-align: middle; }
+    .stats { display: flex; gap: 20px; margin-bottom: 28px; flex-wrap: wrap; }
+    .stat { background: white; border: 1.5px solid var(--line); border-radius: 12px; padding: 16px 24px; }
+    .stat-num { font-family: 'Lora', serif; font-size: 28px; font-weight: 700; color: var(--forest); }
+    .stat-label { font-size: 12px; color: #999; margin-top: 2px; }
   </style>
 </head>
 <body>
@@ -102,7 +111,11 @@ export async function onRequestGet(context) {
   <main>
     <p class="eyebrow">Admin</p>
     <h1>Waitlist Signups</h1>
-    <p class="subtitle"><strong>${results.length} ${results.length === 1 ? 'person' : 'people'}</strong> on the list</p>
+    <div class="stats">
+      <div class="stat"><div class="stat-num">${active}</div><div class="stat-label">Active subscribers</div></div>
+      <div class="stat"><div class="stat-num">${beta}</div><div class="stat-label">Beta testers</div></div>
+      <div class="stat"><div class="stat-num">${results.length}</div><div class="stat-label">Total signups (incl. unsub)</div></div>
+    </div>
     <div class="card">
       <table>
         <thead>

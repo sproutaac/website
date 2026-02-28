@@ -1,0 +1,1 @@
+ALTER TABLE "WaitlistSignup" ADD COLUMN "betaTester" INTEGER NOT NULL DEFAULT 0;

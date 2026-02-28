@@ -12,7 +12,7 @@
   <meta property="og:title"       content="Sprout AAC — Free communication for every child" />
   <meta property="og:description" content="A free, offline-first AAC app for children who communicate differently. No subscription. No paywall. Forever." />
   <meta property="og:image"       content="https://sproutaac.org/og-image.png" />
-  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:width"  content="1600" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card"        content="summary_large_image" />
   <meta name="twitter:image"       content="https://sproutaac.org/og-image.png" />
@@ -101,18 +101,28 @@
 
     .reveal {
       opacity: 0;
-      transform: translateY(22px);
-      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(28px) scale(0.97);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .reveal.visible { opacity: 1; transform: none; }
 
     /* CSS-native stagger for feature cards */
-    .features-grid .reveal:nth-child(2) { transition-delay: 90ms; }
-    .features-grid .reveal:nth-child(3) { transition-delay: 180ms; }
-    .features-grid .reveal:nth-child(4) { transition-delay: 270ms; }
-    .features-grid .reveal:nth-child(5) { transition-delay: 360ms; }
-    .features-grid .reveal:nth-child(6) { transition-delay: 450ms; }
+    .features-grid .reveal:nth-child(2) { transition-delay: 60ms; }
+    .features-grid .reveal:nth-child(3) { transition-delay: 120ms; }
+    .features-grid .reveal:nth-child(4) { transition-delay: 180ms; }
+    .features-grid .reveal:nth-child(5) { transition-delay: 240ms; }
+    .features-grid .reveal:nth-child(6) { transition-delay: 300ms; }
+    /* CSS-native stagger for a11y cards */
+    .a11y-grid .reveal:nth-child(2) { transition-delay: 60ms; }
+    .a11y-grid .reveal:nth-child(3) { transition-delay: 120ms; }
+    .a11y-grid .reveal:nth-child(4) { transition-delay: 180ms; }
+    .a11y-grid .reveal:nth-child(5) { transition-delay: 240ms; }
+    .a11y-grid .reveal:nth-child(6) { transition-delay: 300ms; }
+    /* CSS-native stagger for roadmap cards */
+    .roadmap-grid .reveal:nth-child(2) { transition-delay: 60ms; }
+    .roadmap-grid .reveal:nth-child(3) { transition-delay: 120ms; }
+    .roadmap-grid .reveal:nth-child(4) { transition-delay: 180ms; }
 
     /* ── NAV ───────────────────────────────────────────────────────── */
     nav {
@@ -181,7 +191,7 @@
       align-items: center;
       gap: 60px;
       padding: 120px 60px 80px;
-      max-width: 1200px;
+      max-width: 1600px;
       margin: 0 auto;
       position: relative;
     }
@@ -247,7 +257,7 @@
     }
     @media (max-width: 860px) { .hero-form { justify-content: center; } }
 
-    .hero-form input {
+    .hero-form input[type="email"] {
       flex: 1;
       min-width: 220px;
       padding: 14px 20px;
@@ -260,16 +270,16 @@
       outline: none;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .hero-form input::placeholder { color: #bbb; }
-    .hero-form input:focus {
+    .hero-form input[type="email"]::placeholder { color: #bbb; }
+    .hero-form input[type="email"]:focus {
       border-color: var(--green);
       box-shadow: 0 0 0 3px rgba(26, 140, 69, 0.12);
     }
 
     /* Prevent iOS zoom on input focus */
     @media (max-width: 860px) {
-      .hero-form input,
-      .final-form input { font-size: 16px; }
+      .hero-form input[type="email"],
+      .final-form input[type="email"] { font-size: 16px; }
     }
 
     .btn-primary {
@@ -508,9 +518,15 @@
     .feature-card {
       background: var(--cream);
       padding: 40px 36px;
-      transition: background 0.2s;
+      transition: background 0.25s, box-shadow 0.25s, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .feature-card:hover { background: white; }
+    .feature-card:hover {
+      background: white;
+      box-shadow: 0 8px 32px rgba(15,92,46,0.10);
+      transform: translateY(-3px);
+      z-index: 1;
+      position: relative;
+    }
 
     .feature-icon {
       width: 48px;
@@ -810,7 +826,7 @@
       justify-content: center;
       flex-wrap: wrap;
     }
-    .final-form input {
+    .final-form input[type="email"] {
       flex: 1;
       min-width: 220px;
       padding: 15px 20px;
@@ -824,8 +840,8 @@
       border: 1.5px solid rgba(255,255,255,0.2);
       transition: border-color 0.2s, background 0.2s;
     }
-    .final-form input::placeholder { color: rgba(255,255,255,0.4); }
-    .final-form input:focus {
+    .final-form input[type="email"]::placeholder { color: rgba(255,255,255,0.4); }
+    .final-form input[type="email"]:focus {
       border-color: var(--fresh);
       background: rgba(255,255,255,0.16);
     }
@@ -965,6 +981,70 @@
     #back-to-top:hover { background: var(--green); box-shadow: 0 0 24px rgba(15,92,46,0.45); transform: scale(1.1); }
     #back-to-top:active { transform: scale(0.92); }
 
+    /* ── PRICE COMPARISON ─────────────────────────────────────────── */
+    .price-compare {
+      display: flex;
+      gap: 12px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .price-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 16px 24px;
+      min-width: 110px;
+    }
+    .price-item.highlight {
+      background: rgba(168,240,192,0.12);
+      border-color: var(--fresh);
+    }
+    .price-app {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.3px;
+    }
+    .price-item.highlight .price-app { color: var(--fresh); }
+    .price-cost {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.35);
+    }
+    .price-cost.crossed { text-decoration: line-through; }
+    .price-item.highlight .price-cost {
+      color: white;
+      font-size: 18px;
+      text-decoration: none;
+    }
+
+    /* ── BETA CHECKBOX ─────────────────────────────────────────────── */
+    .beta-label {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--muted);
+      cursor: pointer;
+      user-select: none;
+    }
+    .beta-label input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--forest);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .beta-label--dark { color: rgba(255,255,255,0.5); }
+    .beta-label--dark input[type="checkbox"] { accent-color: var(--fresh); }
+
     /* ── HERO COUNT ────────────────────────────────────────────────── */
     .hero-count {
       font-size: 13px;
@@ -1016,7 +1096,7 @@
     .a11y-feat {
       background: var(--warm);
       padding: 36px 32px;
-      transition: background 0.2s;
+      transition: background 0.2s, opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .a11y-feat:hover { background: white; }
     .a11y-icon {
@@ -1068,6 +1148,13 @@
       border: 1.5px solid rgba(255,255,255,0.1);
       position: relative;
       overflow: hidden;
+      transition: background 0.2s, border-color 0.2s, box-shadow 0.25s, opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .roadmap-card:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.25);
     }
     .roadmap-card.current { border-color: var(--mid); }
     .roadmap-card.current::before {
@@ -1173,11 +1260,15 @@
         <form class="hero-form" id="hero-form" onsubmit="handleSignup(event, 'hero')">
           <input type="email" placeholder="your@email.com" required autocomplete="email" />
           <button type="submit" class="btn-primary">Notify me on launch</button>
+          <label class="beta-label" style="width:100%;margin-top:2px">
+            <input type="checkbox" id="hero-beta">
+            <span>I'm an SLP or developer — I'd like to beta test</span>
+          </label>
         </form>
         <div id="hero-success" class="success-msg" style="margin-top: 12px;">
           <span>🌱</span> Check your inbox — confirmation email on its way.
         </div>
-        <p class="hero-count" id="hero-count" style="display:none">Join <strong id="hero-count-num">—</strong> others already on the waitlist.</p>
+        <p class="hero-count" id="hero-count" style="display:none">Join <strong id="hero-count-num"></strong> others already on the waitlist.</p>
         <p class="hero-note">No spam. Just a heads-up when Sprout launches. Unsubscribe anytime.</p>
         <div class="scroll-line">
           <span class="scroll-line-dot"></span>
@@ -1206,7 +1297,7 @@
                 <ellipse cx="20" cy="18" rx="4" ry="9" fill="rgba(255,255,255,0.5)" transform="rotate(38 20 18)"/>
               </svg>
               <span class="phone-bar-text">Sprout</span>
-              <span class="phone-bar-name">Matthew's board</span>
+              <span class="phone-bar-name">Jamie's board</span>
             </div>
             <div class="phone-output" id="phone-output">
               <span id="output-text">Tap a word...</span>
@@ -1242,6 +1333,20 @@
         including waiting rooms, cars, and places without signal.
         Built open-source. Built with SLPs. Built for the families who need it most.
       </p>
+      <div class="price-compare">
+        <div class="price-item">
+          <span class="price-app">Proloquo2Go</span>
+          <span class="price-cost crossed">$249</span>
+        </div>
+        <div class="price-item">
+          <span class="price-app">TouchChat</span>
+          <span class="price-cost crossed">$149</span>
+        </div>
+        <div class="price-item highlight">
+          <span class="price-app">Sprout</span>
+          <span class="price-cost">$0 — always</span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1365,23 +1470,13 @@
     </div>
   </section>
 
-  <!-- QUOTE — replace with a real quote when available -->
-  <section class="quote-section">
-    <div class="reveal">
-      <span class="quote-mark">"</span>
-      <p class="quote-text">
-        The families who need AAC most are often the ones who can least afford it.
-        Sprout changes that equation.
-      </p>
-    </div>
-  </section>
-
   <!-- ROADMAP -->
   <section class="roadmap">
     <div class="roadmap-inner">
       <div class="roadmap-header reveal">
         <p class="section-eyebrow">What we're building</p>
         <h2 class="section-headline">A clear, <em>open</em> path<br>to a complete AAC system.</h2>
+        <p style="margin-top:16px;font-size:14px;color:rgba(255,255,255,0.35);letter-spacing:0.3px">In active development · Last updated February 2026 · <a href="https://github.com/sproutaac/app" target="_blank" rel="noopener" style="color:var(--fresh);text-decoration:none">Follow on GitHub →</a></p>
       </div>
       <div class="roadmap-grid">
         <div class="roadmap-card current reveal">
@@ -1450,8 +1545,8 @@
     </div>
     <div class="os-divider"></div>
     <div class="os-item">
-      <span class="os-number">OSS</span>
-      <span class="os-label">Open source on GitHub</span>
+      <span class="os-number">Open source</span>
+      <span class="os-label">Community built on GitHub</span>
     </div>
     <div class="os-divider"></div>
     <div class="os-item">
@@ -1565,6 +1660,10 @@
         <form class="final-form" id="final-form" onsubmit="handleSignup(event, 'final')">
           <input type="email" placeholder="your@email.com" required autocomplete="email" />
           <button type="submit" class="btn-light">Notify me on launch</button>
+          <label class="beta-label beta-label--dark" style="width:100%;margin-top:2px;justify-content:center">
+            <input type="checkbox" id="final-beta">
+            <span>I'm an SLP or developer — I'd like to beta test</span>
+          </label>
         </form>
         <div id="final-success" class="success-msg" style="margin-top: 16px; justify-content: center; display: none;">
           <span>🌱</span> Check your inbox — confirmation email on its way.
@@ -1587,7 +1686,7 @@
       <a href="/privacy">Privacy</a>
       <a href="https://github.com/sproutaac/app/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
       <a href="https://discord.gg/TEH8uxh" target="_blank" rel="noopener">Discord</a>
-      <a href="https://github.com/sproutaac" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/sproutaac/app" target="_blank" rel="noopener">GitHub</a>
     </div>
     <p class="footer-copy">© 2026 Sprout AAC · Open source under GPL v3 · <a href="mailto:hello@sproutaac.org" style="color:inherit;text-decoration:none;">hello@sproutaac.org</a></p>
   </footer>
@@ -1615,7 +1714,7 @@
     const easeInOutCubic = t => t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
 
     function smoothScrollTo(target, duration) {
-      duration = duration || 720;
+      duration = duration || 1600;
       const start = window.scrollY;
       const end = target.getBoundingClientRect().top + window.scrollY;
       const distance = end - start;
@@ -1711,7 +1810,7 @@
         const res = await fetch('/api/signup', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email }),
+          body: JSON.stringify({ email, betaTester: form.querySelector('input[type="checkbox"]')?.checked || false }),
         });
         if (!res.ok) throw new Error();
 
@@ -1749,7 +1848,7 @@
       let startTime = null;
       function step(ts) {
         if (!startTime) startTime = ts;
-        const progress = Math.min((ts - startTime) / 720, 1);
+        const progress = Math.min((ts - startTime) / 1600, 1);
         window.scrollTo(0, start * (1 - easeInOutCubic(progress)));
         if (progress < 1) requestAnimationFrame(step);
       }

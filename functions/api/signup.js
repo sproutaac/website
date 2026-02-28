@@ -107,10 +107,11 @@ function buildAdminNotificationEmail(email, adminLink) {
 export async function onRequestPost(context) {
   const { request, env } = context;
 
-  let email;
+  let email, betaTester = 0;
   try {
     const body = await request.json();
     email = (body.email || '').toLowerCase().trim();
+    betaTester = body.betaTester ? 1 : 0;
   } catch {
     return Response.json({ error: 'Invalid request' }, { status: 400 });
   }
@@ -128,8 +129,8 @@ export async function onRequestPost(context) {
     isNew = !existing;
     if (isNew) {
       await env.DB.prepare(
-        `INSERT INTO "WaitlistSignup" (id, email, createdAt) VALUES (?, ?, ?)`
-      ).bind(crypto.randomUUID(), email, new Date().toISOString()).run();
+        `INSERT INTO "WaitlistSignup" (id, email, createdAt, betaTester) VALUES (?, ?, ?, ?)`
+      ).bind(crypto.randomUUID(), email, new Date().toISOString(), betaTester).run();
     }
   } catch (err) {
     console.error('DB error:', err);
