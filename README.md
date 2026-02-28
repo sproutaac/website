@@ -15,7 +15,9 @@ Marketing and waitlist site for [Sprout AAC](https://sproutaac.org) — a free, 
 public/
   index.html          # Full marketing site (single file, inline CSS + JS)
   privacy.html        # Privacy policy
-  og-image.png        # Social share image (1200×630)
+  favicon.ico         # Browser tab icon
+  favicon.png         # Modern browsers + Apple touch icon
+  og-image.png        # Social share image (1200×630) — regenerate if branding changes
 
 functions/
   api/
@@ -46,7 +48,7 @@ npx wrangler pages dev public --d1 DB=<local-db-id>
 npx wrangler pages deploy public --project-name sproutaac-web
 ```
 
-The `main` branch also auto-deploys via Cloudflare Pages CI, but direct `wrangler deploy` is faster and more reliable.
+The `main` branch also auto-deploys via Cloudflare Pages CI. Use direct deploy for hotfixes; CI for everything else.
 
 ## Database
 
