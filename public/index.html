@@ -637,30 +637,6 @@
     .audience-card.parents .audience-list li::before { color: var(--green); }
     .audience-card.slps .audience-list li::before { color: var(--bark); }
 
-    /* ── QUOTE ─────────────────────────────────────────────────────── */
-    .quote-section {
-      padding: 110px 60px;
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    @media (max-width: 760px) { .quote-section { padding: 80px 24px; } }
-
-    .quote-mark {
-      font-family: var(--font-serif);
-      font-size: 80px;
-      line-height: 0.5;
-      color: var(--fresh);
-      display: block;
-      margin-bottom: 24px;
-    }
-    .quote-text {
-      font-family: var(--font-serif);
-      font-size: clamp(22px, 3.5vw, 34px);
-      font-style: italic;
-      line-height: 1.45;
-      color: var(--charcoal);
-    }
 
     /* ── OPEN SOURCE STRIP ─────────────────────────────────────────── */
     .opensource {
@@ -1835,7 +1811,7 @@
     fetch('/api/count')
       .then(r => r.json())
       .then(d => {
-        if (d.count > 1) {
+        if (d.count >= 10) {
           document.getElementById('hero-count-num').textContent = d.count.toLocaleString();
           document.getElementById('hero-count').style.display = 'block';
         }
