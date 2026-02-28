@@ -141,10 +141,11 @@ export async function onRequestPost(context) {
     const unsubLink = `https://sproutaac.org/api/unsubscribe?email=${encodeURIComponent(email)}&token=${token}`;
     const adminLink = `https://sproutaac.org/admin/signups?key=${env.ADMIN_KEY}`;
 
-    // Single waitUntil — send both emails sequentially
-    context.waitUntil((async () => {
-      if (isNew) {
-        await fetch('https://api.resend.com/emails', {
+    // Diagnostic: await confirmation synchronously so we can see the result
+    let confirmDebug = 'skipped';
+    if (isNew) {
+      try {
+        const confRes = await fetch('https://api.resend.com/emails', {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${env.RESEND_API_KEY}`,
@@ -155,12 +156,19 @@ export async function onRequestPost(context) {
             to: email,
             subject: "You're on the Sprout AAC waitlist 🌱",
             html: buildConfirmationEmail(email, unsubLink),
-            text: `You're on the Sprout AAC waitlist!\n\nThanks for joining. We'll send you one email when the app is ready to download on iOS and Android.\n\nLearn more: https://sproutaac.org\n\nUnsubscribe: ${unsubLink}`,
+            text: `You're on the Sprout AAC waitlist!\n\nThanks for joining.\n\nUnsubscribe: ${unsubLink}`,
           }),
-        }).catch(err => console.error('Resend confirmation error:', err));
+        });
+        const confBody = await confRes.text();
+        confirmDebug = `${confRes.status}: ${confBody}`;
+      } catch (err) {
+        confirmDebug = `throw: ${err.message}`;
       }
+    }
 
-      await fetch('https://api.resend.com/emails', {
+    // Admin notification
+    context.waitUntil(
+      fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${env.RESEND_API_KEY}`,
@@ -173,9 +181,9 @@ export async function onRequestPost(context) {
           html: buildAdminNotificationEmail(email, adminLink),
           text: `New Sprout AAC waitlist signup\n\nEmail: ${email}\nTime: ${new Date().toUTCString()}\n\nView all: ${adminLink}`,
         }),
-      }).catch(err => console.error('Resend admin error:', err));
-    })());
+      }).catch(err => console.error('Resend admin error:', err))
+    );
   }
 
-  return Response.json({ ok: true });
+  return Response.json({ ok: true, debug: confirmDebug ?? 'no key' });
 }
