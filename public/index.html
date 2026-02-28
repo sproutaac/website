@@ -1282,6 +1282,30 @@
       });
     });
 
+    // ── Voice selection ───────────────────────────────────────────
+    let preferredVoice = null;
+    const voicePreference = [
+      'Google US English',
+      'Samantha',
+      'Microsoft Aria Online Natural - English (United States)',
+      'Microsoft Jenny Online Natural - English (United States)',
+      'Microsoft Zira Desktop - English (United States)',
+      'Karen',
+      'Moira',
+    ];
+    function pickVoice() {
+      const voices = speechSynthesis.getVoices();
+      if (!voices.length) return;
+      for (const name of voicePreference) {
+        const v = voices.find(v => v.name === name);
+        if (v) { preferredVoice = v; return; }
+      }
+      preferredVoice = voices.find(v => v.lang === 'en-US') ||
+                       voices.find(v => v.lang.startsWith('en')) || null;
+    }
+    pickVoice();
+    speechSynthesis.addEventListener('voiceschanged', pickVoice);
+
     // ── Phone demo interaction ────────────────────────────────────
     let outputWords = [];
     function phoneSpeak(word) {
@@ -1293,6 +1317,7 @@
       if ('speechSynthesis' in window) {
         const utt = new SpeechSynthesisUtterance(word);
         utt.rate = 0.9;
+        if (preferredVoice) utt.voice = preferredVoice;
         speechSynthesis.speak(utt);
       }
     }
