@@ -59,7 +59,7 @@ export async function onRequestPost(context) {
         <!-- Footer -->
         <tr><td style="background:#F4F1EC;border-radius:0 0 12px 12px;padding:20px 36px;border-top:1px solid #E8E3DB">
           <p style="margin:0;font-size:12px;color:#aaa;text-align:center">
-            <a href="https://dash.cloudflare.com/fbd52afc15765e0dec8dbf87fa269313/d1/databases/6dfdd09b-3fd2-4456-8d1f-2bef55dbd7c3" style="color:#1A8C45;text-decoration:none;font-weight:600">View all signups in D1 →</a>
+            <a href="https://dash.cloudflare.com/fbd52afc15765e0dec8dbf87fa269313/workers/d1/databases/6dfdd09b-3fd2-4456-8d1f-2bef55dbd7c3" style="color:#1A8C45;text-decoration:none;font-weight:600">View all signups in D1 →</a>
           </p>
         </td></tr>
 
