@@ -6,6 +6,20 @@
   <title>Privacy — Sprout AAC</title>
   <meta name="description" content="Sprout AAC's privacy policy. Plain English. No surprises." />
 
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://sproutaac.org/privacy" />
+  <meta property="og:title"       content="Privacy Policy — Sprout AAC" />
+  <meta property="og:description" content="Sprout AAC's privacy policy. Plain English. No surprises." />
+  <meta property="og:image"       content="https://sproutaac.org/og-image.png" />
+  <meta property="og:image:width"  content="1600" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:image"       content="https://sproutaac.org/og-image.png" />
+
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" href="/favicon.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/favicon.png" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -457,8 +471,8 @@
         <h3>Have a question?</h3>
         <p>We're real people and we'll give you a real answer.</p>
       </div>
-      <a href="mailto:hello@sproutaac.com" class="contact-btn">
-        hello@sproutaac.com
+      <a href="mailto:hello@sproutaac.org" class="contact-btn">
+        hello@sproutaac.org
       </a>
     </div>
 
@@ -469,10 +483,10 @@
     <div class="footer-logo-text">Sprout AAC</div>
     <div class="footer-links">
       <a href="/">Home</a>
-      <a href="https://github.com/sproutaac" target="_blank" rel="noopener">GitHub</a>
-      <a href="mailto:hello@sproutaac.com">Contact</a>
+      <a href="https://github.com/sproutaac/app" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:hello@sproutaac.org">Contact</a>
     </div>
-    <p class="footer-copy">© 2026 Sprout AAC. Free forever.</p>
+    <p class="footer-copy">© 2026 Sprout AAC · Open source under GPL v3 · <a href="mailto:hello@sproutaac.org" style="color:inherit;text-decoration:none;">hello@sproutaac.org</a></p>
   </footer>
 
   <button id="back-to-top" aria-label="Back to top">↑</button>
@@ -483,7 +497,7 @@
       let startTime = null;
       function step(ts) {
         if (!startTime) startTime = ts;
-        const progress = Math.min((ts - startTime) / 720, 1);
+        const progress = Math.min((ts - startTime) / 1600, 1);
         window.scrollTo(0, start * (1 - easeInOutCubic(progress)));
         if (progress < 1) requestAnimationFrame(step);
       }
