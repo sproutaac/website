@@ -40,13 +40,13 @@ const STYLE = `
 
 function buildEmailHtml({ subject, previewText, heading, body, ctaLabel, ctaUrl }) {
   const paragraphs = body.split(/\n\n+/).map(p =>
-    `<p style="margin:0 0 16px;font-size:16px;line-height:1.7;color:#333">${p.replace(/\n/g, '<br>')}</p>`
+    `<p style="margin:0 0 20px;font-size:16px;line-height:1.75;color:#3D3D3A;font-family:'DM Sans',Helvetica,Arial,sans-serif;font-weight:300">${p.replace(/\n/g, '<br>')}</p>`
   ).join('');
 
   const ctaBlock = ctaLabel && ctaUrl ? `
-    <table cellpadding="0" cellspacing="0" style="margin: 28px 0">
-      <tr><td style="background:#0F5C2E;border-radius:8px;padding:14px 28px">
-        <a href="${ctaUrl}" style="color:white;text-decoration:none;font-size:15px;font-weight:600;font-family:'Helvetica Neue',sans-serif">${ctaLabel}</a>
+    <table cellpadding="0" cellspacing="0" style="margin:32px 0">
+      <tr><td style="background:#0F5C2E;border-radius:10px;padding:15px 32px">
+        <a href="${ctaUrl}" style="color:white;text-decoration:none;font-size:15px;font-weight:600;font-family:'DM Sans',Helvetica,Arial,sans-serif;letter-spacing:0.2px">${ctaLabel}</a>
       </td></tr>
     </table>` : '';
 
@@ -55,30 +55,33 @@ function buildEmailHtml({ subject, previewText, heading, body, ctaLabel, ctaUrl 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  ${previewText ? `<meta name="x-preview-text" content="${previewText}">
-  <div style="display:none;max-height:0;overflow:hidden">${previewText}&nbsp;&zwnj;</div>` : ''}
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  ${previewText ? `<div style="display:none;max-height:0;overflow:hidden;mso-hide:all">${previewText}&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;</div>` : ''}
 </head>
-<body style="margin:0;padding:0;background:#F4F1EC;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#F4F1EC;padding:40px 0">
+<body style="margin:0;padding:0;background:#FAF7F2;font-family:'DM Sans',Helvetica,Arial,sans-serif">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#FAF7F2;padding:48px 0">
     <tr><td align="center">
-      <table width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%">
+      <table width="580" cellpadding="0" cellspacing="0" style="max-width:580px;width:100%">
 
-        <tr><td style="background:#0F5C2E;border-radius:12px 12px 0 0;padding:24px 36px">
-          <span style="font-family:Georgia,serif;font-size:20px;font-weight:700;color:#fff">Sprout</span>
-          <span style="font-size:9px;font-weight:700;letter-spacing:2px;color:#A8F0C0;vertical-align:middle;margin-left:6px">AAC</span>
+        <!-- Header -->
+        <tr><td style="background:#0F5C2E;border-radius:16px 16px 0 0;padding:28px 40px">
+          <span style="font-family:'Lora',Georgia,serif;font-size:22px;font-weight:700;color:#ffffff;letter-spacing:-0.3px">Sprout</span>
+          <span style="display:inline-block;font-size:9px;font-weight:700;letter-spacing:2.5px;color:#A8F0C0;vertical-align:middle;margin-left:8px;margin-bottom:1px">AAC</span>
         </td></tr>
 
-        <tr><td style="background:#fff;padding:36px 36px 28px">
-          <h1 style="margin:0 0 24px;font-family:Georgia,serif;font-size:28px;font-weight:700;color:#1A1A1A;line-height:1.2">${heading}</h1>
+        <!-- Body -->
+        <tr><td style="background:#ffffff;padding:44px 40px 36px;border-left:1px solid #E8E3DB;border-right:1px solid #E8E3DB">
+          <h1 style="margin:0 0 28px;font-family:'Lora',Georgia,serif;font-size:30px;font-weight:700;color:#1A1A1A;line-height:1.2;letter-spacing:-0.3px">${heading}</h1>
           ${paragraphs}
           ${ctaBlock}
         </td></tr>
 
-        <tr><td style="background:#F4F1EC;border-radius:0 0 12px 12px;padding:20px 36px;border-top:1px solid #E8E3DB">
-          <p style="margin:0;font-size:12px;color:#aaa;text-align:center;line-height:1.6">
-            You're receiving this because you signed up for the Sprout AAC waitlist at
+        <!-- Footer -->
+        <tr><td style="background:#FAF7F2;border-radius:0 0 16px 16px;padding:24px 40px;border:1px solid #E8E3DB;border-top:none">
+          <p style="margin:0;font-size:12px;color:#b0aa9f;text-align:center;line-height:1.7;font-family:'DM Sans',Helvetica,Arial,sans-serif">
+            You're receiving this because you joined the Sprout AAC waitlist at
             <a href="https://sproutaac.org" style="color:#1A8C45;text-decoration:none">sproutaac.org</a>.<br>
-            To unsubscribe, reply to this email or contact
+            To unsubscribe, reply with "unsubscribe" or email
             <a href="mailto:hello@sproutaac.org" style="color:#1A8C45;text-decoration:none">hello@sproutaac.org</a>.
           </p>
         </td></tr>
