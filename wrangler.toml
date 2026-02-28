@@ -1,0 +1,7 @@
+name                  = "sproutaac-web"
+pages_build_output_dir = "public"
+
+[[d1_databases]]
+binding       = "DB"
+database_name = "sproutaac-db"
+database_id   = "6dfdd09b-3fd2-4456-8d1f-2bef55dbd7c3"
