@@ -136,13 +136,15 @@ export async function onRequestPost(context) {
     return Response.json({ error: 'Server error' }, { status: 500 });
   }
 
+  let confirmDebug = 'no_resend_key';
+
   if (env.RESEND_API_KEY) {
     const token = await makeUnsubToken(email, env.ADMIN_KEY || '');
     const unsubLink = `https://sproutaac.org/api/unsubscribe?email=${encodeURIComponent(email)}&token=${token}`;
     const adminLink = `https://sproutaac.org/admin/signups?key=${env.ADMIN_KEY}`;
 
     // Diagnostic: await confirmation synchronously so we can see the result
-    let confirmDebug = 'skipped';
+    confirmDebug = 'skipped';
     if (isNew) {
       try {
         const confRes = await fetch('https://api.resend.com/emails', {
