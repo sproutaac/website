@@ -1,0 +1,30 @@
+# Sprout AAC
+
+> Free, open-source, offline-first AAC (Augmentative and Alternative Communication) app for children with autism, cerebral palsy, and developmental delays. No subscription, no paywall, forever free.
+
+Sprout exists because AAC devices and apps are prohibitively expensive ($149–$249+) and access to them is deeply inequitable — only 32% of minority families have AAC device access compared to 84% of white families, and the last widely-used free option (Cboard) moved behind a paywall in 2024. Sprout removes the cost barrier entirely while matching the customization and quality of paid AAC apps.
+
+## Key facts
+
+- Price: free forever, no subscription, no paywall, no ads
+- Status: in active development, not yet released to app stores
+- Platforms: iOS and Android (planned)
+- License: open source, GPL v3
+- Offline-first: fully usable with no internet connection; child data never leaves the device unless a family explicitly exports it
+- Motor planning stability: symbol cell positions never move once set, by design
+
+## Features
+
+- Multi-child profiles
+- Customizable symbol boards (3×3 to 5×5 grids)
+- Native offline text-to-speech (no API key, no internet required)
+- PIN-gated caregiver edit mode
+- On-device word prediction (bigram model, per child, no data leaves the device)
+- Planned: switch scanning, eye gaze support, Open Board Format (OBF) import/export, larger grid sizes, OpenDyslexic font
+
+## Links
+
+- Source code: https://github.com/sproutaac/app
+- Community (OpenAAC Discord): https://discord.gg/TEH8uxh
+- Privacy policy: https://sproutaac.org/privacy
+- Contact: hello@sproutaac.org

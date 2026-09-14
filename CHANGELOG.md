@@ -4,6 +4,20 @@ All notable changes to the Sprout AAC website are documented here.
 
 ---
 
+## [1.2.0] — 2026-09-14
+
+### Added
+- `robots.txt` pointing to sitemap
+- `sitemap.xml` covering `/` and `/privacy`
+- `llms.txt` — plain-language site summary for AI crawlers (emerging convention)
+- JSON-LD structured data on `index.html`: `Organization` + `SoftwareApplication` schema
+- Canonical `<link>` tag on `index.html` and `privacy.html`
+
+### Why
+Site was not indexed by Google at all (`site:sproutaac.org` returned zero results). This is the first step toward discoverability in both traditional search and AI answer engines (ChatGPT, Perplexity, Claude) — submitting to Google Search Console / Bing Webmaster Tools is the remaining, non-code step.
+
+---
+
 ## [1.1.0] — 2026-02-28
 
 ### Added

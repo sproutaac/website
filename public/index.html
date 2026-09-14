@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Sprout AAC — Free communication for every child</title>
   <meta name="description" content="Sprout is a free, offline-first AAC app for children who communicate differently. No subscription. No paywall. Forever." />
+  <link rel="canonical" href="https://sproutaac.org/" />
 
   <!-- Open Graph / social sharing -->
   <meta property="og:type"        content="website" />
@@ -24,6 +25,40 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet" />
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Sprout AAC",
+    "url": "https://sproutaac.org",
+    "logo": "https://sproutaac.org/sprout-logo.png",
+    "email": "hello@sproutaac.org",
+    "sameAs": [
+      "https://github.com/sproutaac",
+      "https://discord.gg/TEH8uxh"
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Sprout AAC",
+    "description": "A free, open-source, offline-first AAC (Augmentative and Alternative Communication) app for children with autism, cerebral palsy, and developmental delays. No subscription, no paywall, forever free.",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "iOS, Android",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "url": "https://sproutaac.org",
+    "license": "https://github.com/sproutaac/app/blob/main/LICENSE",
+    "isAccessibleForFree": true
+  }
+  </script>
 
   <style>
     /* ── Reset & Tokens ────────────────────────────────────────────── */
@@ -99,30 +134,6 @@
       to   { stroke-dashoffset: 0; }
     }
 
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px) scale(0.97);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .reveal.visible { opacity: 1; transform: none; }
-
-    /* CSS-native stagger for feature cards */
-    .features-grid .reveal:nth-child(2) { transition-delay: 60ms; }
-    .features-grid .reveal:nth-child(3) { transition-delay: 120ms; }
-    .features-grid .reveal:nth-child(4) { transition-delay: 180ms; }
-    .features-grid .reveal:nth-child(5) { transition-delay: 240ms; }
-    .features-grid .reveal:nth-child(6) { transition-delay: 300ms; }
-    /* CSS-native stagger for a11y cards */
-    .a11y-grid .reveal:nth-child(2) { transition-delay: 60ms; }
-    .a11y-grid .reveal:nth-child(3) { transition-delay: 120ms; }
-    .a11y-grid .reveal:nth-child(4) { transition-delay: 180ms; }
-    .a11y-grid .reveal:nth-child(5) { transition-delay: 240ms; }
-    .a11y-grid .reveal:nth-child(6) { transition-delay: 300ms; }
-    /* CSS-native stagger for roadmap cards */
-    .roadmap-grid .reveal:nth-child(2) { transition-delay: 60ms; }
-    .roadmap-grid .reveal:nth-child(3) { transition-delay: 120ms; }
-    .roadmap-grid .reveal:nth-child(4) { transition-delay: 180ms; }
 
     /* ── NAV ───────────────────────────────────────────────────────── */
     nav {
@@ -518,14 +529,6 @@
     .feature-card {
       background: var(--cream);
       padding: 40px 36px;
-      transition: background 0.25s, box-shadow 0.25s, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .feature-card:hover {
-      background: white;
-      box-shadow: 0 8px 32px rgba(15,92,46,0.10);
-      transform: translateY(-3px);
-      z-index: 1;
-      position: relative;
     }
 
     .feature-icon {
@@ -1072,9 +1075,7 @@
     .a11y-feat {
       background: var(--warm);
       padding: 36px 32px;
-      transition: background 0.2s, opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .a11y-feat:hover { background: white; }
     .a11y-icon {
       width: 44px;
       height: 44px;
@@ -1124,13 +1125,6 @@
       border: 1.5px solid rgba(255,255,255,0.1);
       position: relative;
       overflow: hidden;
-      transition: background 0.2s, border-color 0.2s, box-shadow 0.25s, opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .roadmap-card:hover {
-      background: rgba(255,255,255,0.1);
-      border-color: rgba(255,255,255,0.2);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 28px rgba(0,0,0,0.25);
     }
     .roadmap-card.current { border-color: var(--mid); }
     .roadmap-card.current::before {
@@ -1673,18 +1667,6 @@
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 40);
     }, { passive: true });
-
-    // ── Scroll reveal ─────────────────────────────────────────────
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0, rootMargin: '0px 0px 280px 0px' });
-
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
     // ── Smooth scroll ─────────────────────────────────────────────
     const easeInOutCubic = t => t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
