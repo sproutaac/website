@@ -4,6 +4,14 @@ All notable changes to the Sprout AAC website are documented here.
 
 ---
 
+## [1.4.0] — 2026-09-14
+
+### Added
+- "Get Involved" section — links to the org's `CONTRIBUTING.md` and the repo, aimed at developers (the existing Community strip only spoke to families/SLPs via Discord)
+
+### Changed
+- Roadmap: v0.2 now shows "In progress" with OBF import/export marked as the active item, matching real GitHub tracking (issues #7-#9 created and added to the project board). v0.1's "current" highlight moved to v0.2 now that v0.1 has actually shipped.
+
 ## [1.3.0] — 2026-09-14
 
 ### Fixed
