@@ -4,6 +4,14 @@ All notable changes to the Sprout AAC website are documented here.
 
 ---
 
+## [1.3.0] — 2026-09-14
+
+### Fixed
+- Wrong symbol source throughout the site — replaced "OpenSymbols" (a dead service, never actually used) with ARASAAC, the library the app is actually built against, in the FAQ, the SLP audience card, and the roadmap
+- Switch scanning was overclaimed as "works out of the box, no extra configuration" in the Accessibility section, directly contradicting the Roadmap section on the same page (which correctly lists it as a v0.3 item). Corrected to accurately describe what's built (visual scanning) vs. what's coming (physical switch input)
+- Roadmap was 7 months stale: timestamp said "February 2026," and v0.1 showed 3 items still "in progress" that actually shipped with v0.1.0. Updated timestamp and marked the whole v0.1 card "Done"
+- FAQ "When is it launching?" answered in pure future tense despite the v0.1.0 pre-release already existing on GitHub — updated to mention it, with a pointer to email for details rather than promoting it as a general download
+
 ## [1.2.0] — 2026-09-14
 
 ### Added
