@@ -19,11 +19,17 @@ Marketing and waitlist site for [Sprout AAC](https://sproutaac.org) — a free, 
 
 ```
 public/
-  index.html          # Full marketing site (single file, inline CSS + JS)
+  index.html          # Full marketing site (single file, inline CSS + JS), incl. the tablet live demo
   privacy.html        # Privacy policy
-  favicon.ico         # Browser tab icon
-  favicon.png         # Modern browsers + Apple touch icon
-  og-image.png        # Social share image (1200×630) — regenerate if branding changes
+  brand.html          # Brand guide (/brand): logo, usage, colours, type, voice
+  brand-assets/       # Downloads linked from /brand (logo SVG/PNG, app icon, social image)
+  sprout-mark.svg     # Official logo (vector): nav logo + SVG favicon
+  sprout-mark.png     # Logo PNG (used in structured data)
+  favicon.ico         # 16/32/48px, rendered from the vector logo
+  favicon.png         # 48px favicon
+  apple-touch-icon.png  # 180px home-screen icon (cream app icon)
+  og-image.png        # Link-preview image (1200×630); source template in sproutaac/.github/brand/social/templates
+  robots.txt, sitemap.xml, llms.txt
 
 functions/
   api/
@@ -50,11 +56,11 @@ npx wrangler pages dev public --d1 DB=<local-db-id>
 
 ## Deploy
 
+Pushing to `main` deploys automatically via GitHub Actions (`.github/workflows/deploy.yml`, which runs `wrangler pages deploy public`). For a hotfix you can also deploy directly:
+
 ```bash
 npx wrangler pages deploy public --project-name sproutaac-web
 ```
-
-The `main` branch also auto-deploys via Cloudflare Pages CI. Use direct deploy for hotfixes; CI for everything else.
 
 ## Database
 
@@ -109,4 +115,4 @@ See [CONTRIBUTING.md](https://github.com/sproutaac/.github/blob/main/CONTRIBUTIN
 
 ## Brand assets
 
-The official logo, colours, and social images live in [`sproutaac/.github/brand`](https://github.com/sproutaac/.github/tree/main/brand). `public/sprout-mark.png` and the favicons in `public/` are generated from that mark.
+The official logo, colours, and social images live in [`sproutaac/.github/brand`](https://github.com/sproutaac/.github/tree/main/brand), with a public guide at [sproutaac.org/brand](https://sproutaac.org/brand). `sprout-mark.svg` is the master. The favicons, `apple-touch-icon.png`, `og-image.png`, and everything in `public/brand-assets/` are generated from the files there; regenerate them rather than editing them by hand.
