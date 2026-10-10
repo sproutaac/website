@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brand guide — Sprout AAC</title>
+  <meta name="description" content="The Sprout AAC logo, colours, and type, with downloads and simple rules for using them." />
+  <link rel="canonical" href="https://sproutaac.org/brand" />
+
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://sproutaac.org/brand" />
+  <meta property="og:title"       content="Brand guide — Sprout AAC" />
+  <meta property="og:description" content="The Sprout AAC logo, colours, and type, with downloads and simple rules for using them." />
+  <meta property="og:image"       content="https://sproutaac.org/og-image.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:image"       content="https://sproutaac.org/og-image.png" />
+
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" href="/sprout-mark.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon.png" type="image/png" sizes="48x48" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --forest:   #0F5C2E;
+      --green:    #1A8C45;
+      --fresh:    #A8F0C0;
+      --cream:    #FAF7F2;
+      --warm:     #F3EDE3;
+      --charcoal: #1C1C1A;
+      --muted:    #6B6860;
+      --line:     #E2D9CC;
+      --font-serif: 'Lora', Georgia, serif;
+      --font-sans:  'DM Sans', system-ui, sans-serif;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--charcoal);
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    /* ── Nav ─────────────────────────────────────────────────────── */
+    nav {
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+      background: var(--cream);
+    }
+    @media (max-width: 600px) { nav { padding: 18px 24px; } }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--forest);
+    }
+    .nav-logo-text {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .nav-badge {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      color: var(--green);
+    }
+    .nav-back {
+      font-size: 14px;
+      color: var(--muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--forest); }
+
+    /* ── Hero strip ──────────────────────────────────────────────── */
+    .hero-strip {
+      background: var(--forest);
+      padding: 64px 48px 56px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-strip::after {
+      content: '';
+      position: absolute;
+      right: -60px;
+      top: -60px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(168,240,192,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero-strip-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      color: var(--fresh);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .hero-headline {
+      font-family: var(--font-serif);
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      color: white;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .hero-headline em { font-style: italic; color: var(--fresh); }
+    .hero-sub {
+      font-size: 17px;
+      color: rgba(255,255,255,0.65);
+      max-width: 540px;
+    }
+    .hero-date {
+      margin-top: 20px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* ── Commitment cards ────────────────────────────────────────── */
+    .commitments {
+      background: var(--warm);
+      padding: 56px 48px;
+      border-bottom: 1px solid var(--line);
+    }
+    @media (max-width: 600px) { .commitments { padding: 40px 24px; } }
+
+    .commitments-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 680px) {
+      .commitments-inner { grid-template-columns: 1fr; }
+    }
+
+    .commitment-card {
+      background: white;
+      border-radius: 16px;
+      padding: 28px 24px;
+      border: 1.5px solid var(--line);
+    }
+    .commitment-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .commitment-title {
+      font-family: var(--font-serif);
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--charcoal);
+    }
+    .commitment-body {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── Main content ────────────────────────────────────────────── */
+    .content {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 64px 48px 80px;
+    }
+    @media (max-width: 600px) { .content { padding: 48px 24px 64px; } }
+
+    .content h2 {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--charcoal);
+      margin: 48px 0 12px;
+      padding-top: 8px;
+      border-top: 1px solid var(--line);
+    }
+    .content h2:first-child { margin-top: 0; border-top: none; padding-top: 0; }
+
+    .content p {
+      color: var(--muted);
+      margin-bottom: 16px;
+      font-size: 16px;
+    }
+    .content p strong { color: var(--charcoal); font-weight: 600; }
+
+    .content ul {
+      list-style: none;
+      margin: 0 0 20px;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .content ul li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 16px;
+      color: var(--muted);
+    }
+    .content ul li::before {
+      content: '✓';
+      color: var(--green);
+      font-weight: 700;
+      font-size: 14px;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    /* never-do list */
+    .content ul.never li::before {
+      content: '✕';
+      color: #E53935;
+    }
+
+    /* ── Contact block ────────────────────────────────────────────── */
+    .contact-block {
+      background: var(--forest);
+      border-radius: 20px;
+      padding: 36px 32px;
+      margin-top: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .contact-block-text h3 {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 6px;
+    }
+    .contact-block-text p {
+      color: rgba(255,255,255,0.6);
+      font-size: 15px;
+      margin: 0;
+    }
+    .contact-btn {
+      background: var(--fresh);
+      color: var(--forest);
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 15px;
+      white-space: nowrap;
+      transition: opacity 0.2s, transform 0.15s;
+      flex-shrink: 0;
+    }
+    .contact-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    /* ── Footer ──────────────────────────────────────────────────── */
+    footer {
+      background: var(--charcoal);
+      padding: 40px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    @media (max-width: 600px) { footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; } }
+
+    .footer-logo-text {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+    .footer-links a {
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      font-size: 13.5px;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: white; }
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(255,255,255,0.22);
+    }
+
+    /* ── Back to top ───────────────────────────────────────────────── */
+    #back-to-top {
+      position: fixed;
+      bottom: calc(1.5rem + env(safe-area-inset-bottom));
+      right: 1.5rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--forest);
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.25s, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      pointer-events: none;
+      z-index: 9989;
+      box-shadow: 0 2px 12px rgba(15,92,46,0.35);
+      -webkit-tap-highlight-color: transparent;
+    }
+    #back-to-top.visible { opacity: 1; transform: scale(1); pointer-events: auto; }
+    #back-to-top:hover { background: var(--green); box-shadow: 0 0 24px rgba(15,92,46,0.45); transform: scale(1.1); }
+    #back-to-top:active { transform: scale(0.92); }
+  </style>
+  <style>
+    /* ── Brand guide ─────────────────────────────────────────────── */
+    .brand { max-width: 960px; margin: 0 auto; padding: 72px 48px 96px; }
+    @media (max-width: 600px) { .brand { padding: 48px 24px 64px; } }
+    .brand section { padding: 56px 0; border-top: 1px solid var(--line); }
+    .brand section:first-child { border-top: none; padding-top: 0; }
+    .brand h2 { font-family: var(--font-serif); font-size: 30px; color: var(--forest); line-height: 1.2; margin-bottom: 10px; }
+    .brand .lede { color: var(--muted); max-width: 640px; margin-bottom: 28px; }
+    .brand h3 { font-size: 15px; font-weight: 600; color: var(--charcoal); margin: 28px 0 10px; }
+
+    .logo-tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    @media (max-width: 720px) { .logo-tiles { grid-template-columns: minmax(0, 1fr); } }
+    .logo-tile { border-radius: 16px; aspect-ratio: 4 / 3; display: grid; place-items: center; border: 1px solid var(--line); position: relative; }
+    .logo-tile img { height: 58%; max-width: 100%; }
+    .logo-tile span { position: absolute; left: 14px; bottom: 10px; font-size: 12px; letter-spacing: .5px; color: var(--muted); }
+    .t-cream { background: var(--cream); }
+    .t-white { background: #fff; }
+    .t-forest { background: linear-gradient(160deg, #0F5C2E, #1A8C45); border-color: transparent; }
+    .t-forest span { color: rgba(255,255,255,.75); }
+    .t-forest img { filter: drop-shadow(0 0 1px rgba(198,248,214,.95)) drop-shadow(0 0 12px rgba(168,240,192,.5)); }
+
+    .downloads { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .dl { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; background: var(--forest); color: #fff; text-decoration: none; font-size: 14px; font-weight: 500; transition: background .2s, transform .2s; }
+    .dl:hover { background: var(--green); transform: translateY(-1px); }
+    .dl.ghost { background: transparent; color: var(--forest); border: 1.5px solid var(--forest); }
+    .dl.ghost:hover { background: var(--forest); color: #fff; }
+    .dl small { opacity: .7; font-weight: 400; }
+
+    .rules { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    @media (max-width: 720px) { .rules { grid-template-columns: minmax(0, 1fr); } }
+    .rule { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 22px; display: flex; gap: 20px; align-items: center; }
+    .rule .demo { flex: none; width: 96px; height: 96px; border-radius: 12px; background: var(--cream); display: grid; place-items: center; position: relative; }
+    .rule .demo img { height: 70px; }
+    .rule p { color: var(--muted); font-size: 15px; line-height: 1.55; }
+    .rule strong { display: block; color: var(--charcoal); font-size: 16px; margin-bottom: 2px; }
+    .clearspace { outline: 2px dashed rgba(26,140,69,.45); outline-offset: 10px; border-radius: 4px; }
+
+    .donts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+    @media (max-width: 720px) { .donts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .dont { text-align: center; font-size: 13px; color: var(--muted); }
+    .dont .demo { aspect-ratio: 1; border-radius: 14px; background: #fff; border: 1px solid var(--line); display: grid; place-items: center; margin-bottom: 8px; position: relative; overflow: hidden; }
+    .dont .demo img { height: 62%; }
+    .dont .demo::after { content: '✕'; position: absolute; top: 8px; right: 10px; width: 22px; height: 22px; border-radius: 50%; background: #C0392B; color: #fff; font-size: 12px; line-height: 22px; font-weight: 700; }
+    .d-recolor img { filter: hue-rotate(150deg) saturate(1.4); }
+    .d-stretch img { transform: scaleX(1.6); }
+    .d-rotate img { transform: rotate(-18deg); }
+    .d-busy { background: repeating-linear-gradient(45deg, #f2a65a 0 12px, #5ab0f2 12px 24px) !important; }
+    .d-outline img { filter: drop-shadow(3px 0 0 #222) drop-shadow(-3px 0 0 #222) drop-shadow(0 3px 0 #222) drop-shadow(0 -3px 0 #222); }
+    .d-shadow img { filter: drop-shadow(10px 12px 4px rgba(0,0,0,.55)); }
+    .d-crop img { height: 140%; transform: translateY(18%); }
+    .d-small img { height: 12%; }
+
+    .swatches { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
+    @media (max-width: 720px) { .swatches { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .swatch { border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: #fff; cursor: pointer; text-align: left; font: inherit; padding: 0; transition: transform .2s, box-shadow .2s; }
+    .swatch:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(15,92,46,.12); }
+    .swatch:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
+    .swatch .chip { height: 96px; }
+    .swatch .meta { padding: 12px 14px; }
+    .swatch .name { display: block; font-weight: 600; font-size: 15px; color: var(--charcoal); }
+    .swatch .hex { display: block; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+    .swatch .use { display: block; font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+
+    .type-specimens { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    @media (max-width: 720px) { .type-specimens { grid-template-columns: minmax(0, 1fr); } }
+    .specimen { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 26px; }
+    .specimen .label { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green); font-weight: 600; }
+    .specimen .big { margin: 10px 0 6px; font-size: clamp(30px, 8vw, 44px); line-height: 1.1; color: var(--forest); overflow-wrap: anywhere; }
+    .specimen .serif { font-family: var(--font-serif); font-weight: 700; }
+    .specimen .sans { font-family: var(--font-sans); font-weight: 500; }
+    .specimen p { color: var(--muted); font-size: 15px; }
+
+    .voice { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    @media (max-width: 720px) { .voice { grid-template-columns: minmax(0, 1fr); } }
+    .voice div { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 22px 24px; }
+    .voice h3 { margin-top: 0; }
+    .voice ul { padding-left: 18px; color: var(--muted); font-size: 15px; }
+    .voice li { margin: 6px 0; }
+    .voice .yes h3 { color: var(--green); }
+    .voice .no h3 { color: #A33A2E; }
+
+    .note { margin-top: 24px; font-size: 15px; color: var(--muted); }
+    .note a { color: var(--green); }
+    .toast { position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 12px); background: var(--forest); color: #fff; padding: 10px 18px; border-radius: 999px; font-size: 14px; opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    @media (prefers-reduced-motion: reduce) { .swatch, .dl, .toast { transition: none; } }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="/sprout-mark.svg" width="25" height="32" alt="" />
+      <div>
+        <div class="nav-logo-text">Sprout</div>
+        <div class="nav-badge">AAC</div>
+      </div>
+    </a>
+    <a href="/" class="nav-back">
+      ← Back to home
+    </a>
+  </nav>
+
+  <!-- Hero strip -->
+  <div class="hero-strip">
+    <div class="hero-strip-inner">
+      <p class="hero-eyebrow">Brand guide</p>
+      <h1 class="hero-headline">
+        One sprout,<br><em>used the same way everywhere.</em>
+      </h1>
+      <p class="hero-sub">
+        Writing about Sprout, linking to us, or building something with us? Everything you need is here:
+        the logo, our colours and type, and a few simple rules for using them.
+      </p>
+    </div>
+  </div>
+
+  <main class="brand">
+
+    <section id="logo">
+      <h2>The logo</h2>
+      <p class="lede">The three-leaf sprout is the Sprout AAC logo and app icon. It works on light backgrounds as is. On dark or green backgrounds, give it a soft mint glow so the darker leaves stand out.</p>
+      <div class="logo-tiles">
+        <div class="logo-tile t-cream"><img src="/sprout-mark.svg" alt="Sprout AAC logo on cream"><span>On cream</span></div>
+        <div class="logo-tile t-white"><img src="/sprout-mark.svg" alt="Sprout AAC logo on white"><span>On white</span></div>
+        <div class="logo-tile t-forest"><img src="/sprout-mark.svg" alt="Sprout AAC logo on forest green, with a mint glow"><span>On green, with glow</span></div>
+      </div>
+      <div class="downloads">
+        <a class="dl" href="/brand-assets/sprout-logo.svg" download>Logo <small>SVG</small></a>
+        <a class="dl" href="/brand-assets/sprout-logo.png" download>Logo <small>PNG, transparent</small></a>
+        <a class="dl ghost" href="/brand-assets/sprout-logo-on-white.png" download>Logo on white <small>PNG, square</small></a>
+        <a class="dl ghost" href="/brand-assets/sprout-app-icon-1024.png" download>App icon <small>1024px</small></a>
+        <a class="dl ghost" href="/brand-assets/sprout-social-1200x630.png" download>Social image <small>1200×630</small></a>
+      </div>
+      <p class="note">Every source file, including the app icon masters and social templates, is in <a href="https://github.com/sproutaac/.github/tree/main/brand" target="_blank" rel="noopener">our GitHub brand folder</a>.</p>
+    </section>
+
+    <section id="usage">
+      <h2>Using the logo</h2>
+      <p class="lede">Two rules keep it looking right at any size.</p>
+      <div class="rules">
+        <div class="rule">
+          <div class="demo"><img class="clearspace" src="/sprout-mark.svg" alt=""></div>
+          <p><strong>Give it room</strong>Keep clear space around the logo of at least half the width of the centre leaf. Don't crowd it with text or other logos.</p>
+        </div>
+        <div class="rule">
+          <div class="demo"><img src="/sprout-mark.svg" alt="" style="height:24px"></div>
+          <p><strong>Not too small</strong>Show it at least 24px tall on screen, or 8mm in print. The only exception is browser favicons.</p>
+        </div>
+      </div>
+
+      <h3>Please don't</h3>
+      <div class="donts">
+        <div class="dont"><div class="demo d-recolor"><img src="/sprout-mark.svg" alt=""></div>Change its colours</div>
+        <div class="dont"><div class="demo d-stretch"><img src="/sprout-mark.svg" alt=""></div>Stretch or squash it</div>
+        <div class="dont"><div class="demo d-rotate"><img src="/sprout-mark.svg" alt=""></div>Rotate it</div>
+        <div class="dont"><div class="demo d-outline"><img src="/sprout-mark.svg" alt=""></div>Add outlines</div>
+        <div class="dont"><div class="demo d-shadow"><img src="/sprout-mark.svg" alt=""></div>Add hard shadows</div>
+        <div class="dont"><div class="demo d-busy"><img src="/sprout-mark.svg" alt=""></div>Put it on busy backgrounds</div>
+        <div class="dont"><div class="demo d-crop"><img src="/sprout-mark.svg" alt=""></div>Crop it</div>
+        <div class="dont"><div class="demo d-small"><img src="/sprout-mark.svg" alt=""></div>Make it tiny</div>
+      </div>
+    </section>
+
+    <section id="colour">
+      <h2>Colour</h2>
+      <p class="lede">Greens from the sprout itself, on a warm cream. Click a colour to copy its hex code.</p>
+      <div class="swatches">
+        <button class="swatch" data-hex="#0F5C2E"><div class="chip" style="background:#0F5C2E"></div><div class="meta"><span class="name">Forest</span><span class="hex">#0F5C2E</span><span class="use">Headings, primary buttons</span></div></button>
+        <button class="swatch" data-hex="#1A8C45"><div class="chip" style="background:#1A8C45"></div><div class="meta"><span class="name">Green</span><span class="hex">#1A8C45</span><span class="use">Brand green, links</span></div></button>
+        <button class="swatch" data-hex="#3DC46A"><div class="chip" style="background:#3DC46A"></div><div class="meta"><span class="name">Leaf</span><span class="hex">#3DC46A</span><span class="use">Accents, highlights</span></div></button>
+        <button class="swatch" data-hex="#A8F0C0"><div class="chip" style="background:#A8F0C0"></div><div class="meta"><span class="name">Fresh</span><span class="hex">#A8F0C0</span><span class="use">Text and glow on green</span></div></button>
+        <button class="swatch" data-hex="#FAF7F2"><div class="chip" style="background:#FAF7F2;border-bottom:1px solid var(--line)"></div><div class="meta"><span class="name">Cream</span><span class="hex">#FAF7F2</span><span class="use">Backgrounds, app icon</span></div></button>
+      </div>
+    </section>
+
+    <section id="type">
+      <h2>Typography</h2>
+      <p class="lede">Two free Google Fonts: a warm serif for headings, a friendly sans-serif for everything else.</p>
+      <div class="type-specimens">
+        <div class="specimen"><span class="label">Headings · Lora</span><div class="big serif">Free communication for every child.</div><p>Lora Bold (700) and SemiBold (600). Used for headings and the "Sprout" wordmark.</p></div>
+        <div class="specimen"><span class="label">Body · DM Sans</span><div class="big sans">No subscription. No paywall.</div><p>DM Sans Regular (400) to Bold (700). Used for body text, buttons, and the app's interface.</p></div>
+      </div>
+    </section>
+
+    <section id="voice">
+      <h2>Name &amp; voice</h2>
+      <p class="lede">Write <strong>Sprout AAC</strong> on first mention, then just <strong>Sprout</strong>. We talk to parents, therapists, and teachers the way a good friend would: warm, plain, and honest.</p>
+      <div class="voice">
+        <div class="yes"><h3>We do</h3><ul>
+          <li>Use plain language and explain any jargon, AAC included</li>
+          <li>Focus on what children can do and say</li>
+          <li>Say "children who communicate differently"</li>
+          <li>Keep promises concrete: free, offline, no tracking</li>
+        </ul></div>
+        <div class="no"><h3>We don't</h3><ul>
+          <li>Use pity or "suffering" language about children</li>
+          <li>Call anyone "non-functional" or "low-functioning"</li>
+          <li>Overpromise features that aren't built yet</li>
+          <li>Use hype, urgency, or fear to make a point</li>
+        </ul></div>
+      </div>
+      <p class="note">Questions about using the brand, or need a format that isn't here? Email <a href="mailto:hello@sproutaac.org">hello@sproutaac.org</a>.</p>
+    </section>
+
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo-text">Sprout AAC</div>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="https://github.com/sproutaac/app" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/company/sproutaac/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="/brand">Brand</a>
+      <a href="mailto:hello@sproutaac.org">Contact</a>
+    </div>
+    <p class="footer-copy">© 2026 Sprout AAC · Open source under GPL v3 · <a href="mailto:hello@sproutaac.org" style="color:inherit;text-decoration:none;">hello@sproutaac.org</a></p>
+  </footer>
+
+  <button id="back-to-top" aria-label="Back to top">↑</button>
+  <script>
+    const easeInOutCubic = t => t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
+    function smoothScrollToTop() {
+      const start = window.scrollY;
+      let startTime = null;
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        const progress = Math.min((ts - startTime) / 1600, 1);
+        window.scrollTo(0, start * (1 - easeInOutCubic(progress)));
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    const btt = document.getElementById('back-to-top');
+    window.addEventListener('scroll', function() {
+      btt.classList.toggle('visible', window.scrollY > 300);
+    }, { passive: true });
+    btt.addEventListener('click', function() {
+      if (navigator.vibrate) navigator.vibrate(40);
+      smoothScrollToTop();
+    });
+  </script>
+  <script>
+    // Click a swatch to copy its hex code
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    document.querySelectorAll('.swatch').forEach((btn) => {
+      btn.setAttribute('aria-label', btn.querySelector('.name').textContent + ' ' + btn.dataset.hex + ', copy hex code');
+      btn.addEventListener('click', async () => {
+        try { await navigator.clipboard.writeText(btn.dataset.hex); toast.textContent = btn.dataset.hex + ' copied'; }
+        catch { toast.textContent = btn.dataset.hex; }
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+      });
+    });
+  </script>
+</body>
+</html>

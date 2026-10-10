@@ -13,12 +13,13 @@
   <meta property="og:title"       content="Sprout AAC — Free communication for every child" />
   <meta property="og:description" content="A free, offline-first AAC app for children who communicate differently. No subscription. No paywall. Forever." />
   <meta property="og:image"       content="https://sproutaac.org/og-image.png" />
-  <meta property="og:image:width"  content="1600" />
+  <meta property="og:image:width"  content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card"        content="summary_large_image" />
   <meta name="twitter:image"       content="https://sproutaac.org/og-image.png" />
 
   <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" href="/sprout-mark.svg" type="image/svg+xml" />
   <link rel="icon" href="/favicon.png" type="image/png" sizes="48x48" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
@@ -33,7 +34,7 @@
     "@type": "Organization",
     "name": "Sprout AAC",
     "url": "https://sproutaac.org",
-    "logo": "https://sproutaac.org/sprout-logo.png",
+    "logo": "https://sproutaac.org/sprout-mark.png",
     "email": "hello@sproutaac.org",
     "sameAs": [
       "https://github.com/sproutaac",
@@ -332,98 +333,121 @@
       align-items: center;
     }
 
-    .phone-mockup {
-      width: 260px;
-      height: 460px;
+    /* Tablet demo: landscape iPad-style frame. Most families use AAC on a
+       tablet. Sizes scale with the frame (container query units). */
+    .tablet-mockup {
+      width: min(500px, 100%);
+      aspect-ratio: 500 / 360;
       background: var(--charcoal);
-      border-radius: 40px;
-      padding: 16px;
+      border-radius: 30px;
+      padding: 18px;
       box-shadow:
         0 40px 80px rgba(0,0,0,0.18),
         0 0 0 1px rgba(255,255,255,0.06) inset;
       animation: float 5s ease-in-out infinite, fadeUp 1s var(--ease-out) 0.4s both;
       position: relative;
       z-index: 2;
+      container-type: inline-size;
+    }
+    .tablet-mockup::before {
+      /* front camera */
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 7px;
+      width: 5px;
+      height: 5px;
+      margin-top: -2.5px;
+      border-radius: 50%;
+      background: #3a3a37;
     }
 
-    .phone-screen {
+    .tablet-screen {
       background: #F5FAF6;
-      border-radius: 28px;
+      border-radius: 14px;
       height: 100%;
       overflow: hidden;
       display: flex;
       flex-direction: column;
     }
 
-    .phone-bar {
+    .tablet-bar {
       background: var(--forest);
-      padding: 10px 14px 8px;
+      padding: 1.6cqi 2.6cqi;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 1.4cqi;
     }
-    .phone-bar-text {
+    .tablet-bar img { height: 3.6cqi; width: auto; filter: brightness(0) invert(1); opacity: .92; }
+    .tablet-bar-text {
       font-family: var(--font-sans);
-      font-size: 10px;
+      font-size: 2.6cqi;
       font-weight: 600;
-      color: rgba(255,255,255,0.9);
+      color: rgba(255,255,255,0.92);
     }
-    .phone-bar-name {
-      font-size: 8px;
-      color: rgba(255,255,255,0.5);
+    .tablet-bar-name {
+      font-size: 2.2cqi;
+      color: rgba(255,255,255,0.55);
       margin-left: auto;
     }
 
-    .phone-output {
+    .tablet-output {
       background: white;
-      margin: 8px 8px 0;
-      border-radius: 10px;
-      padding: 8px 10px;
+      margin: 1.6cqi 1.6cqi 0;
+      border-radius: 1.8cqi;
+      padding: 1.4cqi 2cqi;
       font-family: var(--font-sans);
-      font-size: 11px;
+      font-size: 2.8cqi;
       color: var(--charcoal);
-      min-height: 32px;
+      min-height: 6.4cqi;
       border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
     }
-    .phone-output span {
+    .tablet-output span {
       color: var(--forest);
       font-weight: 600;
     }
 
-    .phone-grid {
+    .tablet-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 5px;
-      padding: 8px;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      gap: 1.2cqi;
+      padding: 1.6cqi;
       flex: 1;
+      min-height: 0;
     }
 
-    .phone-cell {
-      border-radius: 8px;
+    .tablet-cell {
+      border: 0;
+      border-radius: 1.6cqi;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 3px;
-      padding: 6px 4px;
+      gap: 1cqi;
+      padding: 0 1cqi;
       font-family: var(--font-sans);
-      font-size: 9px;
+      font-size: 2.6cqi;
       font-weight: 600;
       color: rgba(0,0,0,0.75);
       cursor: pointer;
       transition: transform 0.1s, filter 0.1s;
       -webkit-tap-highlight-color: transparent;
+      min-width: 0;
+      white-space: nowrap;
     }
-    .phone-cell:hover { transform: scale(0.96); filter: brightness(0.95); }
-    .phone-cell:active { transform: scale(0.93); }
-    .phone-cell .emoji { font-size: 18px; }
+    .tablet-cell:hover { transform: scale(0.96); filter: brightness(0.95); }
+    .tablet-cell:active { transform: scale(0.93); }
+    .tablet-cell:focus-visible { outline: 2px solid var(--forest); outline-offset: 2px; }
+    .tablet-cell .emoji { font-size: 3.6cqi; line-height: 1; }
 
-    /* Fitzgerald Key */
-    .cell-green  { background: #C8E6C9; }
-    .cell-red    { background: #FFCDD2; }
-    .cell-orange { background: #FFE0B2; }
-    .cell-blue   { background: #BBDEFB; }
-    .cell-yellow { background: #FFF9C4; }
+    /* Fitzgerald Key, matching the app (lib/constants/app_theme.dart) as light tints */
+    .fk-people      { background: #FFF1A8; }
+    .fk-verb        { background: #C8E6C9; }
+    .fk-descriptor  { background: #BBDEFB; }
+    .fk-social      { background: #FCE4EC; }
+    .fk-misc        { background: #ECEFF1; }
 
     /* Floating decorative elements */
     .deco-leaf {
@@ -1224,7 +1248,7 @@
   <!-- NAV -->
   <nav id="nav">
     <a href="/" class="nav-logo">
-      <img class="nav-logo-icon" src="/sprout-mark.png" width="29" height="38" alt="" />
+      <img class="nav-logo-icon" src="/sprout-mark.svg" width="29" height="38" alt="" />
       <div>
         <div class="nav-logo-text">Sprout</div>
         <div class="nav-badge">AAC</div>
@@ -1279,30 +1303,33 @@
           <ellipse cx="30" cy="30" rx="15" ry="28" fill="#3DC46A" opacity="0.3" transform="rotate(30 30 30)"/>
         </svg>
 
-        <div class="phone-mockup">
-          <div class="phone-screen">
-            <div class="phone-bar">
-              <svg width="14" height="14" viewBox="0 0 40 40" fill="none">
-                <ellipse cx="20" cy="18" rx="5" ry="10" fill="white" transform="rotate(-25 20 18)"/>
-                <ellipse cx="20" cy="18" rx="5" ry="10" fill="rgba(255,255,255,0.7)" transform="rotate(10 20 18)"/>
-                <ellipse cx="20" cy="18" rx="4" ry="9" fill="rgba(255,255,255,0.5)" transform="rotate(38 20 18)"/>
-              </svg>
-              <span class="phone-bar-text">Sprout</span>
-              <span class="phone-bar-name">Jamie's board</span>
+        <div class="tablet-mockup" role="group" aria-label="Live demo of a Sprout board. Tap a word to hear it.">
+          <div class="tablet-screen">
+            <div class="tablet-bar">
+              <img src="/sprout-mark.svg" alt="" width="11" height="14" />
+              <span class="tablet-bar-text">Sprout</span>
+              <span class="tablet-bar-name">Jamie's board</span>
             </div>
-            <div class="phone-output" id="phone-output">
+            <div class="tablet-output" id="phone-output" aria-live="polite">
               <span id="output-text">Tap a word...</span>
             </div>
-            <div class="phone-grid">
-              <div class="phone-cell cell-green"  onclick="phoneSpeak('more')"><span class="emoji">🔁</span>more</div>
-              <div class="phone-cell cell-red"    onclick="phoneSpeak('stop')"><span class="emoji">✋</span>stop</div>
-              <div class="phone-cell cell-orange" onclick="phoneSpeak('help')"><span class="emoji">🆘</span>help</div>
-              <div class="phone-cell cell-green"  onclick="phoneSpeak('want')"><span class="emoji">💚</span>want</div>
-              <div class="phone-cell cell-green"  onclick="phoneSpeak('go')"><span class="emoji">🏃</span>go</div>
-              <div class="phone-cell cell-orange" onclick="phoneSpeak('eat')"><span class="emoji">🍎</span>eat</div>
-              <div class="phone-cell cell-orange" onclick="phoneSpeak('drink')"><span class="emoji">💧</span>drink</div>
-              <div class="phone-cell cell-blue"   onclick="phoneSpeak('yes')"><span class="emoji">👍</span>yes</div>
-              <div class="phone-cell cell-red"    onclick="phoneSpeak('no')"><span class="emoji">👎</span>no</div>
+            <div class="tablet-grid">
+              <button type="button" class="tablet-cell fk-people" data-word="I"><span class="emoji" aria-hidden="true">🙋</span>I</button>
+              <button type="button" class="tablet-cell fk-descriptor" data-word="more"><span class="emoji" aria-hidden="true">➕</span>more</button>
+              <button type="button" class="tablet-cell fk-verb" data-word="stop"><span class="emoji" aria-hidden="true">✋</span>stop</button>
+              <button type="button" class="tablet-cell fk-verb" data-word="help"><span class="emoji" aria-hidden="true">🆘</span>help</button>
+              <button type="button" class="tablet-cell fk-verb" data-word="want"><span class="emoji" aria-hidden="true">🤲</span>want</button>
+              <button type="button" class="tablet-cell fk-verb" data-word="like"><span class="emoji" aria-hidden="true">❤️</span>like</button>
+              <button type="button" class="tablet-cell fk-verb" data-word="go"><span class="emoji" aria-hidden="true">🏃</span>go</button>
+              <button type="button" class="tablet-cell fk-verb" data-word="eat"><span class="emoji" aria-hidden="true">🍎</span>eat</button>
+              <button type="button" class="tablet-cell fk-misc" data-word="don't"><span class="emoji" aria-hidden="true">🚫</span>don't</button>
+              <button type="button" class="tablet-cell fk-verb" data-word="have"><span class="emoji" aria-hidden="true">🎒</span>have</button>
+              <button type="button" class="tablet-cell fk-misc" data-word="that"><span class="emoji" aria-hidden="true">👉</span>that</button>
+              <button type="button" class="tablet-cell fk-verb" data-word="drink"><span class="emoji" aria-hidden="true">🥤</span>drink</button>
+              <button type="button" class="tablet-cell fk-verb" data-word="play"><span class="emoji" aria-hidden="true">🧸</span>play</button>
+              <button type="button" class="tablet-cell fk-social" data-word="all done"><span class="emoji" aria-hidden="true">✅</span>all done</button>
+              <button type="button" class="tablet-cell fk-social" data-word="yes"><span class="emoji" aria-hidden="true">👍</span>yes</button>
+              <button type="button" class="tablet-cell fk-social" data-word="no"><span class="emoji" aria-hidden="true">👎</span>no</button>
             </div>
           </div>
         </div>
@@ -1695,6 +1722,7 @@
       <a href="https://discord.gg/TEH8uxh" target="_blank" rel="noopener">Discord</a>
       <a href="https://github.com/sproutaac/app" target="_blank" rel="noopener">GitHub</a>
       <a href="https://www.linkedin.com/company/sproutaac/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="/brand">Brand</a>
     </div>
     <p class="footer-copy">© 2026 Sprout AAC · Open source under GPL v3 · <a href="mailto:hello@sproutaac.org" style="color:inherit;text-decoration:none;">hello@sproutaac.org</a></p>
   </footer>
@@ -1736,44 +1764,79 @@
     });
 
     // ── Voice selection ───────────────────────────────────────────
+    // Prefer voices that run on the device: network voices (e.g. Chrome's
+    // "Google US English") can end with an audible pop/thump when the audio
+    // stream closes, and they need a connection.
     let preferredVoice = null;
     const voicePreference = [
-      'Google US English',
       'Samantha',
       'Microsoft Aria Online Natural - English (United States)',
       'Microsoft Jenny Online Natural - English (United States)',
       'Microsoft Zira Desktop - English (United States)',
       'Karen',
       'Moira',
+      'Google US English',
     ];
     function pickVoice() {
       const voices = speechSynthesis.getVoices();
       if (!voices.length) return;
-      for (const name of voicePreference) {
-        const v = voices.find(v => v.name === name);
-        if (v) { preferredVoice = v; return; }
+      const english = voices.filter(v => v.lang && v.lang.startsWith('en'));
+      for (const local of [true, false]) {
+        for (const name of voicePreference) {
+          const v = english.find(v => v.name === name && v.localService === local);
+          if (v) { preferredVoice = v; return; }
+        }
       }
-      preferredVoice = voices.find(v => v.lang === 'en-US') ||
-                       voices.find(v => v.lang.startsWith('en')) || null;
+      preferredVoice = english.find(v => v.localService && v.lang === 'en-US') ||
+                       english.find(v => v.localService) ||
+                       english.find(v => v.lang === 'en-US') || english[0] || null;
     }
-    pickVoice();
-    speechSynthesis.addEventListener('voiceschanged', pickVoice);
+    if ('speechSynthesis' in window) {
+      pickVoice();
+      speechSynthesis.addEventListener('voiceschanged', pickVoice);
+    }
 
-    // ── Phone demo interaction ────────────────────────────────────
+    // Keep the audio output open while the demo is in use. When speech ends,
+    // some browsers close the output device, and many speakers/headsets "thump"
+    // as they power down. A silent tone keeps the device open between taps;
+    // it's released after 15 s idle so it doesn't drain the battery.
+    let audioCtx = null;
+    let idleTimer = null;
+    function keepAudioAwake() {
+      try {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          gain.gain.value = 0;
+          osc.connect(gain).connect(audioCtx.destination);
+          osc.start();
+        }
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        clearTimeout(idleTimer);
+        idleTimer = setTimeout(() => audioCtx && audioCtx.suspend(), 15000);
+      } catch (e) { /* no Web Audio: speech still works */ }
+    }
+
+    // ── Tablet demo interaction ───────────────────────────────────
     let outputWords = [];
-    function phoneSpeak(word) {
+    function demoSpeak(word) {
       outputWords.push(word);
-      if (outputWords.length > 4) outputWords.shift();
-      document.getElementById('output-text').innerHTML =
-        '<span>' + outputWords.join(' ') + '</span>';
+      if (outputWords.length > 5) outputWords.shift();
+      const out = document.getElementById('output-text');
+      out.textContent = outputWords.join(' ');
 
       if ('speechSynthesis' in window) {
+        keepAudioAwake();
+        speechSynthesis.cancel();
         const utt = new SpeechSynthesisUtterance(word);
         utt.rate = 0.9;
         if (preferredVoice) utt.voice = preferredVoice;
         speechSynthesis.speak(utt);
       }
     }
+    document.querySelectorAll('.tablet-cell').forEach(btn =>
+      btn.addEventListener('click', () => demoSpeak(btn.dataset.word)));
 
     // ── FAQ accordion ─────────────────────────────────────────────
     function toggleFaq(btn) {

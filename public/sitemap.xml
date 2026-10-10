@@ -6,6 +6,11 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://sproutaac.org/brand</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>https://sproutaac.org/privacy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>

@@ -27,4 +27,5 @@ Sprout exists because AAC devices and apps are prohibitively expensive ($149–$
 - Source code: https://github.com/sproutaac/app
 - Community (OpenAAC Discord): https://discord.gg/TEH8uxh
 - Privacy policy: https://sproutaac.org/privacy
+- Brand guide and logo downloads: https://sproutaac.org/brand
 - Contact: hello@sproutaac.org
