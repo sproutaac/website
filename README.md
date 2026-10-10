@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/sproutaac/.github/main/brand/sprout-mark.png" width="88" alt="Sprout AAC logo">
+</p>
+
 # Sprout AAC — Website
 
 Marketing and waitlist site for [Sprout AAC](https://sproutaac.org) — a free, offline-first AAC app for children who communicate differently.
@@ -102,3 +106,7 @@ See [CONTRIBUTING.md](https://github.com/sproutaac/.github/blob/main/CONTRIBUTIN
 ## App repo
 
 [github.com/sproutaac/app](https://github.com/sproutaac/app)
+
+## Brand assets
+
+The official logo, colours, and social images live in [`sproutaac/.github/brand`](https://github.com/sproutaac/.github/tree/main/brand). `public/sprout-mark.png` and the favicons in `public/` are generated from that mark.
