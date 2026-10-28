@@ -7,8 +7,8 @@ Sprout exists because AAC devices and apps are prohibitively expensive ($149–$
 ## Key facts
 
 - Price: free forever, no subscription, no paywall, no ads
-- Status: in active development, not yet released to app stores
-- Platforms: iOS and Android (planned)
+- Status: v0.1.0 (MVP) released September 2026 as a macOS build on GitHub (https://github.com/sproutaac/app/releases); not yet in the App Store or Google Play
+- Platforms: macOS today; iOS and Android planned (built in Flutter)
 - License: open source, GPL v3
 - Offline-first: fully usable with no internet connection; child data never leaves the device unless a family explicitly exports it
 - Motor planning stability: symbol cell positions never move once set, by design
@@ -21,6 +21,13 @@ Sprout exists because AAC devices and apps are prohibitively expensive ($149–$
 - PIN-gated caregiver edit mode
 - On-device word prediction (bigram model, per child, no data leaves the device)
 - Planned: switch scanning, eye gaze support, Open Board Format (OBF) import/export, larger grid sizes, OpenDyslexic font
+
+## Brand
+
+- Logo: a three-leaf sprout mark in greens. Don't redraw it; use the files from the brand guide.
+- Colours: forest #0F5C2E, green #1A8C45, mid #3DC46A, fresh #A8F0C0, cream #FAF7F2 (page and app-icon background).
+- Type: Lora for headings, DM Sans for body text.
+- Name: "Sprout AAC" (or "Sprout" for short).
 
 ## Links
 
