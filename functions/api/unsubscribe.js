@@ -1,13 +1,4 @@
-async function verifyToken(email, token, secret) {
-  const key = await crypto.subtle.importKey(
-    'raw', new TextEncoder().encode(secret),
-    { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']
-  );
-  const sig = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(email.toLowerCase()));
-  const expected = btoa(String.fromCharCode(...new Uint8Array(sig)))
-    .replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
-  return expected === token;
-}
+import { escapeHtml, verifyUnsubToken } from '../../lib/security.js';
 
 function page(title, headline, body, isError) {
   return `<!DOCTYPE html>
@@ -67,7 +58,7 @@ export async function onRequestGet(context) {
     );
   }
 
-  const valid = await verifyToken(email, token, env.ADMIN_KEY || '');
+  const valid = await verifyUnsubToken(email, token, env);
   if (!valid) {
     return new Response(
       page('Invalid link', 'This link has expired', 'This unsubscribe link is invalid or has already been used. Please contact <a href="mailto:hello@sproutaac.org">hello@sproutaac.org</a> to be removed manually.', true),
@@ -88,7 +79,7 @@ export async function onRequestGet(context) {
   }
 
   return new Response(
-    page('Unsubscribed', 'You\'ve been unsubscribed.', `We've removed <strong>${email}</strong> from the Sprout AAC waitlist. You won't hear from us again. If you change your mind, you're always welcome back at <a href="https://sproutaac.org">sproutaac.org</a>.`, false),
+    page('Unsubscribed', 'You\'ve been unsubscribed.', `We've removed <strong>${escapeHtml(email)}</strong> from the Sprout AAC waitlist. You won't hear from us again. If you change your mind, you're always welcome back at <a href="https://sproutaac.org">sproutaac.org</a>.`, false),
     { headers: { 'Content-Type': 'text/html;charset=UTF-8' } }
   );
 }

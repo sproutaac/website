@@ -1,12 +1,4 @@
-async function makeUnsubToken(email, secret) {
-  const key = await crypto.subtle.importKey(
-    'raw', new TextEncoder().encode(secret),
-    { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']
-  );
-  const sig = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(email.toLowerCase()));
-  return btoa(String.fromCharCode(...new Uint8Array(sig)))
-    .replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
-}
+import { makeUnsubToken, requireAdmin } from '../../lib/security.js';
 
 const STYLE = `
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -104,8 +96,8 @@ function buildEmailHtml({ subject, previewText, heading, body, ctaLabel, ctaUrl 
 
 export async function onRequestGet(context) {
   const { request, env } = context;
-  const key = new URL(request.url).searchParams.get('key');
-  if (!key || key !== env.ADMIN_KEY) return new Response('Unauthorized', { status: 401 });
+  const denied = await requireAdmin(request, env);
+  if (denied) return denied;
 
   const total = (await env.DB.prepare(`SELECT COUNT(*) as count FROM "WaitlistSignup" WHERE unsubscribed = 0`).first()).count;
 
@@ -203,8 +195,6 @@ You can write as much as you need." required></textarea>
   </main>
 
   <script>
-    const KEY = '${key}';
-
     function getPayload() {
       return {
         subject: document.getElementById('subject').value,
@@ -231,7 +221,7 @@ You can write as much as you need." required></textarea>
       const btn = event.target;
       btn.disabled = true; btn.textContent = 'Sending…';
       try {
-        const res = await fetch('/admin/broadcast?key=' + KEY, {
+        const res = await fetch('/admin/broadcast', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ ...payload, test: true }),
@@ -270,7 +260,7 @@ You can write as much as you need." required></textarea>
       const btn = document.getElementById('confirm-btn');
       btn.disabled = true; btn.textContent = 'Sending…';
       try {
-        const res = await fetch('/admin/broadcast?key=' + KEY, {
+        const res = await fetch('/admin/broadcast', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ ...payload, test: false }),
@@ -288,13 +278,21 @@ You can write as much as you need." required></textarea>
 </body>
 </html>`;
 
-  return new Response(html, { headers: { 'Content-Type': 'text/html;charset=UTF-8' } });
+  return new Response(html, { headers: { 'Content-Type': 'text/html;charset=UTF-8', 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex' } });
 }
 
 export async function onRequestPost(context) {
   const { request, env } = context;
-  const key = new URL(request.url).searchParams.get('key');
-  if (!key || key !== env.ADMIN_KEY) return Response.json({ error: 'Unauthorized' }, { status: 401 });
+  const denied = await requireAdmin(request, env);
+  if (denied) return denied;
+
+  // Browsers send Basic auth automatically, so only accept JSON posted from
+  // this site's own admin page (a cross-site form can't set either).
+  const origin = request.headers.get('Origin');
+  const type = request.headers.get('Content-Type') || '';
+  if (origin !== new URL(request.url).origin || !type.startsWith('application/json')) {
+    return Response.json({ error: 'Forbidden' }, { status: 403 });
+  }
 
   let payload;
   try { payload = await request.json(); } catch {
@@ -311,7 +309,7 @@ export async function onRequestPost(context) {
 
   if (test) {
     const testEmail = env.NOTIFICATION_EMAIL;
-    const token = await makeUnsubToken(testEmail, env.ADMIN_KEY || '');
+    const token = await makeUnsubToken(testEmail, env);
     const unsubLink = `https://sproutaac.org/api/unsubscribe?email=${encodeURIComponent(testEmail)}&token=${token}`;
     const testHtml = html.replace('{{UNSUB_LINK}}', unsubLink);
     const testText = text.replace('{{UNSUB_LINK}}', unsubLink);
@@ -332,7 +330,7 @@ export async function onRequestPost(context) {
   ).all();
   let sent = 0;
   for (const row of results) {
-    const token = await makeUnsubToken(row.email, env.ADMIN_KEY || '');
+    const token = await makeUnsubToken(row.email, env);
     const unsubLink = `https://sproutaac.org/api/unsubscribe?email=${encodeURIComponent(row.email)}&token=${token}`;
     const personalizedHtml = html.replace('{{UNSUB_LINK}}', unsubLink);
     const personalizedText = text.replace('{{UNSUB_LINK}}', unsubLink);

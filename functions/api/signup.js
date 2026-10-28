@@ -1,12 +1,4 @@
-async function makeUnsubToken(email, secret) {
-  const key = await crypto.subtle.importKey(
-    'raw', new TextEncoder().encode(secret),
-    { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']
-  );
-  const sig = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(email.toLowerCase()));
-  return btoa(String.fromCharCode(...new Uint8Array(sig)))
-    .replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
-}
+import { escapeHtml, isValidEmail, makeUnsubToken, rateLimit } from '../../lib/security.js';
 
 function buildConfirmationEmail(email, unsubLink) {
   return `<!DOCTYPE html>
@@ -87,7 +79,7 @@ function buildAdminNotificationEmail(email, adminLink) {
           <table cellpadding="0" cellspacing="0" style="margin-bottom:28px">
             <tr><td style="background:#F4F1EC;border-radius:8px;padding:14px 20px">
               <p style="margin:0 0 2px;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#888">Email address</p>
-              <p style="margin:0;font-size:16px;font-weight:600;color:#0F5C2E">${email}</p>
+              <p style="margin:0;font-size:16px;font-weight:600;color:#0F5C2E">${escapeHtml(email)}</p>
             </td></tr>
           </table>
           <p style="margin:0;font-size:13px;color:#999">${time}</p>
@@ -116,8 +108,16 @@ export async function onRequestPost(context) {
     return Response.json({ error: 'Invalid request' }, { status: 400 });
   }
 
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  if (!isValidEmail(email)) {
     return Response.json({ error: 'Invalid email' }, { status: 400 });
+  }
+
+  // Stops scripts from using the form to email arbitrary addresses.
+  try {
+    const allowed = await rateLimit(env, request, { bucket: 'signup', limit: 5, windowSeconds: 3600 });
+    if (!allowed) return Response.json({ error: 'Too many signups from this network. Try again in an hour.' }, { status: 429 });
+  } catch (err) {
+    console.error('Rate limit error:', err);
   }
 
   // Store in D1 — INSERT OR IGNORE silently handles duplicates
@@ -138,9 +138,9 @@ export async function onRequestPost(context) {
   }
 
   if (env.RESEND_API_KEY) {
-    const token = await makeUnsubToken(email, env.ADMIN_KEY || '');
+    const token = await makeUnsubToken(email, env);
     const unsubLink = `https://sproutaac.org/api/unsubscribe?email=${encodeURIComponent(email)}&token=${token}`;
-    const adminLink = `https://sproutaac.org/admin/signups?key=${env.ADMIN_KEY}`;
+    const adminLink = 'https://sproutaac.org/admin/signups';
 
     context.waitUntil((async () => {
       if (isNew) {

@@ -1,10 +1,9 @@
+import { escapeHtml, requireAdmin } from '../../lib/security.js';
+
 export async function onRequestGet(context) {
   const { request, env } = context;
-  const key = new URL(request.url).searchParams.get('key');
-
-  if (!key || key !== env.ADMIN_KEY) {
-    return new Response('Unauthorized', { status: 401 });
-  }
+  const denied = await requireAdmin(request, env);
+  if (denied) return denied;
 
   const { results } = await env.DB.prepare(
     `SELECT email, createdAt, betaTester, unsubscribed FROM "WaitlistSignup" ORDER BY createdAt DESC`
@@ -16,7 +15,7 @@ export async function onRequestGet(context) {
   const rows = results.map((r, i) => `
     <tr${r.unsubscribed ? ' style="opacity:0.4"' : ''}>
       <td class="num">${i + 1}</td>
-      <td class="email">${r.email}${r.betaTester ? ' <span class="beta-badge">beta</span>' : ''}${r.unsubscribed ? ' <span class="unsub-badge">unsubscribed</span>' : ''}</td>
+      <td class="email">${escapeHtml(r.email)}${r.betaTester ? ' <span class="beta-badge">beta</span>' : ''}${r.unsubscribed ? ' <span class="unsub-badge">unsubscribed</span>' : ''}</td>
       <td class="date">${new Date(r.createdAt).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}</td>
     </tr>`).join('');
 
@@ -135,6 +134,6 @@ export async function onRequestGet(context) {
 </html>`;
 
   return new Response(html, {
-    headers: { 'Content-Type': 'text/html;charset=UTF-8' },
+    headers: { 'Content-Type': 'text/html;charset=UTF-8', 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex' },
   });
 }
