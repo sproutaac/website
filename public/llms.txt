@@ -27,7 +27,8 @@ Sprout exists because AAC devices and apps are prohibitively expensive ($149–$
 - Logo: a three-leaf sprout mark in greens. Don't redraw it; use the files from the brand guide.
 - Colours: forest #0F5C2E, green #1A8C45, mid #3DC46A, fresh #A8F0C0, cream #FAF7F2 (page and app-icon background).
 - Type: Lora for headings, DM Sans for body text.
-- Name: "Sprout AAC" (or "Sprout" for short).
+- Name: write "Sprout AAC" on first mention, then just "Sprout".
+- Voice: warm, plain, and honest. Say "children who communicate differently"; no pity language, hype, or promises about features that aren't built yet.
 
 ## Links
 
