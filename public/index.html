@@ -206,6 +206,11 @@
     @media (max-width: 760px) { .nav-links { display: none; } }
     [id] { scroll-margin-top: 84px; }
     @media (max-width: 900px) { .hero-visual { margin-bottom: 40px; } }
+    .hero-note a { color: var(--forest); font-weight: 500; }
+    .final-note a { color: #fff; font-weight: 500; }
+    .feature-link { display: inline-block; margin-top: 12px; font-size: 14px; font-weight: 600; color: var(--forest); text-decoration: none; }
+    .feature-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+    .faq-answer a { color: var(--forest); font-weight: 600; }
     .demo-credit { position: absolute; left: 0; right: 0; bottom: -30px; font-size: 11px; color: var(--muted); text-align: center; }
     .demo-credit a { color: inherit; }
     .hero-download { margin-top: 10px; font-size: 14px; color: var(--muted); }
@@ -1313,7 +1318,7 @@
           <img src="/sprout-mark.svg" width="14" height="18" alt="" style="height:18px;width:auto;vertical-align:-3px"> Check your inbox — confirmation email on its way.
         </div>
         <p class="hero-count" id="hero-count" style="display:none">Join <strong id="hero-count-num"></strong> others already on the waitlist.</p>
-        <p class="hero-note">No spam. Just a heads-up when Sprout launches. Unsubscribe anytime.</p>
+        <p class="hero-note">No spam. Just a heads-up when Sprout launches. Unsubscribe anytime. <a href="/privacy">Privacy policy</a></p>
         <p class="hero-download">On a Mac? <a href="https://github.com/sproutaac/app/releases/latest">Download v0.1 for macOS →</a></p>
         <div class="scroll-line">
           <span class="scroll-line-dot"></span>
@@ -1426,6 +1431,7 @@
           <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
           <h3 class="feature-title">Private by design</h3>
           <p class="feature-body">Your child's data never leaves their device without your permission. No accounts required to use the app. No behavioral data collected.</p>
+          <a class="feature-link" href="/privacy">Read the privacy policy →</a>
         </div>
         <div class="feature-card reveal">
           <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></div>
@@ -1672,7 +1678,7 @@
           </svg>
         </button>
         <div class="faq-answer">
-          Your child's data lives entirely on your device. Sprout requires no account to use. Sprout has no servers to send it to. Sharing and backup features on the roadmap will always be opt-in. We collect no behavioral or usage data.
+          Your child's data lives entirely on your device. Sprout requires no account to use. Sprout has no servers to send it to. Sharing and backup features on the roadmap will always be opt-in. We collect no behavioral or usage data. <a href="/privacy">Read the full privacy policy</a>.
         </div>
       </div>
       <div class="faq-item">
@@ -1732,7 +1738,7 @@
         <div id="final-success" class="success-msg" style="margin-top: 16px; justify-content: center; display: none;">
           <img src="/sprout-mark.svg" width="14" height="18" alt="" style="height:18px;width:auto;vertical-align:-3px"> Check your inbox — confirmation email on its way.
         </div>
-        <p class="final-note">No spam. Just a heads-up when you can download. Unsubscribe anytime with one click.</p>
+        <p class="final-note">No spam. Just a heads-up when you can download. Unsubscribe anytime with one click. <a href="/privacy">Privacy policy</a></p>
       </div>
     </div>
   </section>
