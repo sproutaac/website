@@ -56,7 +56,9 @@
     "name": "Sprout AAC",
     "description": "A free, open-source, offline-first AAC (Augmentative and Alternative Communication) app for children with autism, cerebral palsy, and developmental delays. No subscription, no paywall, forever free.",
     "applicationCategory": "HealthApplication",
-    "operatingSystem": "iOS, Android",
+    "operatingSystem": "macOS (iOS and Android planned)",
+    "softwareVersion": "0.1.0",
+    "downloadUrl": "https://github.com/sproutaac/app/releases/latest",
     "offers": {
       "@type": "Offer",
       "price": "0",
@@ -197,6 +199,18 @@
       transition: background 0.2s, transform 0.15s;
     }
     .nav-cta:hover { background: var(--green); transform: translateY(-1px); }
+    .nav-right { display: flex; align-items: center; gap: 28px; }
+    .nav-links { display: flex; gap: 22px; }
+    .nav-links a { color: var(--forest); text-decoration: none; font-size: 14px; font-weight: 500; }
+    .nav-links a:hover { color: var(--green); text-decoration: underline; text-underline-offset: 4px; }
+    @media (max-width: 760px) { .nav-links { display: none; } }
+    [id] { scroll-margin-top: 84px; }
+    @media (max-width: 900px) { .hero-visual { margin-bottom: 40px; } }
+    .demo-credit { position: absolute; left: 0; right: 0; bottom: -30px; font-size: 11px; color: var(--muted); text-align: center; }
+    .demo-credit a { color: inherit; }
+    .hero-download { margin-top: 10px; font-size: 14px; color: var(--muted); }
+    .hero-download a { color: var(--forest); font-weight: 600; text-decoration: none; }
+    .hero-download a:hover { text-decoration: underline; }
 
     @media (max-width: 600px) {
       nav { padding: 16px 20px; }
@@ -430,9 +444,10 @@
       border-radius: 1.6cqi;
       display: flex;
       align-items: center;
+      flex-direction: column;
       justify-content: center;
-      gap: 1cqi;
-      padding: 0 1cqi;
+      gap: 0.4cqi;
+      padding: 0.6cqi 1cqi;
       font-family: var(--font-sans);
       font-size: 2.6cqi;
       font-weight: 600;
@@ -446,7 +461,7 @@
     .tablet-cell:hover { transform: scale(0.96); filter: brightness(0.95); }
     .tablet-cell:active { transform: scale(0.93); }
     .tablet-cell:focus-visible { outline: 2px solid var(--forest); outline-offset: 2px; }
-    .tablet-cell .emoji { font-size: 3.6cqi; line-height: 1; }
+    .tablet-cell .sym { width: 5.8cqi; height: 5.8cqi; object-fit: contain; display: block; flex: none; }
 
     /* Fitzgerald Key, matching the app (lib/constants/app_theme.dart) as light tints */
     .fk-people      { background: #FFF1A8; }
@@ -570,7 +585,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
+      color: var(--forest);
       margin-bottom: 20px;
     }
     .feature-title {
@@ -850,7 +865,7 @@
       border: 1.5px solid rgba(255,255,255,0.2);
       transition: border-color 0.2s, background 0.2s;
     }
-    .final-form input[type="email"]::placeholder { color: rgba(255,255,255,0.4); }
+    .final-form input[type="email"]::placeholder { color: rgba(255,255,255,0.65); }
     .final-form input[type="email"]:focus {
       border-color: var(--fresh);
       background: rgba(255,255,255,0.16);
@@ -877,7 +892,7 @@
     .final-note {
       margin-top: 16px;
       font-size: 12.5px;
-      color: rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.75);
     }
 
     /* ── FOOTER ────────────────────────────────────────────────────── */
@@ -918,7 +933,7 @@
       flex-wrap: wrap;
     }
     .footer-links a {
-      color: rgba(255,255,255,0.45);
+      color: rgba(255,255,255,0.7);
       text-decoration: none;
       font-size: 13.5px;
       transition: color 0.2s;
@@ -927,7 +942,7 @@
 
     .footer-copy {
       font-size: 12px;
-      color: rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.6);
     }
 
     /* ── SUCCESS STATE ─────────────────────────────────────────────── */
@@ -1025,7 +1040,7 @@
       font-family: var(--font-serif);
       font-size: 20px;
       font-weight: 700;
-      color: rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.6);
     }
     .price-cost.crossed { text-decoration: line-through; }
     .price-item.highlight .price-cost {
@@ -1180,11 +1195,11 @@
       margin-bottom: 20px;
     }
     .roadmap-card.current .roadmap-status { color: var(--mid); }
-    .roadmap-card:not(.current) .roadmap-status { color: rgba(255,255,255,0.25); }
+    .roadmap-card:not(.current) .roadmap-status { color: rgba(255,255,255,0.6); }
     .roadmap-card ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
     .roadmap-card li {
       font-size: 13px;
-      color: rgba(255,255,255,0.45);
+      color: rgba(255,255,255,0.7);
       display: flex;
       align-items: flex-start;
       gap: 8px;
@@ -1260,7 +1275,15 @@
         <div class="nav-badge">AAC</div>
       </div>
     </a>
-    <a href="#waitlist" class="nav-cta">Join waitlist</a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://github.com/sproutaac/app/releases/latest">Download</a>
+      </div>
+      <a href="#waitlist" class="nav-cta">Join waitlist</a>
+    </div>
   </nav>
 
   <!-- HERO -->
@@ -1269,7 +1292,7 @@
       <div class="hero-content">
         <div class="hero-kicker">
           <span class="hero-kicker-dot"></span>
-          Coming to iOS & Android · Free forever
+          v0.1 out now for macOS · iOS &amp; Android next · Free forever
         </div>
         <h1 class="hero-headline">
           Every child<br>deserves <em>a voice.</em><br>Not a price tag.
@@ -1287,10 +1310,11 @@
           </label>
         </form>
         <div id="hero-success" class="success-msg" style="margin-top: 12px;">
-          <span>🌱</span> Check your inbox — confirmation email on its way.
+          <img src="/sprout-mark.svg" width="14" height="18" alt="" style="height:18px;width:auto;vertical-align:-3px"> Check your inbox — confirmation email on its way.
         </div>
         <p class="hero-count" id="hero-count" style="display:none">Join <strong id="hero-count-num"></strong> others already on the waitlist.</p>
         <p class="hero-note">No spam. Just a heads-up when Sprout launches. Unsubscribe anytime.</p>
+        <p class="hero-download">On a Mac? <a href="https://github.com/sproutaac/app/releases/latest">Download v0.1 for macOS →</a></p>
         <div class="scroll-line">
           <span class="scroll-line-dot"></span>
           <span class="scroll-line-text">SCROLL TO LEARN MORE</span>
@@ -1320,31 +1344,32 @@
               <span id="output-text">Tap a word...</span>
             </div>
             <div class="tablet-grid">
-              <button type="button" class="tablet-cell fk-people" data-word="I"><span class="emoji" aria-hidden="true">🙋</span>I</button>
-              <button type="button" class="tablet-cell fk-descriptor" data-word="more"><span class="emoji" aria-hidden="true">➕</span>more</button>
-              <button type="button" class="tablet-cell fk-verb" data-word="stop"><span class="emoji" aria-hidden="true">✋</span>stop</button>
-              <button type="button" class="tablet-cell fk-verb" data-word="help"><span class="emoji" aria-hidden="true">🆘</span>help</button>
-              <button type="button" class="tablet-cell fk-verb" data-word="want"><span class="emoji" aria-hidden="true">🤲</span>want</button>
-              <button type="button" class="tablet-cell fk-verb" data-word="like"><span class="emoji" aria-hidden="true">❤️</span>like</button>
-              <button type="button" class="tablet-cell fk-verb" data-word="go"><span class="emoji" aria-hidden="true">🏃</span>go</button>
-              <button type="button" class="tablet-cell fk-verb" data-word="eat"><span class="emoji" aria-hidden="true">🍎</span>eat</button>
-              <button type="button" class="tablet-cell fk-misc" data-word="don't"><span class="emoji" aria-hidden="true">🚫</span>don't</button>
-              <button type="button" class="tablet-cell fk-verb" data-word="have"><span class="emoji" aria-hidden="true">🎒</span>have</button>
-              <button type="button" class="tablet-cell fk-misc" data-word="that"><span class="emoji" aria-hidden="true">👉</span>that</button>
-              <button type="button" class="tablet-cell fk-verb" data-word="drink"><span class="emoji" aria-hidden="true">🥤</span>drink</button>
-              <button type="button" class="tablet-cell fk-verb" data-word="play"><span class="emoji" aria-hidden="true">🧸</span>play</button>
-              <button type="button" class="tablet-cell fk-social" data-word="all done"><span class="emoji" aria-hidden="true">✅</span>all done</button>
-              <button type="button" class="tablet-cell fk-social" data-word="yes"><span class="emoji" aria-hidden="true">👍</span>yes</button>
-              <button type="button" class="tablet-cell fk-social" data-word="no"><span class="emoji" aria-hidden="true">👎</span>no</button>
+              <button type="button" class="tablet-cell fk-people" data-word="I"><img class="sym" src="/symbols/i.png" alt="" width="300" height="300" loading="lazy" decoding="async">I</button>
+              <button type="button" class="tablet-cell fk-descriptor" data-word="more"><img class="sym" src="/symbols/more.png" alt="" width="300" height="300" loading="lazy" decoding="async">more</button>
+              <button type="button" class="tablet-cell fk-verb" data-word="stop"><img class="sym" src="/symbols/stop.png" alt="" width="300" height="300" loading="lazy" decoding="async">stop</button>
+              <button type="button" class="tablet-cell fk-verb" data-word="help"><img class="sym" src="/symbols/help.png" alt="" width="300" height="300" loading="lazy" decoding="async">help</button>
+              <button type="button" class="tablet-cell fk-verb" data-word="want"><img class="sym" src="/symbols/want.png" alt="" width="300" height="300" loading="lazy" decoding="async">want</button>
+              <button type="button" class="tablet-cell fk-verb" data-word="like"><img class="sym" src="/symbols/like.png" alt="" width="300" height="300" loading="lazy" decoding="async">like</button>
+              <button type="button" class="tablet-cell fk-verb" data-word="go"><img class="sym" src="/symbols/go.png" alt="" width="300" height="300" loading="lazy" decoding="async">go</button>
+              <button type="button" class="tablet-cell fk-verb" data-word="eat"><img class="sym" src="/symbols/eat.png" alt="" width="300" height="300" loading="lazy" decoding="async">eat</button>
+              <button type="button" class="tablet-cell fk-misc" data-word="don't"><img class="sym" src="/symbols/dont.png" alt="" width="300" height="300" loading="lazy" decoding="async">don't</button>
+              <button type="button" class="tablet-cell fk-verb" data-word="have"><img class="sym" src="/symbols/have.png" alt="" width="300" height="300" loading="lazy" decoding="async">have</button>
+              <button type="button" class="tablet-cell fk-misc" data-word="that"><img class="sym" src="/symbols/that.png" alt="" width="300" height="300" loading="lazy" decoding="async">that</button>
+              <button type="button" class="tablet-cell fk-verb" data-word="drink"><img class="sym" src="/symbols/drink.png" alt="" width="300" height="300" loading="lazy" decoding="async">drink</button>
+              <button type="button" class="tablet-cell fk-verb" data-word="play"><img class="sym" src="/symbols/play.png" alt="" width="300" height="300" loading="lazy" decoding="async">play</button>
+              <button type="button" class="tablet-cell fk-social" data-word="all done"><img class="sym" src="/symbols/done.png" alt="" width="300" height="300" loading="lazy" decoding="async">all done</button>
+              <button type="button" class="tablet-cell fk-social" data-word="yes"><img class="sym" src="/symbols/yes.png" alt="" width="300" height="300" loading="lazy" decoding="async">yes</button>
+              <button type="button" class="tablet-cell fk-social" data-word="no"><img class="sym" src="/symbols/no.png" alt="" width="300" height="300" loading="lazy" decoding="async">no</button>
             </div>
           </div>
         </div>
+        <p class="demo-credit">Pictograms: <a href="https://arasaac.org">ARASAAC</a> (Sergio Palao, Government of Aragón), CC BY-NC-SA</p>
       </div>
     </div>
   </section>
 
   <!-- WHY -->
-  <section class="why">
+  <section class="why" id="why">
     <div class="why-inner reveal">
       <p class="why-eyebrow">Why Sprout exists</p>
       <h2 class="why-headline">
@@ -1355,7 +1380,7 @@
         expensive subscriptions and fragile Wi-Fi connections.
         <strong>Sprout is free to download, free to use, and designed to work anywhere</strong> —
         including waiting rooms, cars, and places without signal.
-        Built open-source. Built with SLPs. Built for the families who need it most.
+        Built in the open, with feedback from the AAC community welcome. Built for the families who need it most.
       </p>
       <div class="price-compare">
         <div class="price-item">
@@ -1376,41 +1401,41 @@
 
   <!-- FEATURES -->
   <section>
-    <div class="features">
+    <div class="features" id="features">
       <div class="features-header reveal">
         <p class="section-eyebrow">How it works</p>
         <h2 class="section-headline">Designed to <em>grow</em><br>with your child.</h2>
       </div>
       <div class="features-grid">
         <div class="feature-card reveal">
-          <div class="feature-icon">📶</div>
+          <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h.01"/><path d="M2 8.82a15 15 0 0 1 4.17-2.65"/><path d="M10.66 5c4.01-.36 8.14.9 11.34 3.76"/><path d="M16.85 11.25a10 10 0 0 1 2.22 1.68"/><path d="M5 13a10 10 0 0 1 5.24-2.76"/><path d="M8.5 16.43a5 5 0 0 1 7 0"/><line x1="2" x2="22" y1="2" y2="22"/></svg></div>
           <h3 class="feature-title">Works anywhere, offline</h3>
-          <p class="feature-body">Sprout stores everything on the device. No Wi-Fi required — ever. The doctor's office, the car, the playground. It just works.</p>
+          <p class="feature-body">Sprout keeps everything on the device, so once a board is set up it works without Wi-Fi: the doctor's office, the car, the playground.</p>
         </div>
         <div class="feature-card reveal">
-          <div class="feature-icon">🌱</div>
+          <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></svg></div>
           <h3 class="feature-title">Grows as they do</h3>
-          <p class="feature-body">Start with a 3×3 grid of 9 essential words. As your child develops, expand to 84 cells — same app, same familiar positions, no motor memory reset.</p>
+          <p class="feature-body">Start with a 3×3 grid of 9 essential words, then move up to 4×4 and 5×5 as your child develops. Same app, same familiar positions, no motor memory reset. Bigger grids are on the roadmap.</p>
         </div>
         <div class="feature-card reveal">
-          <div class="feature-icon">🎨</div>
+          <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg></div>
           <h3 class="feature-title">Fully customizable</h3>
-          <p class="feature-body">Add symbols from a library of thousands. Change labels, colors, and layouts. Import boards your SLP has built. Your child's board, your way.</p>
+          <p class="feature-body">Add symbols from a library of thousands. Change labels, colors, and layouts. Your child's board, your way. Importing boards from your SLP is coming in v0.2.</p>
         </div>
         <div class="feature-card reveal">
-          <div class="feature-icon">🔒</div>
+          <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
           <h3 class="feature-title">Private by design</h3>
           <p class="feature-body">Your child's data never leaves their device without your permission. No accounts required to use the app. No behavioral data collected.</p>
         </div>
         <div class="feature-card reveal">
-          <div class="feature-icon">🖐️</div>
+          <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></div>
           <h3 class="feature-title">Multiple access methods</h3>
           <p class="feature-body">Designed for touch, with switch scanning and eye gaze support in development. Every child's access needs are valid — we're building for all of them.</p>
         </div>
         <div class="feature-card reveal">
-          <div class="feature-icon">👩‍⚕️</div>
+          <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg></div>
           <h3 class="feature-title">SLP collaboration</h3>
-          <p class="feature-body">Therapists can export and share boards directly with families. Industry-standard OBF format means boards work across apps and devices.</p>
+          <p class="feature-body">Coming in v0.2: therapists will be able to share boards directly with families, in the industry-standard OBF format so boards work across apps and devices.</p>
         </div>
       </div>
     </div>
@@ -1440,8 +1465,8 @@
           <h3 class="audience-headline">"I need something I can confidently recommend."</h3>
           <p class="audience-body">Sprout uses industry-standard core vocabulary, Fitzgerald Key color coding, and ARASAAC imagery. It speaks the same language your practice does.</p>
           <ul class="audience-list">
-            <li>OBF import/export — compatible with other AAC systems</li>
-            <li>Push boards directly to families without them paying a cent</li>
+            <li>OBF import/export, compatible with other AAC systems <em>(coming in v0.2)</em></li>
+            <li>Push boards directly to families without them paying a cent <em>(coming in v0.2)</em></li>
             <li>Motor planning stability: cells never move on the child</li>
             <li>Open source — transparent, auditable, trustworthy</li>
           </ul>
@@ -1461,46 +1486,46 @@
       <p class="a11y-sub reveal">AAC should reach every child — not just those whose families can navigate complex setup. Sprout is designed with the widest possible range of access methods from the start.</p>
       <div class="a11y-grid">
         <div class="a11y-feat reveal">
-          <div class="a11y-icon">⇆</div>
+          <div class="a11y-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 3 4 4-4 4"/><path d="M20 7H4"/><path d="m8 21-4-4 4-4"/><path d="M4 17h16"/></svg></div>
           <h3>Switch scanning</h3>
           <p>Single and dual-switch scanning is on the roadmap for children who can't use direct touch — visual scanning is already built, physical switch input is coming next.</p>
         </div>
         <div class="a11y-feat reveal">
-          <div class="a11y-icon">👁</div>
+          <div class="a11y-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg></div>
           <h3>Eye gaze</h3>
           <p>Eye tracking support is on the roadmap — compatible with affordable eye gaze hardware already in many clinics.</p>
         </div>
         <div class="a11y-feat reveal">
-          <div class="a11y-icon" style="font-size:16px;letter-spacing:0">◑◐</div>
+          <div class="a11y-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 18a6 6 0 0 0 0-12v12z" fill="currentColor"/></svg></div>
           <h3>High contrast</h3>
           <p>Optimized for children with low vision. Toggle between standard and high contrast layouts instantly.</p>
         </div>
         <div class="a11y-feat reveal">
-          <div class="a11y-icon" style="font-size:15px">Aa</div>
+          <div class="a11y-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" x2="15" y1="20" y2="20"/><line x1="12" x2="12" y1="4" y2="20"/></svg></div>
           <h3>OpenDyslexic font</h3>
           <p>Switch to OpenDyslexic across the whole app in one tap — no settings buried in submenus.</p>
         </div>
         <div class="a11y-feat reveal">
-          <div class="a11y-icon" style="font-size:14px">3×3</div>
+          <div class="a11y-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/><path d="M15 3v18"/></svg></div>
           <h3>Adjustable grids</h3>
           <p>From 3×3 for beginners to larger grids for advanced communicators. Start small and grow at your child's pace.</p>
         </div>
         <div class="a11y-feat reveal">
-          <div class="a11y-icon">✈</div>
-          <h3>Truly offline</h3>
-          <p>No internet ever required. Your child's voice never depends on Wi-Fi, a data plan, or a server staying online.</p>
+          <div class="a11y-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h.01"/><path d="M2 8.82a15 15 0 0 1 4.17-2.65"/><path d="M10.66 5c4.01-.36 8.14.9 11.34 3.76"/><path d="M16.85 11.25a10 10 0 0 1 2.22 1.68"/><path d="M5 13a10 10 0 0 1 5.24-2.76"/><path d="M8.5 16.43a5 5 0 0 1 7 0"/><line x1="2" x2="22" y1="2" y2="22"/></svg></div>
+          <h3>Works offline</h3>
+          <p>Once a board is set up, no internet is needed. Your child's voice doesn't depend on Wi-Fi, a data plan, or a server staying online.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ROADMAP -->
-  <section class="roadmap">
+  <section class="roadmap" id="roadmap">
     <div class="roadmap-inner">
       <div class="roadmap-header reveal">
         <p class="section-eyebrow">What we're building</p>
         <h2 class="section-headline">A clear, <em>open</em> path<br>to a complete AAC system.</h2>
-        <p style="margin-top:16px;font-size:14px;color:rgba(255,255,255,0.35);letter-spacing:0.3px">In active development · Last updated September 2026 · <a href="https://github.com/sproutaac/app" target="_blank" rel="noopener" style="color:var(--fresh);text-decoration:none">Follow on GitHub →</a></p>
+        <p style="margin-top:16px;font-size:14px;color:rgba(255,255,255,0.65);letter-spacing:0.3px">In active development · Last updated September 2026 · <a href="https://github.com/sproutaac/app" target="_blank" rel="noopener" style="color:var(--fresh);text-decoration:none">Follow on GitHub →</a></p>
       </div>
       <div class="roadmap-grid">
         <div class="roadmap-card reveal">
@@ -1595,13 +1620,13 @@
     </div>
     <div class="os-divider"></div>
     <div class="os-item">
-      <span class="os-number">iOS + Android</span>
-      <span class="os-label">Launching on both</span>
+      <span class="os-number">macOS now</span>
+      <span class="os-label">iOS &amp; Android next</span>
     </div>
   </div>
 
   <!-- FAQ -->
-  <section class="faq">
+  <section class="faq" id="faq">
     <div class="faq-header reveal">
       <p class="section-eyebrow">Questions</p>
       <h2 class="section-headline">Things people ask <em>first.</em></h2>
@@ -1637,8 +1662,7 @@
           </svg>
         </button>
         <div class="faq-answer">
-          We're targeting a public early access release in 2026 on both iOS and Android. A pre-release v0.1 build is already available on <a href="https://github.com/sproutaac/app" target="_blank" rel="noopener">GitHub</a> for developers and SLPs comfortable testing unfinished software — email <a href="mailto:hello@sproutaac.org">hello@sproutaac.org</a> if you'd like details. Waitlist members will get the polished app store release first and may be invited to shape it before public launch. Join the list above to stay in the loop.
-        </div>
+          Sprout v0.1.0 is out now as a macOS build: <a href="https://github.com/sproutaac/app/releases/latest">download it from GitHub</a>. It's an early release, so expect rough edges. iOS and Android builds are next, followed by the App Store and Google Play. Waitlist members hear first when those go live.</div>
       </div>
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
@@ -1648,7 +1672,7 @@
           </svg>
         </button>
         <div class="faq-answer">
-          Your child's data lives entirely on your device. Sprout requires no account to use. Nothing is sent to our servers unless you explicitly choose to back up or share a board. We collect no behavioral or usage data.
+          Your child's data lives entirely on your device. Sprout requires no account to use. Sprout has no servers to send it to. Sharing and backup features on the roadmap will always be opt-in. We collect no behavioral or usage data.
         </div>
       </div>
       <div class="faq-item">
@@ -1706,7 +1730,7 @@
           </label>
         </form>
         <div id="final-success" class="success-msg" style="margin-top: 16px; justify-content: center; display: none;">
-          <span>🌱</span> Check your inbox — confirmation email on its way.
+          <img src="/sprout-mark.svg" width="14" height="18" alt="" style="height:18px;width:auto;vertical-align:-3px"> Check your inbox — confirmation email on its way.
         </div>
         <p class="final-note">No spam. Just a heads-up when you can download. Unsubscribe anytime with one click.</p>
       </div>
@@ -1717,6 +1741,7 @@
   <button id="back-to-top" aria-label="Back to top">↑</button>
   <footer>
     <a href="/" class="footer-logo">
+      <img src="/sprout-mark.svg" width="25" height="33" alt="" style="height:33px;width:auto;filter:drop-shadow(0 0 6px rgba(168,240,192,0.35))">
       <div>
         <div class="footer-logo-text">Sprout</div>
         <div class="footer-logo-badge">AAC</div>

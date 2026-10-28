@@ -1,0 +1,14 @@
+/*
+  Strict-Transport-Security: max-age=31536000
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+
+/admin/*
+  X-Robots-Tag: noindex
+  Cache-Control: no-store
+
+# Keep the pages.dev host out of search results; sproutaac.org is canonical.
+https://sproutaac-web.pages.dev/*
+  X-Robots-Tag: noindex

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Page not found — Sprout AAC</title>
+<meta name="robots" content="noindex" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --forest:#0F5C2E; --green:#1A8C45; --fresh:#A8F0C0; --cream:#FAF7F2; --muted:#6B6860; --charcoal:#1C1C1A; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { min-height: 100vh; display: flex; flex-direction: column; background: var(--cream); font-family: 'DM Sans', system-ui, sans-serif; color: var(--charcoal); }
+  header { padding: 18px 32px; }
+  header a { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--forest); font-family: 'Lora', Georgia, serif; font-weight: 700; font-size: 20px; }
+  main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 24px 80px; text-align: center; }
+  .mark { height: 96px; width: auto; margin-bottom: 24px; }
+  .code { font-weight: 600; letter-spacing: 2px; font-size: 13px; color: var(--green); margin-bottom: 8px; }
+  h1 { font-family: 'Lora', Georgia, serif; font-size: 40px; line-height: 1.15; color: var(--charcoal); margin-bottom: 14px; }
+  p { color: var(--muted); font-size: 17px; line-height: 1.6; max-width: 440px; margin: 0 auto 28px; }
+  .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn { display: inline-block; padding: 12px 24px; border-radius: 30px; font-weight: 600; font-size: 15px; text-decoration: none; }
+  .btn-primary { background: var(--forest); color: #fff; }
+  .btn-primary:hover { background: var(--green); }
+  .btn-ghost { border: 1.5px solid var(--forest); color: var(--forest); }
+  .btn-ghost:hover { background: rgba(15,92,46,0.06); }
+</style>
+</head>
+<body>
+  <header><a href="/"><img src="/sprout-mark.svg" width="29" height="38" alt="" style="height:38px;width:auto">Sprout</a></header>
+  <main>
+    <div>
+      <img class="mark" src="/sprout-mark.svg" width="73" height="96" alt="" />
+      <div class="code">404</div>
+      <h1>This page hasn't sprouted yet.</h1>
+      <p>We couldn't find what you were looking for. It may have moved, or the link may be mistyped.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="/">Go to the homepage</a>
+        <a class="btn btn-ghost" href="/#faq">Read the FAQ</a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

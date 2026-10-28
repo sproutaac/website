@@ -173,9 +173,13 @@
       border: 1.5px solid var(--line);
     }
     .commitment-icon {
-      font-size: 28px;
+      display: inline-flex;
+      width: 48px; height: 48px;
+      align-items: center; justify-content: center;
+      border-radius: 14px;
+      background: var(--fresh, #A8F0C0);
+      color: var(--forest, #0F5C2E);
       margin-bottom: 12px;
-      display: block;
     }
     .commitment-title {
       font-family: var(--font-serif);
@@ -375,7 +379,7 @@
         We wrote this to be read, not to protect us from lawyers.
         If something isn't clear, email us and we'll explain it in plain English.
       </p>
-      <p class="hero-date">Last updated: February 2026</p>
+      <p class="hero-date">Last updated: October 2026</p>
     </div>
   </div>
 
@@ -383,17 +387,17 @@
   <div class="commitments">
     <div class="commitments-inner">
       <div class="commitment-card">
-        <span class="commitment-icon">📱</span>
+        <span class="commitment-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><line x1="12" x2="12.01" y1="18" y2="18"/></svg></span>
         <div class="commitment-title">Stored on-device</div>
         <div class="commitment-body">All board data, profiles, and settings live on the device. We can't see them. Nobody can.</div>
       </div>
       <div class="commitment-card">
-        <span class="commitment-icon">🚫</span>
+        <span class="commitment-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg></span>
         <div class="commitment-title">No account needed</div>
         <div class="commitment-body">You don't need to sign up to use Sprout. No account means nothing to collect.</div>
       </div>
       <div class="commitment-card">
-        <span class="commitment-icon">🔒</span>
+        <span class="commitment-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span>
         <div class="commitment-title">Never sold</div>
         <div class="commitment-body">We will never sell, share, or monetize any information about you or your child. Full stop.</div>
       </div>
@@ -417,6 +421,12 @@
       <li>Location data</li>
     </ul>
     <p>
+      Symbol pictures come from <a href="https://arasaac.org">ARASAAC</a>. The first time a symbol is shown,
+      the app downloads its image from ARASAAC's servers (which see a normal web request, like any website visit),
+      then keeps a copy on the device so it works offline after that. No information about your child is sent.
+    </p>
+
+    <p>
       When you export a board to share with a therapist or another device, that data
       goes directly from your device to wherever you send it — it doesn't pass through
       our servers.
@@ -424,14 +434,20 @@
 
     <h2>The waitlist</h2>
     <p>
-      If you signed up for early access on our website, we collected your email address.
-      Here's exactly what we do with it:
+      If you join the waitlist, we store your email address, the date you signed up, and
+      whether you ticked the beta-tester box. Here's exactly what we do with it:
     </p>
     <ul>
-      <li>Send you one email when Sprout launches</li>
-      <li>Occasionally share meaningful development updates (never more than once a month)</li>
-      <li>Remove you immediately if you unsubscribe — no questions asked</li>
+      <li>Send a confirmation email right after you sign up</li>
+      <li>Tell you when Sprout is available to download, and share occasional development updates (never more than once a month)</li>
+      <li>Remove you immediately if you unsubscribe — every email has a one-click link, or just email us</li>
     </ul>
+    <p>
+      Your email is stored in a Cloudflare D1 database and sent through
+      <a href="https://resend.com/legal/privacy-policy">Resend</a>, our email provider. To stop the form being
+      abused, we briefly keep a scrambled (hashed) form of the IP address that submitted it; we never store the
+      address itself, and those records are deleted within an hour.
+    </p>
     <p>
       <strong>We will never sell, rent, or share your email address with anyone.</strong>
       We use it for one purpose: keeping you informed about Sprout. That's it.
@@ -441,16 +457,19 @@
     <p>
       Sproutaac.org is hosted on Cloudflare Pages. Cloudflare may collect standard
       server logs (IP addresses, browser type, pages visited) for security and
-      performance purposes. We don't use Google Analytics, Meta Pixel, or any
-      third-party tracking on this site.
+      performance purposes, and we use Cloudflare Web Analytics, which counts visits
+      without cookies or tracking you across sites. Fonts load from Google Fonts. We don't
+      use Google Analytics, Meta Pixel, advertising trackers, or any other third-party tracking.
     </p>
 
     <h2>Children's privacy</h2>
     <p>
       Sprout is designed for use by children under the supervision of parents and
       caregivers. Because the app requires no account and stores no data on our servers,
-      no personal information about children is ever transmitted to us.
-      We comply fully with COPPA (Children's Online Privacy Protection Act).
+      no personal information about children is ever transmitted to us. Sprout doesn't
+      collect personal information from children, so there's nothing for COPPA's
+      parental-consent rules to apply to. If that ever changes, we'll update this policy
+      and ask parents first.
     </p>
 
     <h2>Open source transparency</h2>

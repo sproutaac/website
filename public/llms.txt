@@ -10,7 +10,7 @@ Sprout exists because AAC devices and apps are prohibitively expensive ($149–$
 - Status: v0.1.0 (MVP) released September 2026 as a macOS build on GitHub (https://github.com/sproutaac/app/releases); not yet in the App Store or Google Play
 - Platforms: macOS today; iOS and Android planned (built in Flutter)
 - License: open source, GPL v3
-- Offline-first: fully usable with no internet connection; child data never leaves the device unless a family explicitly exports it
+- Offline-first: works with no internet once a board is set up (symbols download the first time they're shown, then stay on the device); child data never leaves the device
 - Motor planning stability: symbol cell positions never move once set, by design
 
 ## Features
@@ -20,7 +20,9 @@ Sprout exists because AAC devices and apps are prohibitively expensive ($149–$
 - Native offline text-to-speech (no API key, no internet required)
 - PIN-gated caregiver edit mode
 - On-device word prediction (bigram model, per child, no data leaves the device)
-- Planned: switch scanning, eye gaze support, Open Board Format (OBF) import/export, larger grid sizes, OpenDyslexic font
+- High contrast theme and OpenDyslexic font
+- Visual scanning (physical switch input coming)
+- Planned: switch hardware support, eye gaze, Open Board Format (OBF) import/export and board sharing (v0.2), larger grids (42 and 84 cells)
 
 ## Brand
 

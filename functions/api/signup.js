@@ -27,7 +27,7 @@ function buildConfirmationEmail(email, unsubLink) {
 
           <p style="margin:0 0 20px;font-size:16px;line-height:1.75;color:#3D3D3A;font-family:'DM Sans',Helvetica,Arial,sans-serif;font-weight:300">Thanks for joining the waitlist for Sprout AAC — a free, offline-first AAC app for children who communicate differently. No subscription. No paywall. Ever.</p>
 
-          <p style="margin:0 0 20px;font-size:16px;line-height:1.75;color:#3D3D3A;font-family:'DM Sans',Helvetica,Arial,sans-serif;font-weight:300">We'll send you one email when the app is ready to download on iOS and Android. If we reach out before then, it'll be because we want your input on shaping it.</p>
+          <p style="margin:0 0 20px;font-size:16px;line-height:1.75;color:#3D3D3A;font-family:'DM Sans',Helvetica,Arial,sans-serif;font-weight:300">We'll email you when Sprout is ready to download on iOS and Android. If you're on a Mac, v0.1 is already out: https://github.com/sproutaac/app/releases/latest If we reach out before then, it'll be because we want your input on shaping it.</p>
 
           <!-- Divider -->
           <table cellpadding="0" cellspacing="0" style="width:100%;margin:28px 0">
@@ -155,7 +155,7 @@ export async function onRequestPost(context) {
             to: email,
             subject: "You're on the Sprout AAC waitlist 🌱",
             html: buildConfirmationEmail(email, unsubLink),
-            text: `You're on the Sprout AAC waitlist!\n\nThanks for joining. We'll send you one email when the app is ready to download on iOS and Android.\n\nLearn more: https://sproutaac.org\n\nUnsubscribe: ${unsubLink}`,
+            text: `You're on the Sprout AAC waitlist!\n\nThanks for joining. We'll email you when Sprout is ready to download on iOS and Android. If you're on a Mac, v0.1 is already out: https://github.com/sproutaac/app/releases/latest\n\nLearn more: https://sproutaac.org\n\nUnsubscribe: ${unsubLink}`,
           }),
         }).catch(err => console.error('Resend confirmation error:', err));
       }
