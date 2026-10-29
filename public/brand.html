@@ -6,13 +6,13 @@
   <script src="/js/motion-pref.js"></script>
   <link rel="stylesheet" href="/css/motion.css" />
   <title>Brand guide — Sprout AAC</title>
-  <meta name="description" content="The Sprout AAC logo, colours, and type, with downloads and simple rules for using them." />
+  <meta name="description" content="The Sprout AAC logo, colors, and type, with downloads and simple rules for using them." />
   <link rel="canonical" href="https://sproutaac.org/brand" />
 
   <meta property="og:type"        content="website" />
   <meta property="og:url"         content="https://sproutaac.org/brand" />
   <meta property="og:title"       content="Brand guide — Sprout AAC" />
-  <meta property="og:description" content="The Sprout AAC logo, colours, and type, with downloads and simple rules for using them." />
+  <meta property="og:description" content="The Sprout AAC logo, colors, and type, with downloads and simple rules for using them." />
   <meta property="og:image"       content="https://sproutaac.org/og-image.png?v=2" />
   <meta property="og:image:width"  content="1200" />
   <meta property="og:image:height" content="630" />
@@ -404,7 +404,9 @@
 
     .swatches { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
     @media (max-width: 720px) { .swatches { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-    .swatch { border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: #fff; cursor: pointer; text-align: left; font: inherit; padding: 0; transition: transform .2s, box-shadow .2s; }
+    /* Column from the top: buttons centre their content by default, which pushed
+       the chips down in cards with shorter descriptions */
+    .swatch { display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: #fff; cursor: pointer; text-align: left; font: inherit; padding: 0; transition: transform .2s, box-shadow .2s; }
     .swatch:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(15,92,46,.12); }
     .swatch:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
     .swatch .chip { height: 96px; }
@@ -469,7 +471,7 @@
       </h1>
       <p class="hero-sub">
         Writing about Sprout, linking to us, or building something with us? Everything you need is here:
-        the logo, our colours and type, and a few simple rules for using them.
+        the logo, our colors and type, and a few simple rules for using them.
       </p>
     </div>
   </div>
@@ -510,7 +512,7 @@
 
       <h3>Please don't</h3>
       <div class="donts">
-        <div class="dont"><div class="demo d-recolor"><img src="/sprout-mark.svg" alt=""></div>Change its colours</div>
+        <div class="dont"><div class="demo d-recolor"><img src="/sprout-mark.svg" alt=""></div>Change its colors</div>
         <div class="dont"><div class="demo d-stretch"><img src="/sprout-mark.svg" alt=""></div>Stretch or squash it</div>
         <div class="dont"><div class="demo d-rotate"><img src="/sprout-mark.svg" alt=""></div>Rotate it</div>
         <div class="dont"><div class="demo d-outline"><img src="/sprout-mark.svg" alt=""></div>Add outlines</div>
@@ -521,9 +523,9 @@
       </div>
     </section>
 
-    <section id="colour">
-      <h2>Colour</h2>
-      <p class="lede">Greens from the sprout itself, on a warm cream. Click a colour to copy its hex code.</p>
+    <section id="color">
+      <h2>Color</h2>
+      <p class="lede">Greens from the sprout itself, on a warm cream. Click a color to copy its hex code.</p>
       <div class="swatches">
         <button class="swatch" data-hex="#0F5C2E"><div class="chip" style="background:#0F5C2E"></div><div class="meta"><span class="name">Forest</span><span class="hex">#0F5C2E</span><span class="use">Headings, primary buttons</span></div></button>
         <button class="swatch" data-hex="#1A8C45"><div class="chip" style="background:#1A8C45"></div><div class="meta"><span class="name">Green</span><span class="hex">#1A8C45</span><span class="use">Brand green, links</span></div></button>
