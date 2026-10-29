@@ -571,42 +571,7 @@
   </footer>
 
   <button id="back-to-top" aria-label="Back to top">↑</button>
-  <script>
-    const easeInOutCubic = t => t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
-    function smoothScrollToTop() {
-      const start = window.scrollY;
-      let startTime = null;
-      function step(ts) {
-        if (!startTime) startTime = ts;
-        const progress = Math.min((ts - startTime) / 1600, 1);
-        window.scrollTo(0, start * (1 - easeInOutCubic(progress)));
-        if (progress < 1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
-    }
-    const btt = document.getElementById('back-to-top');
-    window.addEventListener('scroll', function() {
-      btt.classList.toggle('visible', window.scrollY > 300);
-    }, { passive: true });
-    btt.addEventListener('click', function() {
-      if (navigator.vibrate) navigator.vibrate(40);
-      smoothScrollToTop();
-    });
-  </script>
-  <script>
-    // Click a swatch to copy its hex code
-    const toast = document.getElementById('toast');
-    let toastTimer;
-    document.querySelectorAll('.swatch').forEach((btn) => {
-      btn.setAttribute('aria-label', btn.querySelector('.name').textContent + ' ' + btn.dataset.hex + ', copy hex code');
-      btn.addEventListener('click', async () => {
-        try { await navigator.clipboard.writeText(btn.dataset.hex); toast.textContent = btn.dataset.hex + ' copied'; }
-        catch { toast.textContent = btn.dataset.hex; }
-        toast.classList.add('show');
-        clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
-      });
-    });
-  </script>
+  <script src="/js/back-to-top.js"></script>
+  <script src="/js/brand.js"></script>
 </body>
 </html>

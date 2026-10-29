@@ -117,7 +117,10 @@ export async function onRequestPost(context) {
     const allowed = await rateLimit(env, request, { bucket: 'signup', limit: 5, windowSeconds: 3600 });
     if (!allowed) return Response.json({ error: 'Too many signups from this network. Try again in an hour.' }, { status: 429 });
   } catch (err) {
+    // Fail closed: without the limiter, the form could be used to send
+    // confirmation emails to any address
     console.error('Rate limit error:', err);
+    return Response.json({ error: 'Something went wrong. Please try again in a minute.' }, { status: 503 });
   }
 
   // Store in D1 — INSERT OR IGNORE silently handles duplicates
@@ -155,6 +158,7 @@ export async function onRequestPost(context) {
             to: email,
             subject: "You're on the Sprout AAC waitlist 🌱",
             html: buildConfirmationEmail(email, unsubLink),
+            headers: { 'List-Unsubscribe': `<${unsubLink}>`, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' },
             text: `You're on the Sprout AAC waitlist!\n\nThanks for joining. We'll email you when Sprout is ready to download on iOS and Android. If you're on a Mac, v0.1 is already out: https://github.com/sproutaac/app/releases/latest\n\nLearn more: https://sproutaac.org\n\nUnsubscribe: ${unsubLink}`,
           }),
         }).catch(err => console.error('Resend confirmation error:', err));

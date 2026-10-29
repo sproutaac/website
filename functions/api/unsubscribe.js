@@ -1,6 +1,6 @@
 import { escapeHtml, verifyUnsubToken } from '../../lib/security.js';
 
-function page(title, headline, body, isError) {
+function page(title, headline, body, isError, actions = '<a href="/" class="btn">Back to sproutaac.org</a>') {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,6 +25,8 @@ function page(title, headline, body, isError) {
     p { font-size: 16px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
     a.btn { display: inline-block; background: var(--forest); color: white; border-radius: 10px; padding: 12px 28px; font-size: 14px; font-weight: 600; text-decoration: none; margin-top: 8px; }
     a.btn:hover { background: var(--green); }
+    button.btn { display: inline-block; background: var(--forest); color: white; border: 0; border-radius: 10px; padding: 12px 28px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 8px; }
+    button.btn:hover { background: var(--green); }
     @media (max-width: 520px) { .card { padding: 36px 24px; } nav { padding: 16px 20px; } }
   </style>
 </head>
@@ -38,33 +40,57 @@ function page(title, headline, body, isError) {
       <div class="icon">${isError ? '⚠️' : '👋'}</div>
       <h1>${headline}</h1>
       <p>${body}</p>
-      <a href="/" class="btn">Back to sproutaac.org</a>
+      ${actions}
     </div>
   </main>
 </body>
 </html>`;
 }
 
+const HTML = { 'Content-Type': 'text/html;charset=UTF-8', 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex' };
+
+const missing = () => new Response(
+  page('Invalid link', 'Invalid unsubscribe link', 'This unsubscribe link is missing required information. Please contact <a href="mailto:hello@sproutaac.org">hello@sproutaac.org</a> if you need help.', true),
+  { status: 400, headers: HTML }
+);
+
+const invalid = () => new Response(
+  page('Invalid link', 'This link has expired', 'This unsubscribe link is invalid or has already been used. Please contact <a href="mailto:hello@sproutaac.org">hello@sproutaac.org</a> to be removed manually.', true),
+  { status: 400, headers: HTML }
+);
+
+function readParams(request) {
+  const url = new URL(request.url);
+  return {
+    email: (url.searchParams.get('email') || '').toLowerCase().trim(),
+    token: url.searchParams.get('token') || '',
+  };
+}
+
+// Opening the link only asks for confirmation. Email security scanners
+// (Outlook Safe Links and the like) open every link in a message, so a GET
+// that unsubscribed would remove people who never clicked anything.
 export async function onRequestGet(context) {
   const { request, env } = context;
-  const url = new URL(request.url);
-  const email = (url.searchParams.get('email') || '').toLowerCase().trim();
-  const token = url.searchParams.get('token') || '';
+  const { email, token } = readParams(request);
+  if (!email || !token) return missing();
+  if (!(await verifyUnsubToken(email, token, env))) return invalid();
 
-  if (!email || !token) {
-    return new Response(
-      page('Invalid link', 'Invalid unsubscribe link', 'This unsubscribe link is missing required information. Please contact <a href="mailto:hello@sproutaac.org">hello@sproutaac.org</a> if you need help.', true),
-      { status: 400, headers: { 'Content-Type': 'text/html;charset=UTF-8' } }
-    );
-  }
+  const action = `/api/unsubscribe?email=${encodeURIComponent(email)}&token=${encodeURIComponent(token)}`;
+  return new Response(
+    page('Unsubscribe', 'Unsubscribe from Sprout AAC?', `<strong>${escapeHtml(email)}</strong> will stop getting emails about Sprout AAC.`, false,
+      `<form method="post" action="${escapeHtml(action)}"><button type="submit" class="btn">Unsubscribe</button></form>`),
+    { headers: HTML }
+  );
+}
 
-  const valid = await verifyUnsubToken(email, token, env);
-  if (!valid) {
-    return new Response(
-      page('Invalid link', 'This link has expired', 'This unsubscribe link is invalid or has already been used. Please contact <a href="mailto:hello@sproutaac.org">hello@sproutaac.org</a> to be removed manually.', true),
-      { status: 400, headers: { 'Content-Type': 'text/html;charset=UTF-8' } }
-    );
-  }
+// The confirm button, and one-click unsubscribe from mail apps (RFC 8058:
+// they POST "List-Unsubscribe=One-Click" to the List-Unsubscribe URL).
+export async function onRequestPost(context) {
+  const { request, env } = context;
+  const { email, token } = readParams(request);
+  if (!email || !token) return missing();
+  if (!(await verifyUnsubToken(email, token, env))) return invalid();
 
   try {
     await env.DB.prepare(
@@ -74,12 +100,12 @@ export async function onRequestGet(context) {
     console.error('DB error:', err);
     return new Response(
       page('Error', 'Something went wrong', 'We couldn\'t process your request. Please contact <a href="mailto:hello@sproutaac.org">hello@sproutaac.org</a> and we\'ll remove you right away.', true),
-      { status: 500, headers: { 'Content-Type': 'text/html;charset=UTF-8' } }
+      { status: 500, headers: HTML }
     );
   }
 
   return new Response(
     page('Unsubscribed', 'You\'ve been unsubscribed.', `We've removed <strong>${escapeHtml(email)}</strong> from the Sprout AAC waitlist. You won't hear from us again. If you change your mind, you're always welcome back at <a href="https://sproutaac.org">sproutaac.org</a>.`, false),
-    { headers: { 'Content-Type': 'text/html;charset=UTF-8' } }
+    { headers: HTML }
   );
 }

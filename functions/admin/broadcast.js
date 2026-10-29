@@ -337,7 +337,7 @@ export async function onRequestPost(context) {
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: 'Sprout AAC <hello@sproutaac.org>', to: row.email, subject, html: personalizedHtml, text: personalizedText }),
+      body: JSON.stringify({ from: 'Sprout AAC <hello@sproutaac.org>', to: row.email, subject, html: personalizedHtml, text: personalizedText, headers: { 'List-Unsubscribe': `<${unsubLink}>`, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' } }),
     });
     if (res.ok) sent++;
   }
