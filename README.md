@@ -21,7 +21,7 @@ Marketing and waitlist site for [Sprout AAC](https://sproutaac.org) — a free, 
 public/
   index.html          # Full marketing site (single file, inline CSS + JS), incl. the tablet live demo
   privacy.html        # Privacy policy
-  brand.html          # Brand guide (/brand): logo, usage, colours, type, voice
+  brand.html          # Brand guide (/brand): logo, usage, colors, type, voice
   brand-assets/       # Downloads linked from /brand (logo SVG/PNG, app icon, social image)
   sprout-mark.svg     # Official logo (vector): nav logo + SVG favicon
   sprout-mark.png     # Logo PNG (used in structured data)
@@ -115,4 +115,4 @@ See [CONTRIBUTING.md](https://github.com/sproutaac/.github/blob/main/CONTRIBUTIN
 
 ## Brand assets
 
-The official logo, colours, and social images live in [`sproutaac/.github/brand`](https://github.com/sproutaac/.github/tree/main/brand), with a public guide at [sproutaac.org/brand](https://sproutaac.org/brand). `sprout-mark.svg` is the master. The favicons, `apple-touch-icon.png`, `og-image.png`, and everything in `public/brand-assets/` are generated from the files there; regenerate them rather than editing them by hand.
+The official logo, colors, and social images live in [`sproutaac/.github/brand`](https://github.com/sproutaac/.github/tree/main/brand), with a public guide at [sproutaac.org/brand](https://sproutaac.org/brand). `sprout-mark.svg` is the master. The favicons, `apple-touch-icon.png`, `og-image.png`, and everything in `public/brand-assets/` are generated from the files there; regenerate them rather than editing them by hand.
