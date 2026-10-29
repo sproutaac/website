@@ -213,7 +213,9 @@
     .feature-link { display: inline-block; margin-top: 12px; font-size: 14px; font-weight: 600; color: var(--forest); text-decoration: none; }
     .feature-link:hover { text-decoration: underline; text-underline-offset: 3px; }
     .faq-answer a { color: var(--forest); font-weight: 600; }
-    .demo-credit { position: absolute; left: 0; right: 0; bottom: -30px; font-size: 11px; color: var(--muted); text-align: center; }
+    /* In normal flow under the tablet (it used to hang 30px below it, absolutely
+       positioned, and wrapped lines ran into whatever came next) */
+    .demo-credit { margin-top: 14px; max-width: min(500px, 100%); font-size: 11px; line-height: 1.5; color: var(--muted); text-align: center; }
     .demo-credit a { color: inherit; }
     .hero-download { margin-top: 10px; font-size: 14px; color: var(--muted); }
     .hero-download a { color: var(--forest); font-weight: 600; text-decoration: none; }
@@ -356,6 +358,7 @@
     .hero-visual {
       position: relative;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
     }
