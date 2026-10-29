@@ -11,6 +11,7 @@ function smoothScrollTo(target, duration) {
   duration = duration || 1600;
   const start = window.scrollY;
   const end = target.getBoundingClientRect().top + window.scrollY;
+  if (window.isMotionReduced && window.isMotionReduced()) { window.scrollTo(0, end); return; }
   const distance = end - start;
   let startTime = null;
   function step(ts) {
@@ -147,6 +148,7 @@ async function handleSignup(e, formId) {
     const successEl = document.getElementById(formId + '-success');
     successEl.style.display = 'flex';
     successEl.classList.add('show');
+    celebrateSignup();
   } catch {
     btn.disabled = false;
     btn.textContent = originalText;
@@ -160,20 +162,80 @@ async function handleSignup(e, formId) {
   }
 }
 
-// ── Signup count ──────────────────────────────────────────────
+// ── Signup count + waitlist garden ────────────────────────────
+// One small sprout per person on the waitlist (capped), spread along the
+// bottom of the final CTA. Positions come from a seeded random so the garden
+// looks the same on every visit.
+let waitlistCount = null;
+const GARDEN_MAX = 48;
+const garden = document.getElementById('garden');
+
+function seeded(n) {
+  const x = Math.sin(n * 9301 + 49297) * 233280;
+  return x - Math.floor(x);
+}
+
+function plant(i, isNew, total) {
+  const img = document.createElement('img');
+  img.src = '/sprout-mark.svg';
+  img.alt = '';
+  const h = isNew ? 34 : 14 + Math.round(seeded(i + 1) * 16);
+  img.height = h;
+  img.style.height = h + 'px';
+  // spread across 4–96% of the width, nudged so neighbours don't stack
+  const slot = (i + 0.5) / total;
+  const left = isNew ? 50 : 4 + 92 * Math.min(1, Math.max(0, slot + (seeded(i + 7) - 0.5) / total));
+  img.style.left = 'calc(' + left.toFixed(2) + '% - ' + Math.round(h * 0.38) + 'px)';
+  img.style.animationDelay = isNew ? '' : (-seeded(i + 3) * 6).toFixed(2) + 's';
+  if (isNew) img.className = 'new';
+  garden.appendChild(img);
+}
+
+function showCount(n, tick) {
+  if (n < 10) return;
+  const num = document.getElementById('hero-count-num');
+  num.textContent = n.toLocaleString();
+  if (tick) {
+    num.classList.remove('count-tick');
+    void num.offsetWidth;
+    num.classList.add('count-tick');
+  }
+  document.getElementById('hero-count').style.display = 'block';
+}
+
 fetch('/api/count')
   .then(r => r.json())
   .then(d => {
-    if (d.count >= 10) {
-      document.getElementById('hero-count-num').textContent = d.count.toLocaleString();
-      document.getElementById('hero-count').style.display = 'block';
-    }
+    waitlistCount = d.count;
+    showCount(d.count, false);
+    const total = Math.min(d.count, GARDEN_MAX);
+    for (let i = 0; i < total; i++) plant(i, false, total);
   })
   .catch(() => {});
+
+function celebrateSignup() {
+  plant(0, true);
+  if (waitlistCount !== null) showCount(++waitlistCount, true);
+}
+
+// ── Roadmap: the vine grows when it scrolls into view ─────────
+const roadmap = document.getElementById('roadmap');
+if (roadmap && 'IntersectionObserver' in window) {
+  const io = new IntersectionObserver((entries) => {
+    if (entries.some(e => e.isIntersecting)) {
+      roadmap.classList.add('grown');
+      io.disconnect();
+    }
+  }, { threshold: 0.3 });
+  io.observe(roadmap);
+} else if (roadmap) {
+  roadmap.classList.add('grown');
+}
 
 // ── Back to top ───────────────────────────────────────────────
 function smoothScrollToTop() {
   const start = window.scrollY;
+  if (window.isMotionReduced && window.isMotionReduced()) { window.scrollTo(0, 0); return; }
   let startTime = null;
   function step(ts) {
     if (!startTime) startTime = ts;

@@ -1,6 +1,7 @@
 const easeInOutCubic = t => t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
 function smoothScrollToTop() {
   const start = window.scrollY;
+  if (window.isMotionReduced && window.isMotionReduced()) { window.scrollTo(0, 0); return; }
   let startTime = null;
   function step(ts) {
     if (!startTime) startTime = ts;

@@ -1,0 +1,35 @@
+/* Pause-animations toggle (see /js/motion-pref.js) */
+.motion-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--forest, #0F5C2E);
+  cursor: pointer;
+  opacity: 0.75;
+  transition: opacity 0.2s, background-color 0.2s;
+}
+.motion-toggle:hover { opacity: 1; background-color: rgba(15, 92, 46, 0.08); }
+.motion-toggle:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; opacity: 1; }
+.motion-toggle svg { width: 14px; height: 14px; fill: currentColor; }
+.motion-toggle .icon-play { display: none; }
+html[data-motion="reduce"] .motion-toggle .icon-pause { display: none; }
+html[data-motion="reduce"] .motion-toggle .icon-play { display: block; }
+
+/* Paused: every CSS animation and transition jumps straight to its end state */
+html[data-motion="reduce"] *,
+html[data-motion="reduce"] *::before,
+html[data-motion="reduce"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-delay: 0s !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  transition-delay: 0s !important;
+  scroll-behavior: auto !important;
+}

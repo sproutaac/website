@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="/js/motion-pref.js"></script>
+  <link rel="stylesheet" href="/css/motion.css" />
   <title>Privacy — Sprout AAC</title>
   <meta name="description" content="Sprout AAC's privacy policy. Plain English. No surprises." />
   <link rel="canonical" href="https://sproutaac.org/privacy" />
@@ -66,6 +68,7 @@
       background: var(--cream);
     }
     @media (max-width: 600px) { nav { padding: 18px 24px; } }
+    .nav-actions { display: flex; align-items: center; gap: 16px; }
 
     .nav-logo {
       display: flex;
@@ -363,9 +366,15 @@
         <div class="nav-badge">AAC</div>
       </div>
     </a>
-    <a href="/" class="nav-back">
-      ← Back to home
-    </a>
+    <div class="nav-actions">
+      <button type="button" class="motion-toggle" data-motion-toggle aria-pressed="false" aria-label="Reduce motion" title="Pause animations">
+          <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1.2"/><rect x="14" y="5" width="4" height="14" rx="1.2"/></svg>
+          <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.6v12.8a1 1 0 0 0 1.53.85l10.1-6.4a1 1 0 0 0 0-1.7l-10.1-6.4A1 1 0 0 0 8 5.6Z"/></svg>
+        </button>
+      <a href="/" class="nav-back">
+        ← Back to home
+      </a>
+    </div>
   </nav>
 
   <!-- Hero strip -->

@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="/js/motion-pref.js"></script>
+  <link rel="stylesheet" href="/css/motion.css" />
   <title>Sprout AAC — Free communication for every child</title>
   <meta name="description" content="Sprout is a free, offline-first AAC app for children who communicate differently. No subscription. No paywall. Forever." />
   <link rel="canonical" href="https://sproutaac.org/" />
@@ -1216,6 +1218,83 @@
     .roadmap-card li.doing { color: rgba(255,255,255,0.65); }
     .roadmap-card li.doing::before { content: '◑'; color: var(--fresh); }
 
+    /* ── ROADMAP VINE ──────────────────────────────────────────────
+       Desktop: a vine draws across the top of the four cards and a plant at
+       each version grows into its stage (full sprout → bud → shoot → seed).
+       When the cards wrap, each card shows its own plant instead. */
+    .roadmap-vine { display: none; position: relative; height: 60px; margin-bottom: 4px; }
+    @media (min-width: 901px) {
+      .roadmap-vine { display: block; }
+      .card-sprout { display: none; }
+    }
+    .vine-stem { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+    .vine-stem path {
+      fill: none;
+      stroke: var(--mid);
+      stroke-opacity: 0.55;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      transition: stroke-dashoffset 1.8s var(--ease-out);
+    }
+    .roadmap.grown .vine-stem path { stroke-dashoffset: 0; }
+    .vine-sprout {
+      position: absolute;
+      bottom: 14px;
+      width: 40px;
+      height: 52px;
+      /* centre of column --i in a 4-column grid with 16px gaps */
+      left: calc((100% - 48px) / 4 * (var(--i) + 0.5) + 16px * var(--i) - 20px);
+      overflow: visible;
+    }
+    .card-sprout { position: absolute; top: 20px; right: 20px; width: 28px; height: 36px; overflow: visible; }
+    .roadmap-card .roadmap-version { padding-right: 36px; }
+    .vine-sprout .leaf, .card-sprout .leaf {
+      transform: scale(0);
+      transform-origin: 120px 264px;
+      transition: transform 0.75s cubic-bezier(0.34, 1.4, 0.64, 1);
+      transition-delay: calc(0.6s + var(--i) * 0.4s + var(--l) * 0.12s);
+    }
+    .roadmap.grown .leaf { transform: none; }
+
+    /* ── WAITLIST GARDEN ───────────────────────────────────────────
+       One small sprout per person on the waitlist (up to a cap), swaying
+       along the bottom of the final CTA; a new one grows in when you join. */
+    .garden {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 46px;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .garden img {
+      position: absolute;
+      bottom: 0;
+      width: auto;
+      transform-origin: 50% 100%;
+      animation: leafSway 6s ease-in-out infinite;
+      opacity: 0.85;
+    }
+    .garden img.new {
+      opacity: 1;
+      animation: sproutGrow 1s cubic-bezier(0.34, 1.4, 0.64, 1) both, leafSway 6s ease-in-out 1s infinite;
+      filter: drop-shadow(0 0 8px rgba(168, 240, 192, 0.7));
+    }
+    @keyframes sproutGrow {
+      from { transform: scale(0); }
+      to   { transform: scale(1); }
+    }
+    .success-msg.show img { animation: sproutGrow 0.7s cubic-bezier(0.34, 1.4, 0.64, 1) both; transform-origin: 50% 100%; }
+    .count-tick { display: inline-block; animation: countTick 0.5s var(--ease-out); }
+    @keyframes countTick {
+      from { transform: translateY(-60%); opacity: 0; }
+      to   { transform: none; opacity: 1; }
+    }
+    .final-cta-inner { position: relative; z-index: 2; }
+
     /* ── COMMUNITY STRIP ───────────────────────────────────────────── */
     .community-strip {
       background: var(--warm);
@@ -1287,6 +1366,10 @@
         <a href="#faq">FAQ</a>
         <a href="https://github.com/sproutaac/app/releases/latest">Download</a>
       </div>
+      <button type="button" class="motion-toggle" data-motion-toggle aria-pressed="false" aria-label="Reduce motion" title="Pause animations">
+        <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1.2"/><rect x="14" y="5" width="4" height="14" rx="1.2"/></svg>
+        <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.6v12.8a1 1 0 0 0 1.53.85l10.1-6.4a1 1 0 0 0 0-1.7l-10.1-6.4A1 1 0 0 0 8 5.6Z"/></svg>
+      </button>
       <a href="#waitlist" class="nav-cta">Join waitlist</a>
     </div>
   </nav>
@@ -1526,6 +1609,14 @@
   </section>
 
   <!-- ROADMAP -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="sp-c" x1="0.15" y1="0.9" x2="0.85" y2="0.1"><stop offset="0" stop-color="#A9EDC0"/><stop offset="1" stop-color="#4CC977"/></linearGradient>
+      <linearGradient id="sp-l" x1="0.5" y1="0" x2="0.5" y2="1"><stop offset="0" stop-color="#4BB06C"/><stop offset="1" stop-color="#2A7746"/></linearGradient>
+      <linearGradient id="sp-r" x1="0.5" y1="0" x2="0.5" y2="1"><stop offset="0" stop-color="#5DD486"/><stop offset="1" stop-color="#349A57"/></linearGradient>
+      <linearGradient id="sp-seed" x1="0.2" y1="0" x2="0.8" y2="1"><stop offset="0" stop-color="#8FBF7A"/><stop offset="1" stop-color="#4E7A45"/></linearGradient>
+    </defs>
+  </svg>
   <section class="roadmap" id="roadmap">
     <div class="roadmap-inner">
       <div class="roadmap-header reveal">
@@ -1533,9 +1624,13 @@
         <h2 class="section-headline">A clear, <em>open</em> path<br>to a complete AAC system.</h2>
         <p style="margin-top:16px;font-size:14px;color:rgba(255,255,255,0.65);letter-spacing:0.3px">In active development · Last updated September 2026 · <a href="https://github.com/sproutaac/app" target="_blank" rel="noopener" style="color:var(--fresh);text-decoration:none">Follow on GitHub →</a></p>
       </div>
+<div class="roadmap-vine" aria-hidden="true">
+        <svg class="vine-stem" viewBox="0 0 1000 60" preserveAspectRatio="none" focusable="false"><path d="M0 44 C 60 30, 90 52, 125 44 S 200 30, 250 44 S 330 56, 375 44 S 450 30, 500 44 S 580 56, 625 44 S 700 30, 750 44 S 830 56, 875 44 S 960 34, 1000 44" pathLength="1"/></svg>
+        <svg class="vine-sprout" style="--i:0" viewBox="18 12 204 266" aria-hidden="true"><rect x="113" y="222" width="14" height="43" rx="7" fill="#2A7746"/><g class="leaf" style="--l:1"><ellipse cx="73" cy="140" rx="33" ry="79" fill="url(#sp-l)" transform="rotate(-26 73 140)"/></g><g class="leaf" style="--l:2"><ellipse cx="167" cy="140" rx="33" ry="79" fill="url(#sp-r)" transform="rotate(26 167 140)"/></g><g class="leaf" style="--l:0"><ellipse cx="120" cy="127" rx="40" ry="105" fill="url(#sp-c)"/></g></svg><svg class="vine-sprout" style="--i:1" viewBox="18 12 204 266" aria-hidden="true"><g transform="translate(120 264) scale(0.82) translate(-120 -264)"><rect x="113" y="222" width="14" height="43" rx="7" fill="#2A7746"/><g transform="translate(120 264) scale(0.8) translate(-120 -264)"><g class="leaf" style="--l:1"><ellipse cx="73" cy="140" rx="33" ry="79" fill="url(#sp-l)" transform="rotate(-26 73 140)"/></g><g class="leaf" style="--l:2"><ellipse cx="167" cy="140" rx="33" ry="79" fill="url(#sp-r)" transform="rotate(26 167 140)"/></g></g><g class="leaf" style="--l:0"><ellipse cx="120" cy="127" rx="40" ry="105" fill="url(#sp-c)"/></g></g></svg><svg class="vine-sprout" style="--i:2" viewBox="18 12 204 266" aria-hidden="true"><g transform="translate(120 264) scale(0.5) translate(-120 -264)"><rect x="113" y="222" width="14" height="43" rx="7" fill="#2A7746"/><g class="leaf" style="--l:0"><ellipse cx="120" cy="127" rx="40" ry="105" fill="url(#sp-c)"/></g></g></svg><svg class="vine-sprout" style="--i:3" viewBox="18 12 204 266" aria-hidden="true"><g class="leaf" style="--l:0"><ellipse cx="120" cy="244" rx="32" ry="21" fill="url(#sp-seed)"/><path d="M110 244 q10 -8 20 0" stroke="#A8F0C0" stroke-width="3" fill="none" opacity="0.5" stroke-linecap="round"/></g></svg>
+      </div>
       <div class="roadmap-grid">
         <div class="roadmap-card reveal">
-          <div class="roadmap-version">v0.1 — MVP</div>
+          <svg class="card-sprout" style="--i:0" viewBox="18 12 204 266" aria-hidden="true"><rect x="113" y="222" width="14" height="43" rx="7" fill="#2A7746"/><g class="leaf" style="--l:1"><ellipse cx="73" cy="140" rx="33" ry="79" fill="url(#sp-l)" transform="rotate(-26 73 140)"/></g><g class="leaf" style="--l:2"><ellipse cx="167" cy="140" rx="33" ry="79" fill="url(#sp-r)" transform="rotate(26 167 140)"/></g><g class="leaf" style="--l:0"><ellipse cx="120" cy="127" rx="40" ry="105" fill="url(#sp-c)"/></g></svg><div class="roadmap-version">v0.1 — MVP</div>
           <div class="roadmap-status">Done</div>
           <ul>
             <li class="done">Guided onboarding wizard</li>
@@ -1549,7 +1644,7 @@
           </ul>
         </div>
         <div class="roadmap-card current reveal">
-          <div class="roadmap-version">v0.2 — Sharing</div>
+          <svg class="card-sprout" style="--i:1" viewBox="18 12 204 266" aria-hidden="true"><g transform="translate(120 264) scale(0.82) translate(-120 -264)"><rect x="113" y="222" width="14" height="43" rx="7" fill="#2A7746"/><g transform="translate(120 264) scale(0.8) translate(-120 -264)"><g class="leaf" style="--l:1"><ellipse cx="73" cy="140" rx="33" ry="79" fill="url(#sp-l)" transform="rotate(-26 73 140)"/></g><g class="leaf" style="--l:2"><ellipse cx="167" cy="140" rx="33" ry="79" fill="url(#sp-r)" transform="rotate(26 167 140)"/></g></g><g class="leaf" style="--l:0"><ellipse cx="120" cy="127" rx="40" ry="105" fill="url(#sp-c)"/></g></g></svg><div class="roadmap-version">v0.2 — Sharing</div>
           <div class="roadmap-status">In progress</div>
           <ul>
             <li class="doing">OBF import/export</li>
@@ -1558,7 +1653,7 @@
           </ul>
         </div>
         <div class="roadmap-card reveal">
-          <div class="roadmap-version">v0.3 — Access</div>
+          <svg class="card-sprout" style="--i:2" viewBox="18 12 204 266" aria-hidden="true"><g transform="translate(120 264) scale(0.5) translate(-120 -264)"><rect x="113" y="222" width="14" height="43" rx="7" fill="#2A7746"/><g class="leaf" style="--l:0"><ellipse cx="120" cy="127" rx="40" ry="105" fill="url(#sp-c)"/></g></g></svg><div class="roadmap-version">v0.3 — Access</div>
           <div class="roadmap-status">Coming</div>
           <ul>
             <li>Switch scanning (single & dual)</li>
@@ -1567,7 +1662,7 @@
           </ul>
         </div>
         <div class="roadmap-card reveal">
-          <div class="roadmap-version">v0.4 — Community</div>
+          <svg class="card-sprout" style="--i:3" viewBox="18 12 204 266" aria-hidden="true"><g class="leaf" style="--l:0"><ellipse cx="120" cy="244" rx="32" ry="21" fill="url(#sp-seed)"/><path d="M110 244 q10 -8 20 0" stroke="#A8F0C0" stroke-width="3" fill="none" opacity="0.5" stroke-linecap="round"/></g></svg><div class="roadmap-version">v0.4 — Community</div>
           <div class="roadmap-status">Coming</div>
           <ul>
             <li>Optional cloud backup</li>
@@ -1719,6 +1814,7 @@
 
   <!-- FINAL CTA -->
   <section class="final-cta" id="waitlist">
+    <div class="garden" id="garden" aria-hidden="true"></div>
     <div class="final-cta-inner">
       <div class="reveal">
         <h2 class="final-headline">
