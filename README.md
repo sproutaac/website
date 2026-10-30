@@ -6,6 +6,14 @@
 
 Marketing and waitlist site for [Sprout AAC](https://sproutaac.org) — a free, offline-first AAC app for children who communicate differently.
 
+<p>
+  <!-- Badges are committed SVGs so they load even when shields.io doesn't -->
+  <a href="https://sproutaac.org"><img src="docs/badges/website.svg" alt="Website: sproutaac.org"/></a>
+  <a href="https://github.com/sproutaac/website/actions/workflows/deploy.yml"><img src="https://github.com/sproutaac/website/actions/workflows/deploy.yml/badge.svg" alt="Deploy status"/></a>
+  <a href="https://github.com/sproutaac/website/actions/workflows/validate.yml"><img src="https://github.com/sproutaac/website/actions/workflows/validate.yml/badge.svg" alt="Validate status"/></a>
+  <a href="LICENSE"><img src="docs/badges/license-mit.svg" alt="License: MIT"/></a>
+</p>
+
 ![Sprout AAC website](https://sproutaac.org/og-image.png)
 
 ## Stack
