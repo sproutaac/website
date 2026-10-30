@@ -21,7 +21,7 @@ Marketing and waitlist site for [Sprout AAC](https://sproutaac.org) — a free, 
 - **Hosting:** Cloudflare Pages
 - **Backend:** Cloudflare Pages Functions (JS)
 - **Database:** Cloudflare D1 (SQLite)
-- **Email:** Resend
+- **Email:** Resend sends the site's emails (waitlist confirmations, signup alerts, broadcasts). Mail to hello@sproutaac.org is Google Workspace (an alias on matthew@sproutaac.org); Resend's records live on `send.sproutaac.org` and `resend._domainkey`, so don't remove them
 
 ## Project structure
 
@@ -105,7 +105,7 @@ Set via `npx wrangler secret put <NAME>`:
 |---|---|
 | `ADMIN_KEY` | Gates `/admin/*` routes and signs unsubscribe tokens |
 | `RESEND_API_KEY` | Sends confirmation + broadcast emails |
-| `NOTIFICATION_EMAIL` | Admin notification target on new signup |
+| `NOTIFICATION_EMAIL` | Admin notification target on new signup (hello@sproutaac.org). Redeploy after changing it |
 
 ## Email flow
 
