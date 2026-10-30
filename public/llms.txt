@@ -22,7 +22,7 @@ Sprout exists because AAC devices and apps are prohibitively expensive ($149–$
 - On-device word prediction (bigram model, per child, no data leaves the device)
 - High contrast theme and OpenDyslexic font
 - Visual scanning (physical switch input coming)
-- Planned: switch hardware support, eye gaze, Open Board Format (OBF) import/export and board sharing (v0.2), larger grids (42 and 84 cells)
+- Planned (https://github.com/sproutaac/app/milestones): v0.1.1 fixes (symbol search, board colors); v0.2 iPad, iPhone and Android test builds, a beta, local backup and restore; v0.3 Open Board Format (OBF) import/export and board sharing; v0.4 switch scanning, 42- and 84-cell grids, Spanish; v1.0 App Store and Google Play. After v1.0: eye gaze, optional encrypted cloud backup, therapist dashboard, community board library.
 
 ## Brand
 

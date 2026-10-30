@@ -1169,10 +1169,11 @@
     .roadmap-header .section-headline em { color: var(--fresh); }
     .roadmap-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 16px;
     }
-    @media (max-width: 900px) { .roadmap-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 1100px) { .roadmap-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 760px) { .roadmap-grid { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 560px) { .roadmap-grid { grid-template-columns: 1fr; } }
     .roadmap-card {
       background: rgba(255,255,255,0.06);
@@ -1222,11 +1223,12 @@
     .roadmap-card li.doing::before { content: '◑'; color: var(--fresh); }
 
     /* ── ROADMAP VINE ──────────────────────────────────────────────
-       Desktop: a vine draws across the top of the four cards and a plant at
-       each version grows into its stage (full sprout → bud → shoot → seed).
+       Desktop: a vine draws across the top of the five cards and a plant at
+       each version grows into its stage (full sprout → bud → small bud →
+       shoot → seed).
        When the cards wrap, each card shows its own plant instead. */
     .roadmap-vine { display: none; position: relative; height: 60px; margin-bottom: 4px; }
-    @media (min-width: 901px) {
+    @media (min-width: 1101px) {
       .roadmap-vine { display: block; }
       .card-sprout { display: none; }
     }
@@ -1247,8 +1249,8 @@
       bottom: 14px;
       width: 40px;
       height: 52px;
-      /* center of column --i in a 4-column grid with 16px gaps */
-      left: calc((100% - 48px) / 4 * (var(--i) + 0.5) + 16px * var(--i) - 20px);
+      /* center of column --i in a 5-column grid with 16px gaps */
+      left: calc((100% - 64px) / 5 * (var(--i) + 0.5) + 16px * var(--i) - 20px);
       overflow: visible;
     }
     .card-sprout { position: absolute; top: 20px; right: 20px; width: 28px; height: 36px; overflow: visible; }
@@ -1260,6 +1262,7 @@
       transition-delay: calc(0.6s + var(--i) * 0.4s + var(--l) * 0.12s);
     }
     .roadmap.grown .leaf { transform: none; }
+    .roadmap-later { margin-top: 20px; font-size: 14px; color: rgba(255,255,255,0.7); }
 
     /* ── WAITLIST GARDEN ───────────────────────────────────────────
        One small sprout per person on the waitlist (up to a cap), swaying
@@ -1625,55 +1628,68 @@
       <div class="roadmap-header reveal">
         <p class="section-eyebrow">What we're building</p>
         <h2 class="section-headline">A clear, <em>open</em> path<br>to a complete AAC system.</h2>
-        <p style="margin-top:16px;font-size:14px;color:rgba(255,255,255,0.65);letter-spacing:0.3px">In active development · Last updated September 2026 · <a href="https://github.com/sproutaac/app" target="_blank" rel="noopener" style="color:var(--fresh);text-decoration:none">Follow on GitHub →</a></p>
+        <p style="margin-top:16px;font-size:14px;color:rgba(255,255,255,0.65);letter-spacing:0.3px">In active development · Last updated October 2026 · <a href="https://github.com/sproutaac/app/milestones" target="_blank" rel="noopener" style="color:var(--fresh);text-decoration:none">Follow on GitHub →</a></p>
       </div>
 <div class="roadmap-vine" aria-hidden="true">
         <svg class="vine-stem" viewBox="0 0 1000 60" preserveAspectRatio="none" focusable="false"><path d="M0 44 C 60 30, 90 52, 125 44 S 200 30, 250 44 S 330 56, 375 44 S 450 30, 500 44 S 580 56, 625 44 S 700 30, 750 44 S 830 56, 875 44 S 960 34, 1000 44" pathLength="1"/></svg>
-        <svg class="vine-sprout" style="--i:0" viewBox="18 12 204 266" aria-hidden="true"><rect x="113" y="222" width="14" height="43" rx="7" fill="#2A7746"/><g class="leaf" style="--l:1"><ellipse cx="73" cy="140" rx="33" ry="79" fill="url(#sp-l)" transform="rotate(-26 73 140)"/></g><g class="leaf" style="--l:2"><ellipse cx="167" cy="140" rx="33" ry="79" fill="url(#sp-r)" transform="rotate(26 167 140)"/></g><g class="leaf" style="--l:0"><ellipse cx="120" cy="127" rx="40" ry="105" fill="url(#sp-c)"/></g></svg><svg class="vine-sprout" style="--i:1" viewBox="18 12 204 266" aria-hidden="true"><g transform="translate(120 264) scale(0.82) translate(-120 -264)"><rect x="113" y="222" width="14" height="43" rx="7" fill="#2A7746"/><g transform="translate(120 264) scale(0.8) translate(-120 -264)"><g class="leaf" style="--l:1"><ellipse cx="73" cy="140" rx="33" ry="79" fill="url(#sp-l)" transform="rotate(-26 73 140)"/></g><g class="leaf" style="--l:2"><ellipse cx="167" cy="140" rx="33" ry="79" fill="url(#sp-r)" transform="rotate(26 167 140)"/></g></g><g class="leaf" style="--l:0"><ellipse cx="120" cy="127" rx="40" ry="105" fill="url(#sp-c)"/></g></g></svg><svg class="vine-sprout" style="--i:2" viewBox="18 12 204 266" aria-hidden="true"><g transform="translate(120 264) scale(0.5) translate(-120 -264)"><rect x="113" y="222" width="14" height="43" rx="7" fill="#2A7746"/><g class="leaf" style="--l:0"><ellipse cx="120" cy="127" rx="40" ry="105" fill="url(#sp-c)"/></g></g></svg><svg class="vine-sprout" style="--i:3" viewBox="18 12 204 266" aria-hidden="true"><g class="leaf" style="--l:0"><ellipse cx="120" cy="244" rx="32" ry="21" fill="url(#sp-seed)"/><path d="M110 244 q10 -8 20 0" stroke="#A8F0C0" stroke-width="3" fill="none" opacity="0.5" stroke-linecap="round"/></g></svg>
+        <svg class="vine-sprout" style="--i:0" viewBox="18 12 204 266" aria-hidden="true"><rect x="113" y="222" width="14" height="43" rx="7" fill="#2A7746"/><g class="leaf" style="--l:1"><ellipse cx="73" cy="140" rx="33" ry="79" fill="url(#sp-l)" transform="rotate(-26 73 140)"/></g><g class="leaf" style="--l:2"><ellipse cx="167" cy="140" rx="33" ry="79" fill="url(#sp-r)" transform="rotate(26 167 140)"/></g><g class="leaf" style="--l:0"><ellipse cx="120" cy="127" rx="40" ry="105" fill="url(#sp-c)"/></g></svg><svg class="vine-sprout" style="--i:1" viewBox="18 12 204 266" aria-hidden="true"><g transform="translate(120 264) scale(0.82) translate(-120 -264)"><rect x="113" y="222" width="14" height="43" rx="7" fill="#2A7746"/><g transform="translate(120 264) scale(0.8) translate(-120 -264)"><g class="leaf" style="--l:1"><ellipse cx="73" cy="140" rx="33" ry="79" fill="url(#sp-l)" transform="rotate(-26 73 140)"/></g><g class="leaf" style="--l:2"><ellipse cx="167" cy="140" rx="33" ry="79" fill="url(#sp-r)" transform="rotate(26 167 140)"/></g></g><g class="leaf" style="--l:0"><ellipse cx="120" cy="127" rx="40" ry="105" fill="url(#sp-c)"/></g></g></svg><svg class="vine-sprout" style="--i:2" viewBox="18 12 204 266" aria-hidden="true"><g transform="translate(120 264) scale(0.66) translate(-120 -264)"><rect x="113" y="222" width="14" height="43" rx="7" fill="#2A7746"/><g transform="translate(120 264) scale(0.55) translate(-120 -264)"><g class="leaf" style="--l:1"><ellipse cx="73" cy="140" rx="33" ry="79" fill="url(#sp-l)" transform="rotate(-26 73 140)"/></g><g class="leaf" style="--l:2"><ellipse cx="167" cy="140" rx="33" ry="79" fill="url(#sp-r)" transform="rotate(26 167 140)"/></g></g><g class="leaf" style="--l:0"><ellipse cx="120" cy="127" rx="40" ry="105" fill="url(#sp-c)"/></g></g></svg><svg class="vine-sprout" style="--i:3" viewBox="18 12 204 266" aria-hidden="true"><g transform="translate(120 264) scale(0.5) translate(-120 -264)"><rect x="113" y="222" width="14" height="43" rx="7" fill="#2A7746"/><g class="leaf" style="--l:0"><ellipse cx="120" cy="127" rx="40" ry="105" fill="url(#sp-c)"/></g></g></svg><svg class="vine-sprout" style="--i:4" viewBox="18 12 204 266" aria-hidden="true"><g class="leaf" style="--l:0"><ellipse cx="120" cy="244" rx="32" ry="21" fill="url(#sp-seed)"/><path d="M110 244 q10 -8 20 0" stroke="#A8F0C0" stroke-width="3" fill="none" opacity="0.5" stroke-linecap="round"/></g></svg>
       </div>
       <div class="roadmap-grid">
-        <div class="roadmap-card reveal">
+        <div class="roadmap-card current reveal">
           <svg class="card-sprout" style="--i:0" viewBox="18 12 204 266" aria-hidden="true"><rect x="113" y="222" width="14" height="43" rx="7" fill="#2A7746"/><g class="leaf" style="--l:1"><ellipse cx="73" cy="140" rx="33" ry="79" fill="url(#sp-l)" transform="rotate(-26 73 140)"/></g><g class="leaf" style="--l:2"><ellipse cx="167" cy="140" rx="33" ry="79" fill="url(#sp-r)" transform="rotate(26 167 140)"/></g><g class="leaf" style="--l:0"><ellipse cx="120" cy="127" rx="40" ry="105" fill="url(#sp-c)"/></g></svg><div class="roadmap-version">v0.1 — MVP</div>
-          <div class="roadmap-status">Done</div>
+          <div class="roadmap-status">Released · v0.1.1 next</div>
           <ul>
             <li class="done">Guided onboarding wizard</li>
             <li class="done">Starter boards: 3×3, 4×4, 5×5</li>
             <li class="done">Fitzgerald Key color coding</li>
             <li class="done">Native offline text-to-speech</li>
             <li class="done">Multi-child profiles</li>
-            <li class="done">ARASAAC symbol integration</li>
+            <li class="done">ARASAAC symbols</li>
             <li class="done">Caregiver edit mode (PIN-gated)</li>
             <li class="done">On-device word prediction</li>
+            <li class="doing">v0.1.1: symbol search and board color fixes</li>
           </ul>
         </div>
-        <div class="roadmap-card current reveal">
-          <svg class="card-sprout" style="--i:1" viewBox="18 12 204 266" aria-hidden="true"><g transform="translate(120 264) scale(0.82) translate(-120 -264)"><rect x="113" y="222" width="14" height="43" rx="7" fill="#2A7746"/><g transform="translate(120 264) scale(0.8) translate(-120 -264)"><g class="leaf" style="--l:1"><ellipse cx="73" cy="140" rx="33" ry="79" fill="url(#sp-l)" transform="rotate(-26 73 140)"/></g><g class="leaf" style="--l:2"><ellipse cx="167" cy="140" rx="33" ry="79" fill="url(#sp-r)" transform="rotate(26 167 140)"/></g></g><g class="leaf" style="--l:0"><ellipse cx="120" cy="127" rx="40" ry="105" fill="url(#sp-c)"/></g></g></svg><div class="roadmap-version">v0.2 — Sharing</div>
-          <div class="roadmap-status">In progress</div>
+        <div class="roadmap-card reveal">
+          <svg class="card-sprout" style="--i:1" viewBox="18 12 204 266" aria-hidden="true"><g transform="translate(120 264) scale(0.82) translate(-120 -264)"><rect x="113" y="222" width="14" height="43" rx="7" fill="#2A7746"/><g transform="translate(120 264) scale(0.8) translate(-120 -264)"><g class="leaf" style="--l:1"><ellipse cx="73" cy="140" rx="33" ry="79" fill="url(#sp-l)" transform="rotate(-26 73 140)"/></g><g class="leaf" style="--l:2"><ellipse cx="167" cy="140" rx="33" ry="79" fill="url(#sp-r)" transform="rotate(26 167 140)"/></g></g><g class="leaf" style="--l:0"><ellipse cx="120" cy="127" rx="40" ry="105" fill="url(#sp-c)"/></g></g></svg><div class="roadmap-version">v0.2 — Tablets, phones &amp; beta</div>
+          <div class="roadmap-status">Planned</div>
           <ul>
-            <li class="doing">OBF import/export</li>
+            <li>iPad and iPhone test builds</li>
+            <li>Android test builds</li>
+            <li>Beta with families and SLPs</li>
+            <li>Local backup and restore</li>
+            <li>Word prediction strip</li>
+          </ul>
+        </div>
+        <div class="roadmap-card reveal">
+          <svg class="card-sprout" style="--i:2" viewBox="18 12 204 266" aria-hidden="true"><g transform="translate(120 264) scale(0.66) translate(-120 -264)"><rect x="113" y="222" width="14" height="43" rx="7" fill="#2A7746"/><g transform="translate(120 264) scale(0.55) translate(-120 -264)"><g class="leaf" style="--l:1"><ellipse cx="73" cy="140" rx="33" ry="79" fill="url(#sp-l)" transform="rotate(-26 73 140)"/></g><g class="leaf" style="--l:2"><ellipse cx="167" cy="140" rx="33" ry="79" fill="url(#sp-r)" transform="rotate(26 167 140)"/></g></g><g class="leaf" style="--l:0"><ellipse cx="120" cy="127" rx="40" ry="105" fill="url(#sp-c)"/></g></g></svg><div class="roadmap-version">v0.3 — Sharing</div>
+          <div class="roadmap-status">Planned</div>
+          <ul>
+            <li>OBF import/export</li>
             <li>Board sharing via share code</li>
             <li>SLP → family board push</li>
           </ul>
         </div>
         <div class="roadmap-card reveal">
-          <svg class="card-sprout" style="--i:2" viewBox="18 12 204 266" aria-hidden="true"><g transform="translate(120 264) scale(0.5) translate(-120 -264)"><rect x="113" y="222" width="14" height="43" rx="7" fill="#2A7746"/><g class="leaf" style="--l:0"><ellipse cx="120" cy="127" rx="40" ry="105" fill="url(#sp-c)"/></g></g></svg><div class="roadmap-version">v0.3 — Access</div>
-          <div class="roadmap-status">Coming</div>
+          <svg class="card-sprout" style="--i:3" viewBox="18 12 204 266" aria-hidden="true"><g transform="translate(120 264) scale(0.5) translate(-120 -264)"><rect x="113" y="222" width="14" height="43" rx="7" fill="#2A7746"/><g class="leaf" style="--l:0"><ellipse cx="120" cy="127" rx="40" ry="105" fill="url(#sp-c)"/></g></g></svg><div class="roadmap-version">v0.4 — Access</div>
+          <div class="roadmap-status">Planned</div>
           <ul>
-            <li>Switch scanning (single & dual)</li>
-            <li>Eye gaze support</li>
+            <li>Switch scanning (single &amp; dual)</li>
             <li>Larger grids (42, 84 cells)</li>
+            <li>Spanish: app, boards and voices</li>
           </ul>
         </div>
         <div class="roadmap-card reveal">
-          <svg class="card-sprout" style="--i:3" viewBox="18 12 204 266" aria-hidden="true"><g class="leaf" style="--l:0"><ellipse cx="120" cy="244" rx="32" ry="21" fill="url(#sp-seed)"/><path d="M110 244 q10 -8 20 0" stroke="#A8F0C0" stroke-width="3" fill="none" opacity="0.5" stroke-linecap="round"/></g></svg><div class="roadmap-version">v0.4 — Community</div>
-          <div class="roadmap-status">Coming</div>
+          <svg class="card-sprout" style="--i:4" viewBox="18 12 204 266" aria-hidden="true"><g class="leaf" style="--l:0"><ellipse cx="120" cy="244" rx="32" ry="21" fill="url(#sp-seed)"/><path d="M110 244 q10 -8 20 0" stroke="#A8F0C0" stroke-width="3" fill="none" opacity="0.5" stroke-linecap="round"/></g></svg><div class="roadmap-version">v1.0 — App Store &amp; Google Play</div>
+          <div class="roadmap-status">Planned</div>
           <ul>
-            <li>Optional cloud backup</li>
-            <li>Therapist dashboard</li>
-            <li>Community board library</li>
+            <li>Accessibility and privacy audits</li>
+            <li>SLP-reviewed starter boards</li>
+            <li>Launch on both stores</li>
           </ul>
         </div>
       </div>
+      <p class="roadmap-later reveal">After v1.0: eye gaze support, optional encrypted cloud backup, a therapist dashboard, and a community board library.</p>
     </div>
   </section>
 
@@ -1766,7 +1782,7 @@
           </svg>
         </button>
         <div class="faq-answer">
-          Sprout v0.1.0 is out now as a macOS build: <a href="https://github.com/sproutaac/app/releases/latest">download it from GitHub</a>. It's an early release, so expect rough edges. iOS and Android builds are next, followed by the App Store and Google Play. Waitlist members hear first when those go live.</div>
+          Sprout v0.1.0 is out now as a macOS build: <a href="https://github.com/sproutaac/app/releases/latest">download it from GitHub</a>. It's an early release, so expect rough edges. iPad, iPhone and Android test builds come next (v0.2), and the App Store and Google Play launch is v1.0. Waitlist members hear first when those go live.</div>
       </div>
       <div class="faq-item">
         <button class="faq-question" aria-expanded="false">
